@@ -1,0 +1,84 @@
+.total-spinner {
+    @extend %centrado-flex;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 105%;
+    height: 105vh;
+    margin: -1rem;
+    margin-top: -7.5rem;
+}
+
+.spinner {
+    margin: auto;
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    font-size: 10px;
+    transform: translate(0px, 48px);
+    >div {
+        background-color: #fff;
+        height: 100%;
+        width: 6px;
+        display: inline-block;
+        -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+        animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    }
+    .rect2 {
+        -webkit-animation-delay: -1.1s;
+        animation-delay: -1.1s;
+    }
+    .rect3 {
+        -webkit-animation-delay: -1.0s;
+        animation-delay: -1.0s;
+    }
+    .rect4 {
+        -webkit-animation-delay: -0.9s;
+        animation-delay: -0.9s;
+    }
+    .rect5 {
+        -webkit-animation-delay: -0.8s;
+        animation-delay: -0.8s;
+    }
+}
+
+.card {
+    .loading {
+        @extend %centrado-flex;
+        width: 96.242%;
+        background-color: red;
+        height: 80%;
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.7);
+        z-index: 10;
+    }
+    .spinner {
+        transform: none;
+        >div {
+            background-color: $negro;
+        }
+    }
+}
+
+@-webkit-keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+        -webkit-transform: scaleY(0.4);
+    }
+    20% {
+        -webkit-transform: scaleY(1);
+    }
+}
+
+@keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    }
+    20% {
+        transform: scaleY(1);
+        -webkit-transform: scaleY(1);
+    }
+}

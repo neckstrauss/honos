@@ -1,0 +1,54 @@
+.card {
+  box-shadow: $sombra;
+  background-color: #fff;
+  border: 0;
+  border-radius: $border-radius;
+  padding: 0;
+  animation: {
+    duration: 750ms;
+    name: fadeIn;
+    fill-mode: forwards;
+  }
+  margin: .5rem;
+  margin-top: 1.75rem;
+  width: 100%;
+  display: inline-block;
+  &-header {
+    @extend %encabezado;
+    &:first-child {
+      border-bottom-left-radius: $border-radius !important;
+      border-bottom-right-radius: $border-radius !important;
+    }
+  }
+  &-content {
+    border-radius: $border-radius $border-radius 0 0;
+  }
+  &-footer {
+    background-color: #fff;
+    border-radius: 0 0 $border-radius $border-radius;
+    font-size: .9375rem;
+    color: $gris2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.5rem;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

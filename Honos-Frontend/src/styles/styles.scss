@@ -1,0 +1,10 @@
+/* Estos son los estilos globales, divididos en modulos sass */
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "sass/global"; // este siempte primero
+@import "sass/variables";
+@import "sass/card"; // tarjetas de bootsrap
+@import "sass/tables"; // tablas de bootsrap
+@import "sass/buttons"; // botones de bootsrap
+@import "sass/forms"; // formularios de bootsrap
+@import "sass/spinner"; // estilos de los spinners (loaders)

@@ -1,0 +1,112 @@
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+* {
+    box-sizing: inherit;
+    font-family: 'Roboto', sans-serif;
+}
+
+.body {
+    background: {
+        color: #eee;
+        image: -webkit-linear-gradient(to bottom, #f2f2f2, #e6e6e6);
+        image: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
+    }
+}
+
+::-webkit-scrollbar {
+    position: absolute;
+    right: 0;
+    width: .4rem;
+    height: .5rem;
+    /* remove scrollbar space */
+    background: transparent;
+    /* optional: just make scrollbar invisible */
+}
+
+
+/* optional: show position indicator in red */
+
+::-webkit-scrollbar-thumb {
+    background: #969696;
+}
+
+.material-icons {
+    font: {
+        family: 'Material Icons';
+        weight: normal;
+        style: normal;
+        size: 24px; // Preferred icon size
+        feature-settings: 'liga';
+    }
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr; // Support for all WebKit browsers.
+    -webkit-font-smoothing: antialiased; // Support for Safari and Chrome.
+    text-rendering: optimizeLegibility; // Support for Firefox.
+    -moz-osx-font-smoothing: grayscale; // Support for IE.
+}
+
+.add {
+    font-size: 28px;
+}
+
+.push-right .sidebar {
+    left: 300px !important;
+}
+
+.main-right {
+    margin-left: 0;
+}
+
+@media screen and (min-width: 99px) {
+    .main-right {
+        margin-left: 300px !important;
+    }
+}
+
+.modal-opened {
+    padding-right: 17px;
+    overflow: hidden;
+}
+
+.dropdown {
+    &-menu {
+        top: 0;
+    }
+    &-item:hover {
+        background-color: #eeeeee;
+        cursor: pointer;
+    }
+}
+
+.redondo {
+    border-radius: 50% !important;
+}
+
+.row {
+    &,
+    & base-chart-demo {
+        width: 100%
+    }
+    margin: {
+        right: 0;
+        left: 0;
+    }
+}
+
+.form-group {
+    &.col-12,
+    &.col-9 {
+        padding-left: 0; // buscar solucion con max-width heredable y con calculos
+        // transform: translateX(1rem);
+        // max-width: calc( 100% - 1rem);
+    }
+}

@@ -1,0 +1,102 @@
+.table {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+// .table-striped tbody tr:nth-of-type(odd) {
+//     //background-color: rgba(79, 79, 80, .1);
+//     background: transparent;
+// }
+
+.table-hover tbody tr:hover {
+    background-color: rgba(79, 79, 80, 1);
+}
+
+.table> {
+    thead:first-child>tr:first-child>th {
+        border-top: 0;
+        white-space: nowrap;
+    }
+//     tbody>tr {
+//         > {
+//             th,
+//             td {
+//                 border-top: 0;
+//                 white-space: nowrap;
+//             }
+//         }
+//         border-bottom: 2px solid #eceeef;
+//         &:last-child {
+//             border-bottom: transparent;
+//         }
+//         > {
+//             th,
+//             td {
+//                 padding: 12px 8px;
+//                 vertical-align: middle;
+//                 font-size: 1rem;
+//                 font-weight: 300;
+//             }
+//             td div {
+//                 max-height: 1.75rem;
+//                 height: 1.75rem;
+//                 overflow-y: hidden;
+//                 position: relative;
+//                 // &::after {
+//                 //     content: "y otros...";
+//                 //     position: absolute;
+//                 //     top: 4px;
+//                 //     right: 8px;
+//                 //     font-size: 12px;
+//                 // }
+//             }
+//         }
+//     }
+    thead>tr>th {
+        border-bottom-width: 1px;
+        font-size: 1.1rem;
+        font-weight: 400;
+        padding: 12px 8px;
+    }
+    tbody>tr>td> {
+        i,
+        a>i {
+            cursor: pointer;
+            border-radius: .5rem;
+            padding: .10rem;
+            font-size: 1.4rem;
+            color: #fff;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        i:hover {
+            color: #ededed;
+        }
+    }
+}
+
+.tablescroll1 {
+    overflow-y: auto;
+    overflow-x: auto;
+    height: 160px;
+    border-bottom: 1px solid #eceeef;
+    td {
+        border-bottom: 1px solid #eceeef;
+    }
+}
+
+.tablescroll2 {
+    overflow-y: auto;
+    overflow-x: auto;
+    height: 50vh;
+    margin-right: 0px;
+}
+
+// solucion a las tablas internas en modales
+seleccionador>.row {
+    min-width: 640px;
+}
+
+.convocantes {
+    cursor: pointer;
+}
