@@ -1,0 +1,65 @@
+
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+
+	<div class="side-profile">
+
+		<div class="side-cover">
+			<div class="side-profile">
+				<div class="side-profile-photo">
+					<img class="img-fluid" src="../../../assets/jpg/admin-photo.jpg"
+						alt="ola">
+				</div>
+
+				<div class="side-profile-info">
+					<h6 class="side-profile-name">Nelson Arango</h6>
+
+					<h6 class="side-profile-mail">nelson.arangotolima.gov.co</h6>
+				</div>
+			</div>
+
+			<div class="side-boton-menu">
+				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="material-icons">arrow_drop_down</i>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="side-profile-menu">
+					<a class="dropdown-item">Mi perfil<i class="material-icons">person</i></a>
+					<!--<a class="dropdown-item">Configuración<i class="material-icons">settings</i></a>-->
+					<a class="dropdown-item" (click)="onLoggedout()">Cerrar sesión<i
+						class="material-icons">exit_to_app</i></a>
+				</div>
+			</div>
+			<div class="side-theme-cover">
+				<img class="img-fluid"
+					src="../../../assets/jpg/blue-theme-cover.jpg" alt="ola">
+
+			</div>
+		</div>
+	</div>
+
+	<div class="menu-honos">
+
+		<ul class="list-group">
+			<li>
+				<h6 class="menu-honos-rol">ESTE ES MI ROL</h6>
+			</li>
+			<li><a class="list-group-item"> <i class="material-icons">dashboard</i>Dashboard
+			</a></li>
+
+
+			<li *ngFor="let m of this.menuModel.getMenuUsuario()"><a
+				(click)="collapsar(m.idDivInterno+'I')" class="list-group-item"
+				data-toggle="collapse" [href]="'#'+m.idDivInterno"
+				aria-expanded="false" [attr.aria-controls]="m.idDivInterno">
+					{{m.label}}<i id="{{m.idDivInterno+'I'}}"
+					class="material-icons flecha">keyboard_arrow_right</i>
+			</a>
+				<div class="collapse" id="{{m.idDivInterno}}">
+					<div class="sublist" *ngFor="let o of m.opciones">
+						<a class="list-group-item"> {{o.label}} </a>
+					</div>
+				</div></li>
+
+
+		</ul>
+	</div>
+</nav>

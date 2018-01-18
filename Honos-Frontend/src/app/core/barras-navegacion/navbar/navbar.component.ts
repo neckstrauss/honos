@@ -9,12 +9,12 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public router: Router/*, private auth: AuthService*/) {
-    this.router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd && window.innerWidth <= 992) {
-        this.toggleSidebar();
-      }
-    });
+  constructor(/*public router: Router, private auth: AuthService*/) {
+//    this.router.events.subscribe((val) => {
+//      if (val instanceof NavigationEnd && window.innerWidth <= 992) {
+//        this.toggleSidebar();
+//      }
+//    });
   }
 
   ngOnInit() {
@@ -25,10 +25,10 @@ export class NavbarComponent implements OnInit {
     const dom: any = document.querySelector('body');
     if (dom) {
       dom.classList.toggle('push-right');
-      const main: any = document.querySelector('.main-container');
-      if (window.innerWidth >= 992) {
-        main.classList.toggle('main-right');
-      }
+//      const main: any = document.querySelector('.main-container');
+//      if (window.innerWidth >= 992) {
+//        main.classList.toggle('main-right');
+//      }
     }
   }
 
@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
     const main: any = document.querySelector('.main-container');
     if (dom.classList.contains('push-right')) {
       dom.classList.remove('push-right');
-      main.classList.remove('main-right');
+//      main.classList.remove('main-right');
     }
   }
 

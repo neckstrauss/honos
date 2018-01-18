@@ -4,13 +4,15 @@ import {NgModule} from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import {Model} from "./repositories/repository.model";
 import { RestDataSource } from "./dataSources/rest.datasource";
+import { MenuModel } from './repositories/menu.repository.model';
 import { ProductoModel } from './repositories/producto.repository.model';
 import { Subject } from 'rxjs/Subject';
 
 
 @NgModule({
   imports: [HttpClientModule],
-  providers: [  ProductoModel, 
+  providers: [  ProductoModel,
+                MenuModel,
                 RestDataSource, ModelResolver,
                 { 
                   provide: SHARED_STATE, 
