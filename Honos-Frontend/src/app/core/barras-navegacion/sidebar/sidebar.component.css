@@ -58,6 +58,7 @@
 .side-boton-menu .dropdown-menu {
   left: inherit;
   right: 0;
+  width: max-content;
 }
 
 .side-boton-menu i {

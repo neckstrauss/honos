@@ -31,12 +31,8 @@ export class MenuModel extends Model<Menu> {
         'activo',
         [
           {
-            label: 'Gestión Persona Natural',
-            uri: '/listadoPersonaNatural'
-          },
-          {
-            label: 'Gestión Persona juridica',
-            uri: '/listadoPersonaJuridica'
+            label: 'Productos',
+            uri: '/productg'
           }
         ]
       )

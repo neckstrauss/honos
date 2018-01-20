@@ -1,0 +1,200 @@
+.form-control {
+  border-radius: 0px;
+}
+
+thead>tr>th {
+  cursor: pointer;
+}
+
+.card {
+  width: calc( 100% - 1rem);
+  margin-top: 0.75rem;
+}
+
+.card-header {
+  box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 0, 0, 0.2);
+  margin: -20px 15px 0;
+  border-radius: 3px;
+  padding: 15px;
+  background-color: #00bcd4;
+  float: left;
+  text-align: center;
+}
+
+.icon-title {
+  font-size: 36px;
+  line-height: 56px;
+  width: 56px;
+  height: 56px;
+  color: #fff;
+}
+
+// 
+.card-content {
+  padding: 15px 20px;
+  position: relative;
+  display: block;
+  overflow: auto; // aquieesta el problema 
+  padding-bottom: 0;
+  min-height: 25rem;
+}
+
+// 
+.card-title {
+  margin-top: 1.5rem;
+  text-transform: capitalize;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+.divExcel{
+    position: absolute;
+    top: 0.23rem;
+    right: -0.1rem;
+    cursor: pointer;
+}
+
+// 
+.orden {
+  position: absolute;
+  top: 0;
+  right: .5rem;
+}
+
+// 
+.orden .btn {
+  padding: .655rem;
+  border-radius: 50%;
+  width: 2.8125rem;
+  height: 2.8125rem;
+  border: 0;
+  box-shadow: none;
+  background-color: transparent;
+  color: #242424;
+}
+
+.orden .btn:hover {
+  background-color: rgba(0, 0, 0, .09);
+  outline-color: transparent;
+}
+
+.dropdown-menu {
+  left: inherit;
+  right: 0px;
+}
+
+// 
+// boton de actualizar
+.actualizar {
+  position: absolute;
+  top: .65rem;
+  right: 5.6rem; // left: calc(50% - 56px);
+  //     cursor: pointer;
+}
+
+.nuevo {
+  position: absolute;
+  top: .65rem;
+  right: 3.0rem; // left: calc(50% - 56px);
+  //cursor: pointer;
+}
+
+// 
+.updateIcon {
+  cursor: pointer;
+  border-radius: .5rem;
+  padding: .25rem;
+  font-size: 1.7rem;
+  color: #fff;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.updateIcon:hover {
+  color: #ededed;
+}
+
+// 
+// // animacion de el boton de busqueda
+.input-group {
+  display: flex;
+  height: 36px;
+  overflow: hidden;
+  padding: 0; //  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: absolute;
+  top: .5rem;
+  right: 8.5rem;
+  width: 40%;
+}
+
+// 
+.inactive:active,
+.inactive:hover {
+  background-color: rgba(100, 100, 100, 0.1);
+}
+
+.input-group .pull-right:active,
+.input-group .pull-right:hover {
+  background-color: transparent;
+}
+
+.input-group.centered {
+  margin: 0 auto;
+}
+
+// 
+.input-group .input-group-addon {
+  justify-content: center;
+  width: 36px;
+  background: transparent;
+  border: none;
+  display: flex;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+// 
+// .input-group .input-group-addon i {
+//     height: 24px;
+//     width: 24px;
+//     align-self: center;
+//     color: #777;
+// }
+// 
+.input-group input {
+  font-family: "Roboto", sans-serif;
+  background: transparent;
+  border: none;
+  box-shadow: none !important;
+  font-size: 16px;
+  padding: 0;
+}
+
+// // 
+.input-group input[type="text"] {
+  border-bottom: 2px solid #242424;
+}
+
+// 
+// .search .form-control::-webkit-input-placeholder {
+//   color: red;
+// }
+.inactive {
+  width: 36px;
+  border-radius: 18px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.inactive .input-group-addon:not(:first-child) {
+  opacity: 0;
+}
+
+// 
+.row {
+  margin-top: 1em;
+}
+
+// 
+// // animacin del boton de busqueda
