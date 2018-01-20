@@ -1,5 +1,6 @@
 import { Model } from "../../model/repositories/repository.model";
 import { SHARED_STATE, SharedState, MODES } from "../../model/sharedState.model";
+import { ExcelService } from './excel.service';
 import { Component, OnInit, Input, TemplateRef, ContentChild, Inject } from '@angular/core';
 import { Observer } from "rxjs/Observer";
 
@@ -23,8 +24,11 @@ export class TablaGenericaComponent {
   public itemsPerPage = 15;
   public selectedPage = 1;
 
-  constructor( @Inject(SHARED_STATE) private observer: Observer<SharedState>) { }
+  constructor( @Inject(SHARED_STATE) private observer: Observer<SharedState>, private excelService: ExcelService) { }
 
+  exportToExcel(event) {
+    this.excelService.exportAsExcelFile(this.model.getDataSet(), 'Excel');
+  }
     
   getItems(): any[] {
     return this.model.getDataSet();

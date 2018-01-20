@@ -23,6 +23,10 @@
 					</span> <input type="text" class="form-control" placeholder="Filtro 2"
 						[(ngModel)]="filter2">
 				</div>
+				<div class="divExcel">
+                    <img class="imgExcel material-icons verde updateIcon" [title]="'Exportar a excel'" (click)="exportToExcel()" src="../assets/file-excel.png">
+                    <!-- <button (click)="exportToExcel()" class="btn btn-primary">Export to excel</button> -->
+                </div>
 			</div>
 			<div class="card-content">
 				<table class="table table-striped table-sm">
