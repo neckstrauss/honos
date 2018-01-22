@@ -1,9 +1,9 @@
-import {Product} from '../entities/product.model';
-import {Model} from './repository.model';
-import {RestDataSource} from '../dataSources/rest.datasource';
+import {Product} from '../../entities/product.model';
+import {Model} from '../repository.model';
+import {RestDataSource} from '../../dataSources/rest.datasource';
 import {Injectable} from '@angular/core';
-import {environment} from "../../../environments/environment";
-import {Menu} from '../entities/menu.model';
+import {environment} from "../../../../environments/environment";
+import {Menu} from '../../entities/seguridad/menu.model';
 
 @Injectable()
 export class MenuModel extends Model<Menu> {
@@ -11,7 +11,7 @@ export class MenuModel extends Model<Menu> {
   private menuUsuario: Menu[] = new Array<Menu>();
 
   constructor(private ds: RestDataSource) {
-    super(ds, environment.url + "store/v1/menus");
+    super(ds, environment.url + "honos/seguridad/menus");
     //super.loadDataSet();
     
   }
@@ -28,12 +28,13 @@ export class MenuModel extends Model<Menu> {
         1,
         'Administración',
         'admin',
+        '',
         'activo',
         [
-          {
-            label: 'Productos',
-            uri: '/productg'
-          }
+//          {
+//            label: 'Productos',
+//            uri: '/productg'
+//          }
         ]
       )
     ]

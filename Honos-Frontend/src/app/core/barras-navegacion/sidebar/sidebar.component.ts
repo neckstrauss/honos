@@ -1,4 +1,4 @@
-import { MenuModel } from '../../../model/repositories/menu.repository.model';
+import { MenuModel } from '../../../model/repositories/seguridad/menu.repository.model';
 import { Component, OnInit } from '@angular/core';
 declare var $: any;
 

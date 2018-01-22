@@ -25,10 +25,13 @@ public class Opcion implements Serializable {
 	
 	@Column(length=30)
 	private String label;
+	
 	@Column(length=30)
-	private String uri;	
+	private String uri;
+	
 	@Column(length=3)
 	private String estado;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Opcion() {
