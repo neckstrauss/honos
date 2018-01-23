@@ -86,7 +86,6 @@ public abstract class PojoGenerico<T>
 	 */
 	public T update(T item) 
 	{	
-		System.out.println("prueba: ");
 		this.em.getTransaction().begin();
 		T item2 = this.em.merge(item);
 		this.em.getTransaction().commit();

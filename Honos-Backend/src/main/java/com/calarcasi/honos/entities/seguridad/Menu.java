@@ -35,7 +35,7 @@ public class Menu implements Serializable {
 	@Column(length=30)
 	private String label;
 	
-	@Column(length=240)
+	@Column(length=440)
 	private String descripcion;
 	
 	@Column(length=3)
