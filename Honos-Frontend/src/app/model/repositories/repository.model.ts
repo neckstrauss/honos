@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpRequest, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {RestDataSource} from "../dataSources/rest.datasource";
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 export class Model<T> {
 
@@ -11,10 +12,21 @@ export class Model<T> {
   constructor(private dataSource: RestDataSource, private url: string) {
   }
   
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+    Observable<any[]> {
+    if (this.getDataSet().length == 0) {
+     // this.messages.reportMessage(new Message("Loading data..."));
+     //implementar sistema de mensajes
+      console.log("entro resolve model")
+      return this.dataSource.setUrl(this.url).getData();
+    }
+    
+  }
+  
   loadDataSet(): void {
     this.dataSource.setUrl(this.url).getData().subscribe(event => {
       if (event.type === HttpEventType.Response) {
-//        console.log("response received... getData()", event.body);
+        console.log("response received... getData()", event.body);
         this.dataSet = event.body.items;
       }
     });

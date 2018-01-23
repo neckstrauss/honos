@@ -1,11 +1,10 @@
-<tabla-generica #tb [model]="this.model" [columnas]="this.columnas" titulo="prueba generica">
+<tabla-generica #tb [model]="this.model" [columnas]="this.columnas" titulo="Opciones">
   <ng-template let-item let-i="index">
     <tr>
       <th scope="row">{{i + 1 + ((tb.selectedPage - 1) * tb.itemsPerPage)}}</th>
-      <td style="vertical-align: middle">{{item.id}}</td>
-      <td style="vertical-align: middle">{{item.name}}</td>
-      <td style="vertical-align: middle">{{item.category}}</td>
-      <td style="vertical-align: middle">{{item.price | currency:"USD":"symbol" }}</td>
+      <td style="vertical-align: middle">{{item.label}}</td>
+      <td style="vertical-align: middle">{{item.uri}}</td>
+      <td style="vertical-align: middle">{{item.estado}}</td>
       <td class="text-center">
         <i class="material-icons verde" aria-hidden="true " data-placement="top " title="Editar" data-toggle="modal" data-target="#modalForm"
           (click)="tb.editItem(item.id)">edit</i>
@@ -16,4 +15,4 @@
 </tabla-generica>
 
 
-<modal-form></modal-form>
+<opcion-modal-form></opcion-modal-form>

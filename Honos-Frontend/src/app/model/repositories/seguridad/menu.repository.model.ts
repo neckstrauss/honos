@@ -1,4 +1,3 @@
-import {Product} from '../../entities/product.model';
 import {Model} from '../repository.model';
 import {RestDataSource} from '../../dataSources/rest.datasource';
 import {Injectable} from '@angular/core';
@@ -18,10 +17,6 @@ export class MenuModel extends Model<Menu> {
 
 
   loadMenuUsuario(): void {
-    
-    
-    console.log("paso por aca");
-    
     
     this.menuUsuario = [
       new Menu(

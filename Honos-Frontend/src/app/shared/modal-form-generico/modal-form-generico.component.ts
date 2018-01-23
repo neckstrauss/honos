@@ -1,7 +1,5 @@
 import {Component, Inject, ViewChild, Input} from "@angular/core";
 import {NgForm} from "@angular/forms";
-import {Product} from "../../model/entities/product.model";
-import {ProductoModel} from '../../model/repositories/producto.repository.model';
 import {Model} from "../../model/repositories/repository.model";
 import {MODES, SharedState, SHARED_STATE} from "../../model/sharedState.model";
 import {Observable} from "rxjs/Observable";

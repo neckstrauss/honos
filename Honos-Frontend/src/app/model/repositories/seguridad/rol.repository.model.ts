@@ -1,4 +1,3 @@
-import {Product} from '../../entities/product.model';
 import {Model} from '../repository.model';
 import {RestDataSource} from '../../dataSources/rest.datasource';
 import {Injectable} from '@angular/core';

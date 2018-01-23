@@ -1,0 +1,39 @@
+<modal-form-generico #md [model]="this.model" titulo="Menú">
+<div card-body>
+	<div class="form-group ">
+		<label class="control-label" for="input">Label<span
+			class="required">*</span>
+		</label> <input class="form-control " name="label" type="text"
+			[(ngModel)]="md.object.label" required="required" required />
+
+	</div>
+	<div class="form-group">
+		<label>Id Div Interno<span class="required">*</span></label> <input
+			class="form-control " name="idDivInterno" type="text"
+			[(ngModel)]="md.object.idDivInterno" required="required" required />
+	</div>
+
+	<div class="form-group">
+		<label>Descripción<span class="required">*</span></label> <input
+			class="form-control " name="descripcion" type="text"
+			[(ngModel)]="md.object.descripcion" required="required" required />
+	</div>
+
+	<div class="form-group">
+		<label>Estado<span class="required">*</span></label>
+		<!-- <input class="form-control" name="estado" [(ngModel)]="md.object.estado"
+		required type="text" required>  -->
+		<select class="form-control  custom-select"
+				name="estado" [(ngModel)]="md.object.estado" required>
+				<option  value="ACT">Activo</option>
+				<option  value="INA">Inactivo</option>
+			</select>
+	</div>
+	
+
+
+</div>
+<div card-footer>
+
+</div>
+</modal-form-generico>
