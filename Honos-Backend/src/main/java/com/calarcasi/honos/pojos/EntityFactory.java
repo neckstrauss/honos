@@ -10,7 +10,7 @@ public class EntityFactory {
 	public static EntityManager getEntityManager()
 	{
 		EntityManagerFactory emf =
-				 Persistence.createEntityManagerFactory("LibroBackend");
+				 Persistence.createEntityManagerFactory("HonosBackend");
 		
 		EntityManager em = emf.createEntityManager();
 		
