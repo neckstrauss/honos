@@ -6,6 +6,7 @@ import {Menu} from '../../entities/seguridad/menu.model';
 
 @Injectable()
 export class MenuModel extends Model<Menu> {
+ 
 
   private menuUsuario: Menu[] = new Array<Menu>();
 
@@ -15,6 +16,10 @@ export class MenuModel extends Model<Menu> {
     
   }
 
+   newObject(): Menu {
+    return new Menu();
+  }
+  
 
   loadMenuUsuario(): void {
     

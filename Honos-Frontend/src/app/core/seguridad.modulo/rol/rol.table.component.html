@@ -1,8 +1,8 @@
-<tabla-generica #tb [model]="this.model" [columnas]="this.columnas" titulo="Menus">
+<tabla-generica #tb [model]="this.model" [columnas]="this.columnas" titulo="Roles">
   <ng-template let-item let-i="index">
     <tr>
       <th scope="row" style="vertical-align: middle">{{i + 1 + ((tb.selectedPage - 1) * tb.itemsPerPage)}}</th>
-      <td style="vertical-align: middle">{{item.label}}</td>
+      <td style="vertical-align: middle">{{item.nombre}}</td>
       <td style="vertical-align: middle">{{item.descripcion}}</td>
       <td style="vertical-align: middle">{{item.estado}}</td>
       <td class="text-center">
@@ -15,4 +15,4 @@
 </tabla-generica>
 
 
-<menu-modal-form></menu-modal-form>
+<rol-modal-form></rol-modal-form>

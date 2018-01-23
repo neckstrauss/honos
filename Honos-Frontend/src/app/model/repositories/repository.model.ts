@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {RestDataSource} from "../dataSources/rest.datasource";
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-export class Model<T> {
+export abstract class Model<T> {
 
   private dataSet: T[] = new Array<any>();
   private locator = (p: any, id: number) => p.id == id;
@@ -22,6 +22,8 @@ export class Model<T> {
     }
     
   }
+  
+  abstract newObject():T;
   
   loadDataSet(): void {
     this.dataSource.setUrl(this.url).getData().subscribe(event => {
@@ -87,5 +89,7 @@ export class Model<T> {
       return id || 0;
     }
   }
+  
+
 
 }

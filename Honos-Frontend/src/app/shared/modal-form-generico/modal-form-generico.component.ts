@@ -14,7 +14,7 @@ declare var $: any;
   styleUrls: ["modal-form-generico.component.scss"]
 })
 export class ModalFormGenericoComponent {
-object: any = new Object();
+ 
 
   lastId: number;
   editing: boolean = false;
@@ -22,10 +22,15 @@ object: any = new Object();
   @Input('model') model: Model<any>;
   @Input('titulo') titulo: string = 'titulo por defecto';
   
+  object: any = new Object();
+  
 
   constructor(@Inject(SHARED_STATE) private stateEvents: Observable<SharedState>) {
+    
+    //this.object = this.model.newObject();
+    
     stateEvents.subscribe((update) => {
-      this.object = new Object();
+      this.object = this.model.newObject();
 
       if (update.id != undefined) {
         Object.assign(this.object, this.model.get(update.id));
@@ -37,7 +42,8 @@ object: any = new Object();
       this.editing = update.mode == MODES.EDIT;
     });
   }
-
+  
+ 
 
   cambiarObject(id: number) {
     if (id != undefined) {

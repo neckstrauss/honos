@@ -6,6 +6,10 @@ import { Opcion } from '../../entities/seguridad/opcion.model';
 
 @Injectable()
 export class OpcionModel extends Model<Opcion> {
+  
+  newObject(): Opcion {
+    return new Opcion();
+  }
 
 
   constructor(private ds: RestDataSource) {
