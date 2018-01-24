@@ -14,7 +14,6 @@ export class MenuModel extends Model<Menu> {
   constructor(private ds: RestDataSource) {
     super(ds, environment.url + "honos/seguridad/menus");
     //super.loadDataSet();
-    
   }
   
   loadListaParaRol(id:number = null): void {

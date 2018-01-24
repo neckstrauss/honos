@@ -14,7 +14,6 @@ export class OpcionModel extends Model<Opcion> {
 
   constructor(private ds: RestDataSource) {
     super(ds, environment.url + "honos/seguridad/opciones");
-    //super.loadDataSet();    
   }
 
   loadListaParaMenu(id:number = null): void {
@@ -24,7 +23,4 @@ export class OpcionModel extends Model<Opcion> {
       }
     });
   }
-
-
-
 }

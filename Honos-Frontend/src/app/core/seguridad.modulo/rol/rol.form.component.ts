@@ -18,7 +18,7 @@ export class RolFormComponent {
   private locator = (p: any, id: number) => p.id == id;
 
   constructor(private model: RolModel, private menuModel: MenuModel) {
-    this.menuModel.loadDataSet();
+    model.loadDataSet();
   }
 
   addMenu() {
@@ -39,9 +39,9 @@ export class RolFormComponent {
   }
 
   deleteMenu(id: number) {
-    let index = this.md.object.menu.findIndex(p => this.locator(p, id));
+    let index = this.md.object.menus.findIndex(p => this.locator(p, id));
     if (index > -1) {
-      this.md.object.menu.splice(index, 1);
+      this.md.object.menus.splice(index, 1);
     }
   }
   

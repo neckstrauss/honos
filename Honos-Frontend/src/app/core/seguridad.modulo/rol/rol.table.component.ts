@@ -10,7 +10,7 @@ import { Component } from "@angular/core";
 export class RolTableComponent {
 
   constructor(private model: RolModel) {
-    model.loadDataSet();
+    //model.loadDataSet();
   }
   
   columnas: any[] = [{ nombre: '#' },

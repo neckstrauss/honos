@@ -10,9 +10,7 @@ export class RolModel extends Model<Rol> {
 
 
   constructor(private ds: RestDataSource) {
-    super(ds, environment.url + "honos/seguridad/roles");
-    super.loadDataSet();
-    
+    super(ds, environment.url + "honos/seguridad/roles");    
   }
   
   newObject(): Rol {

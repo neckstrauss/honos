@@ -30,7 +30,7 @@
 			<thead class="thead-light">
 				<tr>
 					<th scope="col">#</th>
-					<th scope="col">Nombre</th>
+					<th scope="col">Label</th>
 					<th scope="col">Descripción</th>
 					<th></th>
 				</tr>
@@ -38,7 +38,7 @@
 			<tbody>
 				<tr *ngFor="let opc of md.object.menus; let i=index">
 					<th scope="row">{{i + 1}}</th>
-					<td>{{opc.nombre}}</td>
+					<td>{{opc.label}}</td>
 					<td>{{opc.descripcion}}</td>
 					<td class="text-center"><i class="material-icons rojo"
 						aria-hidden="true " data-toggle="tooltip " data-placement="top"

@@ -9,18 +9,18 @@ import { Router, NavigationEnd } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   constructor(public router: Router/*, private auth: AuthService*/) {
-    this.router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd /* && window.innerWidth <= 992*/) {
-        this.toggleSidebar();
-      }
-    });
+//    this.router.events.subscribe((val) => {
+//      if (val instanceof NavigationEnd /* && window.innerWidth <= 992*/) {
+//        this.toggleSidebar();
+//      }
+//    });
   }
 
   ngOnInit() {
     //this.onResize()
-    if (window.innerWidth <= 864) {
+ //   if (window.innerWidth <= 864) {
      this.toggleSidebar();
-    }
+ //   }
   }
 
   toggleSidebar() {

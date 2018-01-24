@@ -33,7 +33,7 @@ export class ModalFormGenericoComponent {
       if (update.id != undefined) {
         Object.assign(this.object, this.model.get(update.id));
       } 
-
+      console.log("paso event");
       this.editing = update.mode == MODES.EDIT;      
       this.newEvent.emit(update.id);      
     });
