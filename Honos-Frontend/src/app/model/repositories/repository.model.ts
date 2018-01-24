@@ -25,6 +25,15 @@ export abstract class Model<T> {
   
   abstract newObject():T;
   
+  getUrl():string{
+    return this.url;
+  }
+  
+  setData(dataSet: T[])
+  {
+    this.dataSet = dataSet;
+  }
+  
   loadDataSet(): void {
     this.dataSource.setUrl(this.url).getData().subscribe(event => {
       if (event.type === HttpEventType.Response) {

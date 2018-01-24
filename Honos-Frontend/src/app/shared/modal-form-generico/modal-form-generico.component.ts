@@ -1,4 +1,4 @@
-import {Component, Inject, ViewChild, Input} from "@angular/core";
+import {Component, Inject, ViewChild, Input, Output, EventEmitter} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {Model} from "../../model/repositories/repository.model";
 import {MODES, SharedState, SHARED_STATE} from "../../model/sharedState.model";
@@ -22,6 +22,9 @@ export class ModalFormGenericoComponent {
   @Input('model') model: Model<any>;
   @Input('titulo') titulo: string = 'titulo por defecto';
   
+  @Output("stateUpdate")
+  newEvent = new EventEmitter<number>();
+  
   object: any = new Object();
   
 
@@ -40,6 +43,9 @@ export class ModalFormGenericoComponent {
 //      }
 
       this.editing = update.mode == MODES.EDIT;
+      
+      this.newEvent.emit(update.id);
+      
     });
   }
   

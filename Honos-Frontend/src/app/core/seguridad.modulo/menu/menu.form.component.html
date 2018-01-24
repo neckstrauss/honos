@@ -1,4 +1,4 @@
-<modal-form-generico #md [model]="this.model" titulo="Menú">
+<modal-form-generico #md [model]="this.model" titulo="Menú" (stateUpdate)="actualizarOpciones($event)">
 <div card-body>
 	<div class="form-group ">
 		<label class="control-label" for="input">Label<span
