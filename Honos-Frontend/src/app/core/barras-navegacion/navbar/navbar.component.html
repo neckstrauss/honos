@@ -1,84 +1,112 @@
 <div class="fixed-top header" (window:resize)="onResize()">
-	<nav class="navbar">
+    <nav class="navbar">
+        <button class="boton-menu" (click)="toggleSidebar()">
+      <i class="material-icons">&#xE5D2;</i>
+    </button>
+        <div class="l-navbar">
+            <img class="logo-navbar" src="../../../assets/svg/montana.svg" alt="honos">
+            <img class="logo-navbar" src="../../../assets/svg/honos.svg" alt="honos">
+        </div>
+            <div class="item-notification">
+                <div class="dropdown">
+                    <button class="boton-menu" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="material-icons">notifications</i><span class="badge badge-notification">25</span>
+      </button>
+                    <div class="dropdown-menu notification-menu" aria-labelledby="dropdownMenu2">
+                        <div class="notification-menu-header">
+                            <div class="titulo">
+                                Notificaciones
+                            </div>
+                            <div>
+                                <a class="marcar-todos">Marcar todas como leídas</a>
+                            </div>
+                        </div>
+                        <div class="notification-menu-content-list">
+                            <ul class="notification-drawer">
+                                <li class="notification-list">
+                                    <div class="img-not"><i class="material-icons">notifications</i></div>
+                                    <div class="msg-not">
+                                        <h6>Joel Alvarez</h6><span>Ha aplicado una ficha técnica.</span></div>
+                                    <div class="time-not">Hace 5 min.</div>
+                                </li>
+                                <li class="notification-list">
+                                    <div class="img-not"><i class="material-icons">notifications</i></div>
+                                    <div class="msg-not">
+                                        <h6>Joel Alvarez</h6><span>Ha aplicado una ficha técnica.</span></div>
+                                    <div class="time-not">Hace 5 min.</div>
+                                </li>
+                                <li class="notification-list">
+                                    <div class="img-not"><i class="material-icons">notifications</i></div>
+                                    <div class="msg-not">
+                                        <h6>Joel Alvarez</h6><span>Ha aplicado una ficha técnica.</span></div>
+                                    <div class="time-not">Hace 5 min.</div>
+                                </li>
+                                <li class="notification-list">
+                                    <div class="img-not"><i class="material-icons">notifications</i></div>
+                                    <div class="msg-not">
+                                        <h6>Joel Alvarez</h6><span>Ha aplicado una ficha técnica.</span></div>
+                                    <div class="time-not">Hace 5 min.</div>
+                                </li>
+                                <li class="notification-list">
+                                    <div class="img-not"><i class="material-icons">notifications</i></div>
+                                    <div class="msg-not">
+                                        <h6>Joel Alvarez</h6><span>Ha aplicado una ficha técnica.</span></div>
+                                    <div class="time-not">Hace 5 min.</div>
+                                </li>
+                                <li class="notification-list">
+                                    <div class="img-not"><i class="material-icons">notifications</i></div>
+                                    <div class="msg-not">
+                                        <h6>Joel Alvarez</h6><span>Ha aplicado una ficha técnica.</span></div>
+                                    <div class="time-not">Hace 5 min.</div>
+                                </li>
+                                <li class="notification-list">
+                                    <div class="img-not"><i class="material-icons">notifications</i></div>
+                                    <div class="msg-not">
+                                        <h6>Joel Alvarez</h6><span>Ha aplicado una ficha técnica.</span></div>
+                                    <div class="time-not">Hace 5 min.</div>
+                                </li>
+                                <li class="notification-list">
+                                    <div class="img-not"><i class="material-icons">notifications</i></div>
+                                    <div class="msg-not">
+                                        <h6>Joel Alvarez</h6><span>Ha aplicado una ficha técnica.</span></div>
+                                    <div class="time-not">Hace 5 min.</div>
+                                </li>
+                                <li class="notification-list">
+                                    <div class="img-not"><i class="material-icons">notifications</i></div>
+                                    <div class="msg-not">
+                                        <h6>Joel Alvarez</h6><span>Ha aplicado una ficha técnica.</span></div>
+                                    <div class="time-not">Hace 5 min.</div>
+                                </li>
+                                <li class="notification-list">
+                                    <div class="img-not"><i class="material-icons">notifications</i></div>
+                                    <div class="msg-not">
+                                        <h6>Joel Alvarez</h6><span>Ha aplicado una ficha técnica.</span></div>
+                                    <div class="time-not">Hace 5 min.</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="notification-menu-footer">Ver todas las notificaciones</div>
+                    </div>
+                </div>
+            </div>
+            <!-- menu de nitificaicones -->
 
-		<button class="boton-menu" (click)="toggleSidebar()">
-			<i class="material-icons">&#xE5D2;</i>
-		</button>
-
-		<div class="l-navbar">
-			<img class="logo-navbar" src="../../../assets/svg/montana.svg"
-				alt="honos"> <img class="logo-navbar"
-				src="../../../assets/svg/honos.svg" alt="honos">
-		</div>
-
-		<div class="menu-derecha">
 
 
-			<div class="item-notification">
-				<div class="dropdown">
-					<button class="boton-menu" id="dropdownMenu2"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="material-icons">notifications</i><span
-							class="badge badge-notification">25</span>
-					</button>
-					<div class="dropdown-menu notification-menu"
-						aria-labelledby="dropdownMenu2">
-						<div class="notification-menu-header">
-							<div class="titulo">Notificaciones</div>
-							<div>
-								<a class="marcar-todos">Marcar todas como leídas</a>
-							</div>
-						</div>
-						<div class="notification-menu-content-list">
-							<ul class="notification-drawer">
-
-								<li class="notification-list">
-									<div class="img-not">
-										<i class="material-icons">notifications</i>
-									</div>
-									<div class="msg-not">
-										<h6>Joel Alvarez</h6>
-										<span>Ha aplicado una ficha técnica.</span>
-									</div>
-									<div class="time-not">Hace 5 min.</div>
-								</li>
-								<li class="notification-list">
-									<div class="img-not">
-										<i class="material-icons">notifications</i>
-									</div>
-									<div class="msg-not">
-										<h6>Joel Alvarez</h6>
-										<span>Ha aplicado una ficha técnica.</span>
-									</div>
-									<div class="time-not">Hace 5 min.</div>
-								</li>
-
-							</ul>
-						</div>
-						<div class="notification-menu-footer">Ver todas las
-							notificaciones</div>
-					</div>
-				</div>
-			</div>
-			<!-- menu de nitificaicones -->
-
-			<div class="item-notification">
-				<button class="boton-menu">
-					<i class="material-icons">help</i>
-				</button>
-				<!-- <span class="badge badge-notification">9</span> -->
-			</div>
-
-			<button class="boton-menu" type="button" id="dropdownMenuButton"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<i class="material-icons">more_vert</i>
-			</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<a class="dropdown-item">Mi perfil<i class="material-icons">person</i></a>
-				<!--<a class="dropdown-item">Configuración<i class="material-icons">settings</i></a>-->
-				<a class="dropdown-item" (click)="onLoggedout()">Cerrar sesión<i
-					class="material-icons">exit_to_app</i></a>
-			</div>
-		</div>
-	</nav>
+            <div class="item-notification">
+                <button class="boton-menu">
+          <i class="material-icons">help</i>
+      </button>
+                <!-- <span class="badge badge-notification">9</span> -->
+            </div>
+            <button class="boton-menu" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="material-icons">more_vert</i>
+      </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item">Mi perfil<i class="material-icons">person</i></a>
+                <!--<a class="dropdown-item">Configuración<i class="material-icons">settings</i></a>-->
+                <a class="dropdown-item"  (click)="onLoggedout()">Cerrar sesión<i class="material-icons">exit_to_app</i></a>
+            </div>
+        </div>
+    </nav>
 </div>
