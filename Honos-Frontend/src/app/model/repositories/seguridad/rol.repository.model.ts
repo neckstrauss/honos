@@ -7,7 +7,7 @@ import { Rol } from '../../entities/seguridad/rol.model';
 
 @Injectable()
 export class RolModel extends Model<Rol> {
-
+  
   constructor(private ds: RestDataSource, message: MessageService) {
     super(ds, message, environment.url + "honos/seguridad/roles");    
   }

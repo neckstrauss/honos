@@ -19,8 +19,7 @@ export abstract class Model<T> {
     if (this.getDataSet().length == 0) {
       this.messages.reportMessage(new Message("Loading data..."));     
       return this.dataSource.setUrl(this.url).getData();
-    }
-    
+    }    
   }
   
   abstract newObject():T;
