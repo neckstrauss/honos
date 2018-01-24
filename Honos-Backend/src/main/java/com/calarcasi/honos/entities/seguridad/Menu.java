@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
@@ -18,12 +19,19 @@ import javax.persistence.NamedQuery;
  *
  */
 @Entity
-@NamedQuery(name=Menu.AllMenus, query="SELECT m FROM Menu m")
+@NamedQueries(value = { 
+	@NamedQuery(name=Menu.AllMenus, query="SELECT m FROM Menu m"),
+	@NamedQuery(name=Menu.RolMenus, query="SELECT m FROM Menu m "),
+	
+}
+)
+
 public class Menu implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public final static String AllMenus = "Menu.findAll";		
+	public final static String AllMenus = "Menu.findAll";
+	public final static String RolMenus = "Menu.rolMenus";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

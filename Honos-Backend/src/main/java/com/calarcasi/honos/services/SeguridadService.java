@@ -1,6 +1,8 @@
 package com.calarcasi.honos.services;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.calarcasi.honos.entities.seguridad.Menu;
 import com.calarcasi.honos.entities.seguridad.Opcion;
@@ -34,17 +36,29 @@ public class SeguridadService {
 	 */
 
 	@ApiMethod(name = "getOpciones", path = "opciones", httpMethod = HttpMethod.GET)
-	public List<Opcion> getProducts() throws UnauthorizedException {
+	public List<Opcion> getOpciones() throws UnauthorizedException {
 		return new OpcionPojo().findWithNamedQuery(Opcion.AllOpciones);
+	}
+	
+	@ApiMethod(name = "getOpcionesMenu", path = "opciones/{idMenu}", httpMethod = HttpMethod.GET)
+	public List<Opcion> getOpcionesBy(@Named("idMenu") final int idMenu) throws UnauthorizedException {
+		
+		Map parameters = new HashMap();
+		
+		parameters.put("idMenu", idMenu);
+		
+		
+		return new OpcionPojo().findWithNamedQuery(Opcion.OpcionesMenu, parameters);
+		//return new OpcionPojo().findWithNamedQuery(Opcion.OpcionesMenu);
 	}
 
 	@ApiMethod(name = "saveOpcion", path = "opciones", httpMethod = HttpMethod.POST)
-	public Opcion saveProduct(Opcion opcion) throws UnauthorizedException {
+	public Opcion saveOpcion(Opcion opcion) throws UnauthorizedException {
 		return new OpcionPojo().create(opcion);
 	}
 
 	@ApiMethod(name = "deleteOpcion", path = "opciones/{id}", httpMethod = HttpMethod.DELETE)
-	public void deleteProduct(@Named("id") final int id) throws UnauthorizedException {
+	public void deleteOpcion(@Named("id") final int id) throws UnauthorizedException {
 		new OpcionPojo().delete(id);
 	}
 

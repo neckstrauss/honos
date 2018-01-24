@@ -109,7 +109,7 @@ public abstract class PojoGenerico<T>
 	 * @param parameters
 	 * @return List
 	 */
-	public List findWithNamedQuery(String namedQueryName, Map parameters) {
+	public List<T> findWithNamedQuery(String namedQueryName, Map parameters) {
 		return findWithNamedQuery(namedQueryName, parameters, 0);
 	}
 
