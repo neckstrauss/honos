@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { routing } from "./app.routing";
+import { MessageModule } from './shared/messages/message.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { routing } from "./app.routing";
   imports: [
     BrowserModule,
     CoreModule,
-    routing
+    routing, 
+    MessageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

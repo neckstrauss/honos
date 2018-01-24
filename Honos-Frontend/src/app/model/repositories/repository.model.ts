@@ -1,3 +1,5 @@
+import { MessageService } from '../../shared/messages/message.service';
+import { Message } from '../../shared/messages/message.model';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpRequest, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
@@ -9,15 +11,13 @@ export abstract class Model<T> {
   private dataSet: T[] = new Array<any>();
   private locator = (p: any, id: number) => p.id == id;
   
-  constructor(private dataSource: RestDataSource, private url: string) {
+  constructor(private dataSource: RestDataSource, private messages: MessageService,private url: string) {
   }
   
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<any[]> {
     if (this.getDataSet().length == 0) {
-     // this.messages.reportMessage(new Message("Loading data..."));
-     //implementar sistema de mensajes
-      console.log("entro resolve model")
+      this.messages.reportMessage(new Message("Loading data..."));     
       return this.dataSource.setUrl(this.url).getData();
     }
     
@@ -37,7 +37,7 @@ export abstract class Model<T> {
   loadDataSet(): void {
     this.dataSource.setUrl(this.url).getData().subscribe(event => {
       if (event.type === HttpEventType.Response) {
-        console.log("response received... getData()", event.body);
+        //console.log("response received... getData()", event.body);             
         this.dataSet = event.body.items;
       }
     });
@@ -55,14 +55,16 @@ export abstract class Model<T> {
     if (data.id == 0 || data.id == null) {
       this.dataSource.setUrl(this.url).saveData(data).subscribe(event => {
         if (event.type === HttpEventType.Response) {
-          console.log("response received... save()", event.body);
+//          console.log("response received... save()", event.body);
+          this.messages.reportMessage(new Message("Transacción Exitosa...", "alert-success"));
           this.dataSet.push(event.body);
         }
       });
     } else {
       this.dataSource.setUrl(this.url).updateData(data).subscribe(event => {
         if (event.type === HttpEventType.Response) {
-          console.log("response received... update()", event.body);
+//          console.log("response received... update()", event.body);
+          this.messages.reportMessage(new Message("Transacción Exitosa...", "alert-success"));
           let index = this.dataSet.findIndex(item => this.locator(item, event.body.id));
           this.dataSet.splice(index, 1, event.body);
         }
@@ -76,6 +78,7 @@ export abstract class Model<T> {
       if (index > -1) {
         this.dataSet.splice(index, 1);
       }
+      this.messages.reportMessage(new Message("Transacción Exitosa...", "alert-success"));
     });
   }
 
