@@ -1,0 +1,67 @@
+<modal-form-generico #md [model]="this.model" titulo="Rol" (stateUpdate)="actualizarMenus($event)">
+<div card-body>
+	<div class="form-group ">
+		<label class="control-label" for="input">Nombre Rol<span
+			class="required">*</span>
+		</label> <input class="form-control form-control-sm"
+			 name="nombre" type="text"
+			[(ngModel)]="md.object.nombre" required="required" required />
+
+	</div>	
+
+	<div class="form-group">
+		<label>Descripción<span class="required">*</span></label>
+		<textarea class="form-control form-control-sm"
+			 name="descripcion"
+			[(ngModel)]="md.object.descripcion" required="required" required> </textarea>
+	</div>
+
+	<div class="form-group">
+		<label>Estado<span class="required">*</span></label>		
+		<select class="form-control  custom-select form-control-sm"
+			 name="estado" [(ngModel)]="md.object.estado" required>
+			<option value="ACT">Activo</option>
+			<option value="INA">Inactivo</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label>Opciones<span class="required">*</span></label>
+		<table class="table table-sm ">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Descripción</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let opc of md.object.menus; let i=index">
+					<th scope="row">{{i + 1}}</th>
+					<td>{{opc.nombre}}</td>
+					<td>{{opc.descripcion}}</td>
+					<td class="text-center"><i class="material-icons rojo"
+						aria-hidden="true " data-toggle="tooltip " data-placement="top"
+						title="Eliminar" (click)="deleteMenu(opc.id)">delete_forever</i></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<div class="form-row">
+		<div class="col-sm-8 my-1">
+			<select class="form-control  custom-select form-control-sm"
+				name="opcionSeleted" [(ngModel)]="opcionSeleted">
+				<option *ngFor="let o of this.menuModel.getDataSet()"
+					value="{{o.id}}">{{o.label}}</option>
+
+			</select>
+		</div>
+		<div class="col-sm-3 my-1">
+			<button type="button" class="btn btn-primary btn-sm"
+				(click)="addMenu()">Add Opción</button>
+		</div>
+	</div>
+</div>
+<div card-footer></div>
+</modal-form-generico>

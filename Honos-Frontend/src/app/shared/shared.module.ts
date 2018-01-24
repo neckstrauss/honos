@@ -1,5 +1,4 @@
 import { ModelModule } from "../model/model.module";
-import { ModelResolver } from "../model/model.resolver";
 import { ModalFormGenericoComponent } from "./modal-form-generico/modal-form-generico.component";
 import { TablaGenericaComponent } from "./tabla-generica/tabla-generica.component";
 import { SHARED_STATE, SharedState } from "../model/sharedState.model";
