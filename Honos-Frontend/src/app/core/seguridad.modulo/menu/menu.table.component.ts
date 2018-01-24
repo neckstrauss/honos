@@ -10,6 +10,7 @@ import { Component } from "@angular/core";
 export class MenuTableComponent {
 
   constructor(private model: MenuModel) {
+    console.log("paso por table menu");
     model.loadDataSet();
   }
   

@@ -23,6 +23,10 @@ export class RestDataSource {
   getData(): Observable<any> {
     return this.sendRequest("GET", this.url);
   }
+  
+  getDataWithParameter(data: any): Observable<any> {
+    return this.sendRequest("POST", this.url, data);
+  }
 
   saveData(data: any): Observable<any> {
     return this.sendRequest("POST", this.url, data);

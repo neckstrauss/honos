@@ -1,4 +1,5 @@
 import { MenuModel } from '../../../model/repositories/seguridad/menu.repository.model';
+import { UsuarioModel } from '../../../model/repositories/seguridad/usuario.repository.model';
 import { Component, OnInit } from '@angular/core';
 declare var $: any;
 
@@ -12,9 +13,10 @@ export class SidebarComponent implements OnInit {
   isActive = false;
   showMenu = '';
 
-  constructor(private menuModel: MenuModel
-  ) {
-    this.menuModel.loadMenuUsuario();
+  constructor(private usuarioModel: UsuarioModel ) {
+    
+    usuarioModel.login();
+    
   }
 
   ngOnInit() {

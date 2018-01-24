@@ -9,10 +9,15 @@ import javax.persistence.*;
  *
  */
 @Entity
-@NamedQuery(name=Usuario.AllUsuarios, query="SELECT u FROM Usuario u")
+@NamedQueries(value = { 
+		@NamedQuery(name=Usuario.AllUsuarios, query="SELECT u FROM Usuario u"),
+		@NamedQuery(name=Usuario.UsuarioByLogin, query="SELECT u FROM Usuario u where u.usuario like :login")
+})
+
 public class Usuario implements Serializable {
 
-	public final static String AllUsuarios = "Usuario.findAll";	   
+	public final static String AllUsuarios = "Usuario.findAll";
+	public final static String UsuarioByLogin = "Usuario.usuarioByLogin";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

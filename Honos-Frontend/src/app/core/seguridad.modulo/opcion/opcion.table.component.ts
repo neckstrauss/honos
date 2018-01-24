@@ -11,6 +11,7 @@ import { Component } from "@angular/core";
 export class OpcionTableComponent {
 
   constructor(private model: OpcionModel) {
+    model.loadDataSet();
   }
   
   columnas: any[] = [{ nombre: '#' },

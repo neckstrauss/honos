@@ -2,6 +2,7 @@ import {Model} from '../repository.model';
 import {RestDataSource} from '../../dataSources/rest.datasource';
 import {Injectable} from '@angular/core';
 import {environment} from "../../../../environments/environment";
+import { MessageService } from '../../../shared/messages/message.service';
 import { Opcion } from '../../entities/seguridad/opcion.model';
 import { HttpEventType } from '@angular/common/http';
 
@@ -12,9 +13,8 @@ export class OpcionModel extends Model<Opcion> {
     return new Opcion();
   }
 
-  constructor(private ds: RestDataSource) {
-    super(ds, environment.url + "honos/seguridad/opciones");
-    //super.loadDataSet();    
+  constructor(private ds: RestDataSource, message: MessageService) {
+    super(ds, message, environment.url + "honos/seguridad/opciones");
   }
 
   loadListaParaMenu(id:number = null): void {
@@ -24,7 +24,4 @@ export class OpcionModel extends Model<Opcion> {
       }
     });
   }
-
-
-
 }

@@ -1,7 +1,6 @@
 input.ng-dirty.ng-invalid { border: 2px solid #ff0000 }
 input.ng-dirty.ng-valid { border: 2px solid #6bc502 } 
 
-
 .form-control {
     border-radius: 0px;
 }
@@ -11,7 +10,7 @@ thead>tr>th {
 }
 
 .card {
-    width: calc( 100% - 1rem);
+    width: calc( 100% - 1rem);    
 }
 
 .card-header {
