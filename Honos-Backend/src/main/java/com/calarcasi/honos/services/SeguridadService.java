@@ -156,6 +156,24 @@ public class SeguridadService {
 	public Usuario updateUsuario(Usuario usuario) throws UnauthorizedException {
 		return new UsuarioPojo().update(usuario);
 	}
+	
+	@ApiMethod(name = "getUsuario", path = "usuarios/usuario", httpMethod = HttpMethod.POST)
+	public Usuario getUsuario(Usuario usuario) throws UnauthorizedException {
+		
+		Map parameters = new HashMap();		
+		parameters.put("login", usuario.getUsuario());
+		
+		List<Usuario> usuarios = new UsuarioPojo().findWithNamedQuery(Usuario.UsuarioByLogin, parameters);
+		
+		if(usuarios.size() > 0)
+		{
+			return usuarios.get(0);
+		}	
+		
+		return null;
+		
+		//return new UsuarioPojo().findWithNamedQuery(Usuario.AllUsuarios);
+	}
 
 	/*
 	 * FIN gestion USUARIO

@@ -88,6 +88,8 @@ public abstract class PojoGenerico<T>
 	{	
 		this.em.getTransaction().begin();
 		T item2 = this.em.merge(item);
+		this.em.flush();
+		this.em.refresh(item2);
 		this.em.getTransaction().commit();
 		this.em.close();
 		return item2;
