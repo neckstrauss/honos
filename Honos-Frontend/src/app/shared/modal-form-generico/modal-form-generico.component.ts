@@ -1,13 +1,10 @@
-import {Component, Inject, ViewChild, Input} from "@angular/core";
+import {Component, Inject, ViewChild, Input, Output, EventEmitter} from "@angular/core";
 import {NgForm} from "@angular/forms";
-import {Product} from "../../model/entities/product.model";
-import {ProductoModel} from '../../model/repositories/producto.repository.model';
 import {Model} from "../../model/repositories/repository.model";
 import {MODES, SharedState, SHARED_STATE} from "../../model/sharedState.model";
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute, Router} from "@angular/router";
 declare var $: any;
-
 
 @Component({
   selector: "modal-form-generico",
@@ -16,7 +13,6 @@ declare var $: any;
   styleUrls: ["modal-form-generico.component.scss"]
 })
 export class ModalFormGenericoComponent {
-object: any = new Object();
 
   lastId: number;
   editing: boolean = false;
@@ -24,23 +20,25 @@ object: any = new Object();
   @Input('model') model: Model<any>;
   @Input('titulo') titulo: string = 'titulo por defecto';
   
-
+  @Output("stateUpdate")
+  newEvent = new EventEmitter<number>();
+  
+  object: any = new Object();
+  
   constructor(@Inject(SHARED_STATE) private stateEvents: Observable<SharedState>) {
+    
     stateEvents.subscribe((update) => {
-      this.object = new Object();
+      this.object = this.model.newObject();
 
       if (update.id != undefined) {
         Object.assign(this.object, this.model.get(update.id));
       } 
-//      else {
-//        this.form.reset();
-//      }
 
-      this.editing = update.mode == MODES.EDIT;
+      this.editing = update.mode == MODES.EDIT;      
+      this.newEvent.emit(update.id);      
     });
   }
-
-
+  
   cambiarObject(id: number) {
     if (id != undefined) {
       Object.assign(this.object, this.model.get(id));
@@ -55,8 +53,5 @@ object: any = new Object();
     }
   }
 
-  
-
-  
 }
 
