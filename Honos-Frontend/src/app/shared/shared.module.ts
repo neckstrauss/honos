@@ -3,6 +3,7 @@ import { ModalFormGenericoComponent } from "./modal-form-generico/modal-form-gen
 import { TablaGenericaComponent } from "./tabla-generica/tabla-generica.component";
 import { SHARED_STATE, SharedState } from "../model/sharedState.model";
 import { CardEstadoComponent } from './card-estado/card-estado.component';
+import { MessageModule } from './messages/message.module';
 import { ExcelService } from './tabla-generica/excel.service';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";

@@ -2,6 +2,7 @@ import {Model} from '../repository.model';
 import {RestDataSource} from '../../dataSources/rest.datasource';
 import {Injectable} from '@angular/core';
 import {environment} from "../../../../environments/environment";
+import { MessageService } from '../../../shared/messages/message.service';
 import {Menu} from '../../entities/seguridad/menu.model';
 import { HttpEventType } from '@angular/common/http';
 
@@ -11,8 +12,8 @@ export class MenuModel extends Model<Menu> {
 
   private menuUsuario: Menu[] = new Array<Menu>();
 
-  constructor(private ds: RestDataSource) {
-    super(ds, environment.url + "honos/seguridad/menus");
+  constructor(private ds: RestDataSource, message: MessageService) {
+    super(ds, message, environment.url + "honos/seguridad/menus");
     //super.loadDataSet();
   }
   

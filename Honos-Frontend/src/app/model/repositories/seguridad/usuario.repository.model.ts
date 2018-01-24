@@ -2,6 +2,7 @@ import {Model} from '../repository.model';
 import {RestDataSource} from '../../dataSources/rest.datasource';
 import {Injectable} from '@angular/core';
 import {environment} from "../../../../environments/environment";
+import { MessageService } from '../../../shared/messages/message.service';
 import {Rol} from '../../entities/seguridad/rol.model';
 import {Usuario} from '../../entities/seguridad/usuario.model';
 import { HttpEventType } from '@angular/common/http';
@@ -11,8 +12,8 @@ export class UsuarioModel extends Model<Usuario> {
 
   private usuario: Usuario = new Usuario();
 
-  constructor(private ds: RestDataSource) {
-    super(ds, environment.url + "honos/seguridad/usuarios");
+  constructor(private ds: RestDataSource, message: MessageService) {
+    super(ds, message, environment.url + "honos/seguridad/usuarios");
   }
 
   newObject(): Usuario {
