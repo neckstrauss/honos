@@ -23,9 +23,6 @@ export class TablaGenericaComponent {
 
   public itemsPerPage = 15;
   public selectedPage = 1;
-  
-  public filter;
-  public filter2;
 
   constructor( @Inject(SHARED_STATE) private observer: Observer<SharedState>, private excelService: ExcelService) { }
 
