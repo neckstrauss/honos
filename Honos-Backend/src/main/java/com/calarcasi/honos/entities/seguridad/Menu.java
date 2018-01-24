@@ -21,7 +21,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries(value = { 
 	@NamedQuery(name=Menu.AllMenus, query="SELECT m FROM Menu m"),
-	@NamedQuery(name=Menu.RolMenus, query="SELECT m FROM Menu m "),
+	@NamedQuery(name=Menu.MenusRol, query="SELECT m FROM Menu m where m not in (select rm from Rol r JOIN r.menus rm WHERE r.id = :idRol)"),
 	
 }
 )
@@ -31,7 +31,7 @@ public class Menu implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public final static String AllMenus = "Menu.findAll";
-	public final static String RolMenus = "Menu.rolMenus";
+	public final static String MenusRol = "Menu.MenusRol";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

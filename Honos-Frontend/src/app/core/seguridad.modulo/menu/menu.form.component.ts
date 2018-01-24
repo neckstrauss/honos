@@ -14,24 +14,24 @@ import {Component, ViewChild} from "@angular/core";
 export class MenuFormComponent {
 
   opcionSeleted: number;
-
   @ViewChild('md') md: ModalFormGenericoComponent;
-
   private locator = (p: any, id: number) => p.id == id;
 
   constructor(private model: MenuModel, private opcionesModel: OpcionModel) {
   }
 
   addOpcion() {
+    
+    if (this.md.object.opciones == undefined) {
+        this.md.object.opciones = new Array<Opcion>();
+      }
+    
     let index = this.md.object.opciones.findIndex(p => this.locator(p, this.opcionSeleted));
 
     if (index == -1) {
       let opcion: Opcion = new Opcion();
       Object.assign(opcion, this.opcionesModel.get(this.opcionSeleted));
-
-      if (this.md.object.opciones == undefined) {
-        this.md.object.opciones = new Array<Opcion>();
-      }
+      
       this.md.object.opciones.push(opcion);
     }
   }

@@ -1,4 +1,4 @@
-<modal-form-generico #md [model]="this.model" titulo="Rol">
+<modal-form-generico #md [model]="this.model" titulo="Rol" (stateUpdate)="actualizarMenus($event)">
 <div card-body>
 	<div class="form-group ">
 		<label class="control-label" for="input">Nombre Rol<span

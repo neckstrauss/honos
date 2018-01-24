@@ -15,7 +15,6 @@ export class MenuTableComponent {
   
   columnas: any[] = [{ nombre: '#' },
   { nombre: 'Label', key: 'label' },
- // { nombre: 'Id Div Interno', key: 'idDivInterno' },
   { nombre: 'Descripción', key: 'descripcion' },
   { nombre: 'Estado', key: 'estado' },
   { nombre: '' }

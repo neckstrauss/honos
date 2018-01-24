@@ -1,7 +1,7 @@
-import { Menu } from '../../../model/entities/seguridad/menu.model';
-import { Rol } from '../../../model/entities/seguridad/rol.model';
+import {Menu} from '../../../model/entities/seguridad/menu.model';
+import {Rol} from '../../../model/entities/seguridad/rol.model';
 import {MenuModel} from '../../../model/repositories/seguridad/menu.repository.model';
-import { RolModel } from '../../../model/repositories/seguridad/rol.repository.model';
+import {RolModel} from '../../../model/repositories/seguridad/rol.repository.model';
 import {ModalFormGenericoComponent} from '../../../shared/modal-form-generico/modal-form-generico.component';
 import {Component, ViewChild} from "@angular/core";
 
@@ -14,9 +14,7 @@ import {Component, ViewChild} from "@angular/core";
 export class RolFormComponent {
 
   opcionSeleted: number;
-
   @ViewChild('md') md: ModalFormGenericoComponent;
-  
   private locator = (p: any, id: number) => p.id == id;
 
   constructor(private model: RolModel, private menuModel: MenuModel) {
@@ -24,22 +22,31 @@ export class RolFormComponent {
   }
 
   addMenu() {
-
-    let opcion: Menu = new Menu();
-    Object.assign(opcion, this.menuModel.get(this.opcionSeleted));
-
+    
     if (this.md.object.menus == undefined) {
-      this.md.object.menus = new Array<Menu>();
-    }
+        this.md.object.menus = new Array<Menu>();
+      }
+    
+    let index = this.md.object.menus.findIndex(p => this.locator(p, this.opcionSeleted));
 
-    this.md.object.menus.push(opcion);
+    if (index == -1) {
+      let opcion: Menu = new Menu();
+      Object.assign(opcion, this.menuModel.get(this.opcionSeleted));
+
+      
+      this.md.object.menus.push(opcion);
+    }
+  }
+
+  deleteMenu(id: number) {
+    let index = this.md.object.menu.findIndex(p => this.locator(p, id));
+    if (index > -1) {
+      this.md.object.menu.splice(index, 1);
+    }
   }
   
-  deleteMenu(id: number) {
-      let index = this.md.object.menu.findIndex(p => this.locator(p, id));
-      if (index > -1) {
-        this.md.object.menu.splice(index, 1);
-      }
+  actualizarMenus(id: number) {
+    this.menuModel.loadListaParaRol(id);
   }
 
 }

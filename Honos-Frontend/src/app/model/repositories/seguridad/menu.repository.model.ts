@@ -3,6 +3,7 @@ import {RestDataSource} from '../../dataSources/rest.datasource';
 import {Injectable} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {Menu} from '../../entities/seguridad/menu.model';
+import { HttpEventType } from '@angular/common/http';
 
 @Injectable()
 export class MenuModel extends Model<Menu> {
@@ -14,6 +15,14 @@ export class MenuModel extends Model<Menu> {
     super(ds, environment.url + "honos/seguridad/menus");
     //super.loadDataSet();
     
+  }
+  
+  loadListaParaRol(id:number = null): void {
+    this.ds.setUrl(super.getUrl()+(id?"/"+id:"")).getData().subscribe(event => {
+      if (event.type === HttpEventType.Response) {
+        super.setData(event.body.items); 
+      }
+    });
   }
 
    newObject(): Menu {

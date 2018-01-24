@@ -6,7 +6,6 @@ import {Observable} from "rxjs/Observable";
 import {ActivatedRoute, Router} from "@angular/router";
 declare var $: any;
 
-
 @Component({
   selector: "modal-form-generico",
   moduleId: module.id,
@@ -14,7 +13,6 @@ declare var $: any;
   styleUrls: ["modal-form-generico.component.scss"]
 })
 export class ModalFormGenericoComponent {
- 
 
   lastId: number;
   editing: boolean = false;
@@ -27,10 +25,7 @@ export class ModalFormGenericoComponent {
   
   object: any = new Object();
   
-
   constructor(@Inject(SHARED_STATE) private stateEvents: Observable<SharedState>) {
-    
-    //this.object = this.model.newObject();
     
     stateEvents.subscribe((update) => {
       this.object = this.model.newObject();
@@ -38,19 +33,12 @@ export class ModalFormGenericoComponent {
       if (update.id != undefined) {
         Object.assign(this.object, this.model.get(update.id));
       } 
-//      else {
-//        this.form.reset();
-//      }
 
-      this.editing = update.mode == MODES.EDIT;
-      
-      this.newEvent.emit(update.id);
-      
+      this.editing = update.mode == MODES.EDIT;      
+      this.newEvent.emit(update.id);      
     });
   }
   
- 
-
   cambiarObject(id: number) {
     if (id != undefined) {
       Object.assign(this.object, this.model.get(id));
@@ -65,8 +53,5 @@ export class ModalFormGenericoComponent {
     }
   }
 
-  
-
-  
 }
 

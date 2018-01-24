@@ -12,7 +12,6 @@ export class OpcionModel extends Model<Opcion> {
     return new Opcion();
   }
 
-
   constructor(private ds: RestDataSource) {
     super(ds, environment.url + "honos/seguridad/opciones");
     //super.loadDataSet();    
@@ -21,7 +20,6 @@ export class OpcionModel extends Model<Opcion> {
   loadListaParaMenu(id:number = null): void {
     this.ds.setUrl(super.getUrl()+(id?"/"+id:"")).getData().subscribe(event => {
       if (event.type === HttpEventType.Response) {
-        console.log("response received... getData()", event.body);
         super.setData(event.body.items); 
       }
     });
