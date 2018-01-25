@@ -24,6 +24,10 @@ export class RestDataSource {
     return this.sendRequest("GET", this.url);
   }
   
+  getDataById(id:number): Observable<any> {
+    return this.sendRequest("GET", this.url+'/'+id);
+  }
+  
   getDataWithParameter(data: any): Observable<any> {
     return this.sendRequest("POST", this.url, data);
   }

@@ -2,6 +2,7 @@ import {Component, Inject, ViewChild, Input, Output, EventEmitter} from "@angula
 import {NgForm} from "@angular/forms";
 import {Model} from "../../model/repositories/repository.model";
 import {MODES, SharedState, SHARED_STATE} from "../../model/sharedState.model";
+import { HttpEventType } from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute, Router} from "@angular/router";
 declare var $: any;
@@ -30,9 +31,20 @@ export class ModalFormGenericoComponent {
     
     stateEvents.subscribe((update) => {
       this.object = this.model.newObject();
-
       if (update.id != undefined) {
-        Object.assign(this.object, this.model.get(update.id));
+        //Object.assign(this.object, this.model.get(update.id));
+        
+        this.model.getById(update.id).subscribe(event => {
+      if (event.type === HttpEventType.Response) {
+        console.log("response received... getBYID()", event.body);             
+        Object.assign(this.object, event.body);
+        //return event.body;
+      }
+    });
+        
+        //Object.assign(this.object, this.model.getById(update.id ));
+        //this.object = this.model.get(update.id);
+        //this.object = Object.assign({},this.model.get(update.id));
       } 
       this.editing = update.mode == MODES.EDIT;      
       this.newEvent.emit(update.id);      
@@ -48,8 +60,9 @@ export class ModalFormGenericoComponent {
   submitForm(form: NgForm) {
     if (form.valid) {
       this.model.save(this.object);
-      form.reset();
+      form.reset();      
       $("#modalForm").modal("hide");
+     // this.model.loadDataSet();
     }
   }
 

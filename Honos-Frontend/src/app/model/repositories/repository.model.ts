@@ -9,6 +9,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 export abstract class Model<T> {
 
   private dataSet: T[] = new Array<any>();
+  private object:T;
   private locator = (p: any, id: number) => p.id == id;
   
   constructor(private dataSource: RestDataSource, private messages: MessageService,private url: string) {
@@ -41,12 +42,35 @@ export abstract class Model<T> {
       }
     });
   }
+  
+  getObjectById():T
+  {
+    return this.object;
+  }
+  
+  getById(id:number):Observable<T> {
+    let res:T;
+    
+    return this.dataSource.setUrl(this.url).getDataById(id);
+    
+//    this.dataSource.setUrl(this.url).getDataById(id).subscribe(event => {
+//      if (event.type === HttpEventType.Response) {
+//        console.log("response received... getBYID()", event.body);             
+//        return event.body;
+//      }
+//    });
+   // return res;
+  }
 
   getDataSet(): T[] {
     return this.dataSet;
   }
 
   get(id: number): T {
+    return this.dataSet.find(p => this.locator(p, id));
+  }
+  
+  getFromServer(id: number): T {
     return this.dataSet.find(p => this.locator(p, id));
   }
 

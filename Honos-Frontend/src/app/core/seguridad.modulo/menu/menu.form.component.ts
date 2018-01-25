@@ -22,6 +22,8 @@ export class MenuFormComponent {
   constructor(private model: MenuModel, private opcionesModel: OpcionModel) {
   }
   
+  
+  
   form: GenericoFormGroup = new GenericoFormGroup(
     {
       label: new GenericoFormControl(

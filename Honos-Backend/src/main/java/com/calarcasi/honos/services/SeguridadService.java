@@ -77,14 +77,20 @@ public class SeguridadService {
 		return new MenuPojo().findWithNamedQuery(Menu.AllMenus);
 	}
 
-	@ApiMethod(name = "getMenusRol", path = "menus/{idRol}", httpMethod = HttpMethod.GET)
-	public List<Menu> getMenusBy(@Named("idRol") final int idRol) throws UnauthorizedException {
+	@ApiMethod(name = "getMenusRol", path = "menus/rol/{idRol}", httpMethod = HttpMethod.GET)
+	public List<Menu> getMenusRol(@Named("idRol") final int idRol) throws UnauthorizedException {
 		
 		Map parameters = new HashMap();		
 		parameters.put("idRol", idRol);		
 		
 		return new MenuPojo().findWithNamedQuery(Menu.MenusRol, parameters);
-	}	
+	}
+	
+	@ApiMethod(name = "getMenuById", path = "menus/{id}", httpMethod = HttpMethod.GET)
+	public Menu getMenusBy(@Named("id") final int id) throws UnauthorizedException {
+		System.out.println();		
+		return new MenuPojo().find(id);
+	}
 	
 	@ApiMethod(name = "saveMenus", path = "menus", httpMethod = HttpMethod.POST)
 	public Menu saveMenu(Menu menu) throws UnauthorizedException {

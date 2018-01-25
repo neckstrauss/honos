@@ -45,6 +45,7 @@ public abstract class PojoGenerico<T>
 	 * @return 
 	 */
 	public T find(Object id) {
+		//this.em.flush();
 		return this.em.find(this.type, id);
 	}
 
