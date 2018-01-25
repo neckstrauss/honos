@@ -1,0 +1,6 @@
+<ul class="text-danger list-unstyled"
+	*ngIf="( form.controls[property].dirty) && form.controls[property].invalid">
+	<li
+		*ngFor="let error of form.controls[property].getValidationMessages()">
+		{{error}}</li>
+</ul>

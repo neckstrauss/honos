@@ -15,7 +15,6 @@
       "severity": "warn"
     },
     "eofline": false,
-    "forin": true,
     "import-blacklist": [
       true,
       "rxjs",
@@ -33,17 +32,6 @@
       140
     ],
     "member-access": false,
-    "member-ordering": [
-      true,
-      {
-        "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
-        ]
-      }
-    ],
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [
@@ -69,7 +57,6 @@
     "no-trailing-whitespace": false,
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [

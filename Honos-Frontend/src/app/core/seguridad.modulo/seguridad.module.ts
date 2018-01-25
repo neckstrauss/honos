@@ -15,7 +15,7 @@ import { UsuarioFormComponent } from './usuario/usuario.form.component';
 import { UsuarioTableComponent } from './usuario/usuario.table.component';
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Routes, RouterModule} from "@angular/router";
 import {Subject} from "rxjs/Subject";
 
@@ -31,7 +31,7 @@ let routing = RouterModule.forChild([
 ]);
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ModelModule, routing, SharedModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModelModule, routing, SharedModule],
   declarations: [
     OpcionTableComponent, OpcionFormComponent,
     MenuTableComponent, MenuFormComponent,

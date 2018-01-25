@@ -1,41 +1,44 @@
-<modal-form-generico #md [model]="this.model" titulo="Rol">
+<modal-form-generico #md [model]="this.model" titulo="Rol" [form]="form">
 <div card-body>
+<form novalidate  [formGroup]="form">
 	<div class="form-group ">
 		<label class="control-label" for="input">Usuario<span
 			class="required">*</span>
 		</label> <input class="form-control form-control-sm"
-			 name="usuario" type="text"
-			[(ngModel)]="md.object.usuario" required="required" required />
-
+			 name="usuario" type="text" formControlName="usuario"
+			[(ngModel)]="md.object.usuario" />
+			<message-validation [form]="form" property="usuario"></message-validation>
 	</div>	
 
 	<div class="form-group ">
 		<label class="control-label" for="input">Password<span
 			class="required">*</span>
 		</label> <input class="form-control form-control-sm"
-			 name="password" type="password"
-			[(ngModel)]="md.object.password" required="required" required />
+			 name="password" type="password" formControlName="password"
+			[(ngModel)]="md.object.password" />
+			<message-validation [form]="form" property="password"></message-validation>
 
 	</div>		
 
 	<div class="form-group" *ngIf="md.object.rol">
 		<label>Rol<span class="required">*</span></label>		
 		<select class="form-control  custom-select form-control-sm"
-			 name="rol" [(ngModel)]="md.object.rol.id" required>
+			 name="rol" [(ngModel)]="md.object.rol.id" formControlName="rol">
 			<option *ngFor="let o of this.rolModel.getDataSet()"
 					value="{{o.id}}">{{o.nombre}}</option>
 		</select>
+		<message-validation [form]="form" property="rol"></message-validation>
 	</div>	
 
 	<div class="form-group">
 		<label>Estado<span class="required">*</span></label>		
 		<select class="form-control  custom-select form-control-sm"
-			 name="estado" [(ngModel)]="md.object.estado" required>
+			 name="estado" [(ngModel)]="md.object.estado" formControlName="estado">
 			<option value="ACT">Activo</option>
 			<option value="INA">Inactivo</option>
 		</select>
+		<message-validation [form]="form" property="estado"></message-validation>
 	</div>
-	
+</form>	
 </div>
-<div card-footer></div>
 </modal-form-generico>
