@@ -75,6 +75,7 @@ export class RolFormComponent {
   deleteMenu(id: number) {
     let index = this.md.object.menus.findIndex(p => this.locator(p, id));
     if (index > -1) {
+      this.menuModel.getDataSet().push(this.md.object.opciones[index]);
       this.md.object.menus.splice(index, 1);
     }
   }

@@ -86,6 +86,7 @@ export class MenuFormComponent {
   deleteOpcion(id: number) {
     let index = this.md.object.opciones.findIndex(p => this.locator(p, id));
     if (index > -1) {
+      this.opcionesModel.getDataSet().push(this.md.object.opciones[index]);
       this.md.object.opciones.splice(index, 1);
     }
   }
