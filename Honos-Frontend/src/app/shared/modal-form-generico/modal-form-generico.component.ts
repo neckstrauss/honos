@@ -19,6 +19,7 @@ export class ModalFormGenericoComponent {
   
   @Input('model') model: Model<any>;
   @Input('titulo') titulo: string = 'titulo por defecto';
+  @Input('form') form: NgForm; 
   
   @Output("stateUpdate")
   newEvent = new EventEmitter<number>();
@@ -33,7 +34,6 @@ export class ModalFormGenericoComponent {
       if (update.id != undefined) {
         Object.assign(this.object, this.model.get(update.id));
       } 
-      console.log("paso event");
       this.editing = update.mode == MODES.EDIT;      
       this.newEvent.emit(update.id);      
     });

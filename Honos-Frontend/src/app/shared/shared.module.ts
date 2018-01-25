@@ -3,6 +3,7 @@ import { ModalFormGenericoComponent } from "./modal-form-generico/modal-form-gen
 import { TablaGenericaComponent } from "./tabla-generica/tabla-generica.component";
 import { SHARED_STATE, SharedState } from "../model/sharedState.model";
 import { CardEstadoComponent } from './card-estado/card-estado.component';
+import { MessageValidationFormComponent } from './message-validacion-form/message-validation-form.component';
 import { MessageModule } from './messages/message.module';
 import { ExcelService } from './tabla-generica/excel.service';
 import { NgModule } from "@angular/core";
@@ -17,8 +18,20 @@ import { Subject } from "rxjs/Subject";
 
 @NgModule({
     imports: [CommonModule, FormsModule, ModelModule, Ng2SearchPipeModule, OrderModule, NgxPaginationModule],
-    declarations: [TablaGenericaComponent, ModalFormGenericoComponent, CardEstadoComponent],
-    exports: [TablaGenericaComponent, ModalFormGenericoComponent, CardEstadoComponent],
+    declarations: 
+    [
+      TablaGenericaComponent, 
+      ModalFormGenericoComponent, 
+      CardEstadoComponent, 
+      MessageValidationFormComponent
+    ],
+    exports: 
+    [
+      TablaGenericaComponent, 
+      ModalFormGenericoComponent, 
+      CardEstadoComponent, 
+      MessageValidationFormComponent
+    ],
     providers: [{ provide: SHARED_STATE, useValue: new Subject<SharedState>() }, ExcelService]
 
 })

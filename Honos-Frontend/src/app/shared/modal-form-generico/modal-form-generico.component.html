@@ -3,10 +3,6 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				<!-- <button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button> -->
 				<div class="card">
 					<div class="card-header">
 						<i class="material-icons icon-title">assignment</i>
@@ -15,12 +11,17 @@
 						<h2>{{editing ? "Editar" : "Crear"}} {{titulo}}</h2>
 					</div>
 					<div class="card-content">
-						<form novalidate #form="ngForm" >
-							<ng-content select="[card-body]"></ng-content>
-						</form>	
+						<!-- <form novalidate #form="ngForm" > -->
+						<ng-content select="[card-body]"></ng-content>
+						<!-- </form> -->
 					</div>
 					<div class="card-footer">
-						<ng-content select="[card-footer]"></ng-content>
+						<button type="button" class="btn btn-primary"
+							(click)="submitForm(form)" [class.btn-warning]="editing"
+							[disabled]="form.invalid">{{editing ? "Save" :
+							"Create"}}</button>
+
+						<!-- <ng-content select="[card-footer]"></ng-content> -->
 						<div *ngIf="editing" class="btn-group float-left">
 							<button class="btn btn-secondary"
 								(click)="cambiarObject(this.model.getPreviousId(this.object.id))">
@@ -29,10 +30,6 @@
 								(click)="cambiarObject(this.model.getNextId(this.object.id))">
 								Next</button>
 						</div>
-						<button type="button" class="btn btn-primary"
-							(click)="submitForm(form)" [class.btn-warning]="editing"
-							[disabled]="form.invalid">{{editing ? "Save" :
-							"Create"}}</button>
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Cancel</button>
 

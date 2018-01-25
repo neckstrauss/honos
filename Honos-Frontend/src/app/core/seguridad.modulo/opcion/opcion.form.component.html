@@ -1,33 +1,35 @@
-<modal-form-generico #md [model]="this.model" titulo="Opción">
+<modal-form-generico #md [model]="this.model" titulo="Opción"
+	[form]="form">
 <div card-body>
-	<div class="form-group ">
-		<label class="control-label" for="input">Label<span
-			class="required">*</span>
-		</label> <input class="form-control " name="label" type="text"
-			[(ngModel)]="md.object.label" required="required" required />
+	<form novalidate  [formGroup]="form">
+		<div class="form-group ">
+			<label class="control-label" for="input">Label<span
+				class="required">*</span>
+			</label> 
+			<input class="form-control " name="label" formControlName="label"
+				type="text" [(ngModel)]="md.object.label" />
+			<message-validation [form]="form" property="label"></message-validation>
+		</div>
+		
+		<div class="form-group">
+			<label>URI<span class="required">*</span></label> <input
+				class="form-control " name="uri" type="text" formControlName="uri"
+				[(ngModel)]="md.object.uri" />
+				<ul class="text-danger list-unstyled"
+				*ngIf="( form.controls['uri'].dirty) && form.controls['uri'].invalid">
+				<message-validation [form]="form" property="uri"></message-validation>					
+			</ul>
+		</div>
 
-	</div>
-	<div class="form-group">
-		<label>URI<span class="required">*</span></label> <input
-			class="form-control " name="uri" type="text"
-			[(ngModel)]="md.object.uri" required="required" required />
-	</div>
-
-	<div class="form-group">
-		<label>Estado<span class="required">*</span></label>
-		<!-- <input class="form-control" name="estado" [(ngModel)]="md.object.estado"
-		required type="text" required>  -->
-		<select class="form-control  custom-select"
-				name="estado" [(ngModel)]="md.object.estado" required>
-				<option  value="ACT">Activo</option>
-				<option  value="INA">Inactivo</option>
+		<div class="form-group">
+			<label>Estado<span class="required">*</span></label> <select
+				class="form-control  custom-select" name="estado" formControlName="estado"
+				[(ngModel)]="md.object.estado" required>
+				<option value="ACT">Activo</option>
+				<option value="INA">Inactivo</option>
 			</select>
-	</div>
-	
-
-
-</div>
-<div card-footer>
-
+			<message-validation [form]="form" property="estado"></message-validation>
+		</div>
+ 	</form>
 </div>
 </modal-form-generico>
