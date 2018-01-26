@@ -40,13 +40,18 @@ public class SeguridadService {
 		return new OpcionPojo().findWithNamedQuery(Opcion.AllOpciones);
 	}
 	
-	@ApiMethod(name = "getOpcionesMenu", path = "opciones/{idMenu}", httpMethod = HttpMethod.GET)
-	public List<Opcion> getOpcionesBy(@Named("idMenu") final int idMenu) throws UnauthorizedException {
+	@ApiMethod(name = "getOpcionesMenu", path = "opciones/menu/{idMenu}", httpMethod = HttpMethod.GET)
+	public List<Opcion> getOpcionesMenu(@Named("idMenu") final int idMenu) throws UnauthorizedException {
 		
 		Map parameters = new HashMap();		
 		parameters.put("idMenu", idMenu);		
 		
 		return new OpcionPojo().findWithNamedQuery(Opcion.OpcionesMenu, parameters);
+	}
+	
+	@ApiMethod(name = "getOpcionById", path = "opciones/{id}", httpMethod = HttpMethod.GET)
+	public Opcion getOpcionById(@Named("id") final int id) throws UnauthorizedException {
+		return new OpcionPojo().find(id);
 	}
 
 	@ApiMethod(name = "saveOpcion", path = "opciones", httpMethod = HttpMethod.POST)
@@ -77,14 +82,19 @@ public class SeguridadService {
 		return new MenuPojo().findWithNamedQuery(Menu.AllMenus);
 	}
 
-	@ApiMethod(name = "getMenusRol", path = "menus/{idRol}", httpMethod = HttpMethod.GET)
-	public List<Menu> getMenusBy(@Named("idRol") final int idRol) throws UnauthorizedException {
+	@ApiMethod(name = "getMenusRol", path = "menus/rol/{idRol}", httpMethod = HttpMethod.GET)
+	public List<Menu> getMenusRol(@Named("idRol") final int idRol) throws UnauthorizedException {
 		
 		Map parameters = new HashMap();		
 		parameters.put("idRol", idRol);		
-		
 		return new MenuPojo().findWithNamedQuery(Menu.MenusRol, parameters);
-	}	
+	}
+	
+	@ApiMethod(name = "getMenuById", path = "menus/{id}", httpMethod = HttpMethod.GET)
+	public Menu getMenuById(@Named("id") final int id) throws UnauthorizedException {
+		
+		return new MenuPojo().find(id);
+	}
 	
 	@ApiMethod(name = "saveMenus", path = "menus", httpMethod = HttpMethod.POST)
 	public Menu saveMenu(Menu menu) throws UnauthorizedException {
@@ -113,6 +123,18 @@ public class SeguridadService {
 	public List<Rol> getRoles() throws UnauthorizedException {
 		return new RolPojo().findWithNamedQuery(Rol.AllRoles);
 	}
+	
+	@ApiMethod(name = "getRolesActivos", path = "roles/activos", httpMethod = HttpMethod.GET)
+	public List<Rol> getRolesActivos() throws UnauthorizedException {
+		
+		String query = "select r from Rol r where r.estado LIKE 'ACT'";		
+		return new RolPojo().findWithQuery(query);
+	}
+	
+	@ApiMethod(name = "getRolById", path = "roles/{id}", httpMethod = HttpMethod.GET)
+	public Rol getRolById(@Named("id") final int id) throws UnauthorizedException {
+		return new RolPojo().find(id);
+	}
 
 	@ApiMethod(name = "saveRoles", path = "roles", httpMethod = HttpMethod.POST)
 	public Rol saveRol(Rol rol) throws UnauthorizedException {
@@ -140,6 +162,11 @@ public class SeguridadService {
 	@ApiMethod(name = "getUsuarios", path = "usuarios", httpMethod = HttpMethod.GET)
 	public List<Usuario> getUsuarios() throws UnauthorizedException {
 		return new UsuarioPojo().findWithNamedQuery(Usuario.AllUsuarios);
+	}
+	
+	@ApiMethod(name = "getUsuarioById", path = "usuarios/{id}", httpMethod = HttpMethod.GET)
+	public Usuario getUsuarioById(@Named("id") final int id) throws UnauthorizedException {
+		return new UsuarioPojo().find(id);
 	}
 
 	@ApiMethod(name = "saveUsuarios", path = "usuarios", httpMethod = HttpMethod.POST)

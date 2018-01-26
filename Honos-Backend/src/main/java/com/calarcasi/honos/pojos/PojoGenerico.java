@@ -1,32 +1,33 @@
 package com.calarcasi.honos.pojos;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CacheStoreMode;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-public abstract class PojoGenerico<T>
-{	
-	
+public abstract class PojoGenerico<T> {
+
 	private EntityManager em;
 
 	private Class<T> type;
 
-	
-	public PojoGenerico(Class<T> c)
-	{
+	public PojoGenerico(Class<T> c) {
 		this.type = c;
-		
+
 		em = EntityFactory.getEntityManager();
 	}
 
 	/**
 	 * Stores an instance of the entity class in the database
-	 * @param T Object
-	 * @return 
+	 * 
+	 * @param T
+	 *            Object
+	 * @return
 	 */
 	public T create(T t) {
 		this.em.getTransaction().begin();
@@ -39,19 +40,31 @@ public abstract class PojoGenerico<T>
 	}
 
 	/**
-	 * Retrieves an entity instance that was previously persisted to the database 
-	 * @param T Object
+	 * Retrieves an entity instance that was previously persisted to the database
+	 * 
+	 * @param T
+	 *            Object
 	 * @param id
-	 * @return 
+	 * @return
 	 */
 	public T find(Object id) {
-		return this.em.find(this.type, id);
+		// this.em.flush();
+		// return this.em.find(this.type, id);
+
+		String query = "select o from "+ this.type.getName() +" o where o.id = :id";
+
+		Map parameters = new HashMap();
+		parameters.put("id", id);
+		
+		return  findWithQuery(query, parameters).get(0);
+
 	}
 
 	/**
 	 * Removes the record that is associated with the entity instance
+	 * 
 	 * @param type
-	 * @param id 
+	 * @param id
 	 */
 	public void delete(Object id) {
 		this.em.getTransaction().begin();
@@ -63,14 +76,14 @@ public abstract class PojoGenerico<T>
 
 	/**
 	 * Removes the number of entries from a table
+	 * 
 	 * @param <T>
 	 * @param items
-	 * @return 
+	 * @return
 	 */
 	public boolean deleteItems(T[] items) {
 		this.em.getTransaction().begin();
-		for (T item : items) 
-		{
+		for (T item : items) {
 			em.remove(em.merge(item));
 		}
 		this.em.getTransaction().commit();
@@ -80,12 +93,12 @@ public abstract class PojoGenerico<T>
 
 	/**
 	 * Updates the entity instance
+	 * 
 	 * @param <T>
 	 * @param t
 	 * @return the object that is updated
 	 */
-	public T update(T item) 
-	{	
+	public T update(T item) {
 		this.em.getTransaction().begin();
 		T item2 = this.em.merge(item);
 		this.em.flush();
@@ -97,16 +110,41 @@ public abstract class PojoGenerico<T>
 
 	/**
 	 * Returns the number of records that meet the criteria
+	 * 
 	 * @param namedQueryName
 	 * @return List
 	 */
 	@SuppressWarnings("unchecked")
 	public List<T> findWithNamedQuery(String namedQueryName) {
-		return  this.em.createNamedQuery(namedQueryName).getResultList();
+		return this.em.createNamedQuery(namedQueryName).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> findWithQuery(String queryStr, Map parameters) {
+
+		Set<Map.Entry<String, Object>> rawParameters = parameters.entrySet();
+
+		Query query = em.createQuery(queryStr);
+		query.setHint("javax.persistence.cache.storeMode", CacheStoreMode.REFRESH);
+
+		for (Map.Entry<String, Object> entry : rawParameters) {
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> findWithQuery(String queryStr) {
+
+		Query query = em.createQuery(queryStr);
+		query.setHint("javax.persistence.cache.storeMode", CacheStoreMode.REFRESH);
+
+		return query.getResultList();
 	}
 
 	/**
 	 * Returns the number of records that meet the criteria
+	 * 
 	 * @param namedQueryName
 	 * @param parameters
 	 * @return List
@@ -117,18 +155,18 @@ public abstract class PojoGenerico<T>
 
 	/**
 	 * Returns the number of records with result limit
+	 * 
 	 * @param queryName
 	 * @param resultLimit
 	 * @return List
 	 */
 	public List<T> findWithNamedQuery(String queryName, int resultLimit) {
-		return this.em.createNamedQuery(queryName).
-				setMaxResults(resultLimit).
-				getResultList();
+		return this.em.createNamedQuery(queryName).setMaxResults(resultLimit).getResultList();
 	}
 
 	/**
 	 * Returns the number of records that meet the criteria
+	 * 
 	 * @param <T>
 	 * @param sql
 	 * @param type
@@ -140,6 +178,7 @@ public abstract class PojoGenerico<T>
 
 	/**
 	 * Returns the number of total records
+	 * 
 	 * @param namedQueryName
 	 * @return int
 	 */
@@ -152,6 +191,7 @@ public abstract class PojoGenerico<T>
 	/**
 	 * Returns the number of records that meet the criteria with parameter map and
 	 * result limit
+	 * 
 	 * @param namedQueryName
 	 * @param parameters
 	 * @param resultLimit
@@ -170,7 +210,9 @@ public abstract class PojoGenerico<T>
 	}
 
 	/**
-	 * Returns the number of records that will be used with lazy loading / pagination 
+	 * Returns the number of records that will be used with lazy loading /
+	 * pagination
+	 * 
 	 * @param namedQueryName
 	 * @param start
 	 * @param end
@@ -183,59 +225,33 @@ public abstract class PojoGenerico<T>
 		return query.getResultList();
 	}
 
-	public Connection getConnection()
-	{
+	public Connection getConnection() {
 		return em.unwrap(java.sql.Connection.class);
 	}
 
-	protected EntityManager getEntityManager()
-	{
+	protected EntityManager getEntityManager() {
 		return em;
 	}
 	/*
-	protected EntityManager getEntityManager()
-	{
-		return em;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<E> queryByRange(String jpqlStmt, int firstResult, int maxResults) 
-	{
-		Query query = getEntityManager().createQuery(jpqlStmt);
-		if (firstResult > 0) {
-			query = query.setFirstResult(firstResult);
-		}
-		if (maxResults > 0) {
-			query = query.setMaxResults(maxResults);
-		}
-		return query.getResultList();
-	}
-
-	public E persist(E object) 
-	{
-		getEntityManager().persist(object);
-		return object;
-	}
-
-	public E merge(E object) 
-	{
-		return getEntityManager().merge(object);
-	}
-
-	public void remove(E entity) 
-	{	        
-		E entityToRemove = find(entity.getId());
-		getEntityManager().remove(entityToRemove);
-	}
-
-	public E find(P pk)
-	{
-		return  getEntityManager().find(type, pk);
-	} 
-
-	
+	 * protected EntityManager getEntityManager() { return em; }
+	 * 
+	 * @SuppressWarnings("unchecked") public List<E> queryByRange(String jpqlStmt,
+	 * int firstResult, int maxResults) { Query query =
+	 * getEntityManager().createQuery(jpqlStmt); if (firstResult > 0) { query =
+	 * query.setFirstResult(firstResult); } if (maxResults > 0) { query =
+	 * query.setMaxResults(maxResults); } return query.getResultList(); }
+	 * 
+	 * public E persist(E object) { getEntityManager().persist(object); return
+	 * object; }
+	 * 
+	 * public E merge(E object) { return getEntityManager().merge(object); }
+	 * 
+	 * public void remove(E entity) { E entityToRemove = find(entity.getId());
+	 * getEntityManager().remove(entityToRemove); }
+	 * 
+	 * public E find(P pk) { return getEntityManager().find(type, pk); }
+	 * 
+	 * 
 	 */
-	
-	
-	
+
 }

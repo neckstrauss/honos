@@ -2,6 +2,7 @@ import {Component, Inject, ViewChild, Input, Output, EventEmitter} from "@angula
 import {NgForm} from "@angular/forms";
 import {Model} from "../../model/repositories/repository.model";
 import {MODES, SharedState, SHARED_STATE} from "../../model/sharedState.model";
+import {HttpEventType} from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute, Router} from "@angular/router";
 declare var $: any;
@@ -16,29 +17,29 @@ export class ModalFormGenericoComponent {
 
   lastId: number;
   editing: boolean = false;
-  
+
   @Input('model') model: Model<any>;
   @Input('titulo') titulo: string = 'titulo por defecto';
-  @Input('form') form: NgForm; 
-  
+  @Input('form') form: NgForm;
+
   @Output("stateUpdate")
   newEvent = new EventEmitter<number>();
-  
+
   object: any = new Object();
-  
-  constructor(@Inject(SHARED_STATE) private stateEvents: Observable<SharedState>) {
-    
+
+  constructor( @Inject(SHARED_STATE) private stateEvents: Observable<SharedState>) {
+
     stateEvents.subscribe((update) => {
       this.object = this.model.newObject();
-
       if (update.id != undefined) {
-        Object.assign(this.object, this.model.get(update.id));
-      } 
-      this.editing = update.mode == MODES.EDIT;      
-      this.newEvent.emit(update.id);      
+        //Object.assign(this.object, this.model.get(update.id));
+        this.getObjectById(update.id);
+      }
+      this.editing = update.mode == MODES.EDIT;
+      this.newEvent.emit(update.id);
     });
   }
-  
+
   cambiarObject(id: number) {
     if (id != undefined) {
       Object.assign(this.object, this.model.get(id));
@@ -50,7 +51,17 @@ export class ModalFormGenericoComponent {
       this.model.save(this.object);
       form.reset();
       $("#modalForm").modal("hide");
+      // this.model.loadDataSet();
     }
+  }
+
+  private getObjectById(id: number) {
+    this.model.getById(id).subscribe(event => {
+      if (event.type === HttpEventType.Response) {
+        //            console.log("response received... getBYID()", event.body);
+        Object.assign(this.object, event.body);
+      }
+    });
   }
 
 }

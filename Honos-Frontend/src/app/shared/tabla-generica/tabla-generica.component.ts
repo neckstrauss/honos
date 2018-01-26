@@ -46,8 +46,18 @@ export class TablaGenericaComponent {
     this.itemsPerPage = Number(newSize);
   }
 
-  deleteItem(key: number) {
-    this.model.delete(key);
+  cambiarEstado(item: any) {
+    //this.model.delete(key);
+    if(item.estado == 'INA')
+    {
+      item.estado = 'ACT'
+    }
+    else if(item.estado = 'ACT')
+    {
+      item.estado = 'INA'
+    }   
+    
+    this.model.save(item);    
   }
 
   editItem(key: number) {
