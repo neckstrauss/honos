@@ -1,4 +1,4 @@
-<modal-form-generico #md [model]="this.model" titulo="Rol" [form]="form">
+<modal-form-generico #md [model]="this.model" titulo="Rol" [form]="form" (stateUpdate)="cargarListados()">
 <div card-body>
 <form novalidate  [formGroup]="form">
 	<div class="form-group ">

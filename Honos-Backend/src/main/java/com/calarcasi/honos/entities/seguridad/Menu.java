@@ -21,7 +21,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries(value = { 
 	@NamedQuery(name=Menu.AllMenus, query="SELECT m FROM Menu m"),
-	@NamedQuery(name=Menu.MenusRol, query="SELECT m FROM Menu m where m not in (select rm from Rol r JOIN r.menus rm WHERE r.id = :idRol)"),
+	@NamedQuery(name=Menu.MenusRol, query="SELECT m FROM Menu m where m not in (select rm from Rol r JOIN r.menus rm WHERE r.id = :idRol) and m.estado LIKE 'ACT'"),
 }
 )
 

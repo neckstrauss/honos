@@ -2,10 +2,10 @@ import {Menu} from '../../../model/entities/seguridad/menu.model';
 import {Opcion} from '../../../model/entities/seguridad/opcion.model';
 import {MenuModel} from '../../../model/repositories/seguridad/menu.repository.model';
 import {OpcionModel} from '../../../model/repositories/seguridad/opcion.repository.model';
-import { GenericoFormControl, GenericoFormGroup } from '../../../shared/modal-form-generico/form-generico.model';
+import {GenericoFormControl, GenericoFormGroup} from '../../../shared/modal-form-generico/form-generico.model';
 import {ModalFormGenericoComponent} from '../../../shared/modal-form-generico/modal-form-generico.component';
 import {Component, ViewChild} from "@angular/core";
-import { Validators } from '@angular/forms';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: "menu-modal-form",
@@ -21,9 +21,7 @@ export class MenuFormComponent {
 
   constructor(private model: MenuModel, private opcionesModel: OpcionModel) {
   }
-  
-  
-  
+
   form: GenericoFormGroup = new GenericoFormGroup(
     {
       label: new GenericoFormControl(
@@ -47,7 +45,7 @@ export class MenuFormComponent {
         )
       ),
 
-    descripcion: new GenericoFormControl(
+      descripcion: new GenericoFormControl(
         "Descripcion", "descripcion", "",
         Validators.compose(
           [
@@ -58,7 +56,7 @@ export class MenuFormComponent {
           ]
         )
       ),
-    
+
       estado: new GenericoFormControl(
         "Estado", "estado", "",
         Validators.compose(
@@ -70,17 +68,17 @@ export class MenuFormComponent {
 
 
   addOpcion() {
-    
+
     if (this.md.object.opciones == undefined) {
-        this.md.object.opciones = new Array<Opcion>();
-      }
-    
+      this.md.object.opciones = new Array<Opcion>();
+    }
+
     let index = this.md.object.opciones.findIndex(p => this.locator(p, this.opcionSeleted));
 
     if (index == -1) {
       let opcion: Opcion = new Opcion();
       Object.assign(opcion, this.opcionesModel.get(this.opcionSeleted));
-      
+
       this.md.object.opciones.push(opcion);
     }
   }

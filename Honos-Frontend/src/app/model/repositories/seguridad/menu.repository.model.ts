@@ -15,7 +15,7 @@ export class MenuModel extends Model<Menu> {
   }
 
   loadListaParaRol(id: number = null): void {
-    this.ds.setUrl(super.getUrl() + (id ? "/rol/" + id : "")).getData().subscribe(event => {
+    this.ds.setUrl(super.getUrl() + "/rol/" + id ).getData().subscribe(event => {
       if (event.type === HttpEventType.Response) {
         super.setData(event.body.items);
       }

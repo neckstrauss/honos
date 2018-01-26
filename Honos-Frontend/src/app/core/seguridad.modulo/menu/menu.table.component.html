@@ -9,7 +9,10 @@
       <td class="text-center">
         <i class="material-icons verde" aria-hidden="true " data-placement="top " title="Editar" data-toggle="modal" data-target="#modalForm"
           (click)="tb.editItem(item.id)">edit</i>
-        <i class="material-icons rojo" aria-hidden="true " data-toggle="tooltip " data-placement="top" title="Eliminar" (click)="tb.deleteItem(item.id)">delete_forever</i>
+        <i class="material-icons rojo" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Inactivar" 
+        	*ngIf="item.estado=='ACT'"	(click)="tb.cambiarEstado(item)">delete_forever</i>
+        <i class="material-icons azul" aria-hidden="true " data-toggle="tooltip " data-placement="top" title="Activar" 
+        	*ngIf="item.estado=='INA'" (click)="tb.cambiarEstado(item)">open_in_new</i>
       </td>
     </tr>
   </ng-template>

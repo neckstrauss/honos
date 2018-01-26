@@ -17,7 +17,7 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries(value = { 
 		@NamedQuery(name = Opcion.AllOpciones, query = "SELECT o FROM Opcion o"),
-		@NamedQuery(name = Opcion.OpcionesMenu, query = "SELECT o FROM Opcion o where o not in (select mo from Menu m JOIN m.opciones mo WHERE m.id = :idMenu)"),
+		@NamedQuery(name = Opcion.OpcionesMenu, query = "SELECT o FROM Opcion o where o not in (select mo from Menu m JOIN m.opciones mo WHERE m.id = :idMenu) and o.estado LIKE 'ACT'"),
 		})
 public class Opcion implements Serializable {
 

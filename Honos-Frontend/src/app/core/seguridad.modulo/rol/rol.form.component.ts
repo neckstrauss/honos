@@ -2,10 +2,10 @@ import {Menu} from '../../../model/entities/seguridad/menu.model';
 import {Rol} from '../../../model/entities/seguridad/rol.model';
 import {MenuModel} from '../../../model/repositories/seguridad/menu.repository.model';
 import {RolModel} from '../../../model/repositories/seguridad/rol.repository.model';
-import { GenericoFormControl, GenericoFormGroup } from '../../../shared/modal-form-generico/form-generico.model';
+import {GenericoFormControl, GenericoFormGroup} from '../../../shared/modal-form-generico/form-generico.model';
 import {ModalFormGenericoComponent} from '../../../shared/modal-form-generico/modal-form-generico.component';
 import {Component, ViewChild} from "@angular/core";
-import { Validators } from '@angular/forms';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: "rol-modal-form",
@@ -20,7 +20,7 @@ export class RolFormComponent {
   private locator = (p: any, id: number) => p.id == id;
 
   constructor(private model: RolModel, private menuModel: MenuModel) {
-    model.loadDataSet();
+    // model.loadDataSet();
   }
 
   form: GenericoFormGroup = new GenericoFormGroup(
@@ -67,7 +67,6 @@ export class RolFormComponent {
       let opcion: Menu = new Menu();
       Object.assign(opcion, this.menuModel.get(this.opcionSeleted));
 
-
       this.md.object.menus.push(opcion);
     }
   }
@@ -75,7 +74,7 @@ export class RolFormComponent {
   deleteMenu(id: number) {
     let index = this.md.object.menus.findIndex(p => this.locator(p, id));
     if (index > -1) {
-      this.menuModel.getDataSet().push(this.md.object.opciones[index]);
+      this.menuModel.getDataSet().push(this.md.object.menus[index]);
       this.md.object.menus.splice(index, 1);
     }
   }

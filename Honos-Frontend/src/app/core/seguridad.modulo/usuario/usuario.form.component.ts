@@ -1,10 +1,10 @@
-import { Usuario } from '../../../model/entities/seguridad/usuario.model';
-import { RolModel } from '../../../model/repositories/seguridad/rol.repository.model';
-import { UsuarioModel } from '../../../model/repositories/seguridad/usuario.repository.model';
-import { GenericoFormGroup, GenericoFormControl } from '../../../shared/modal-form-generico/form-generico.model';
+import {Usuario} from '../../../model/entities/seguridad/usuario.model';
+import {RolModel} from '../../../model/repositories/seguridad/rol.repository.model';
+import {UsuarioModel} from '../../../model/repositories/seguridad/usuario.repository.model';
+import {GenericoFormGroup, GenericoFormControl} from '../../../shared/modal-form-generico/form-generico.model';
 import {ModalFormGenericoComponent} from '../../../shared/modal-form-generico/modal-form-generico.component';
 import {Component, ViewChild} from "@angular/core";
-import { Validators } from '@angular/forms';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: "usuario-modal-form",
@@ -14,7 +14,7 @@ import { Validators } from '@angular/forms';
 })
 export class UsuarioFormComponent {
 
-    @ViewChild('md') md: ModalFormGenericoComponent; 
+  @ViewChild('md') md: ModalFormGenericoComponent;
 
   constructor(private model: UsuarioModel, private rolModel: RolModel) {
   }
@@ -57,7 +57,9 @@ export class UsuarioFormComponent {
       )
     });
 
-  
+  cargarListados() {
+    this.rolModel.loadDataSetActivos();
+  }
 
 }
 

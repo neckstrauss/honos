@@ -18,7 +18,7 @@ export class OpcionModel extends Model<Opcion> {
   }
 
   loadListaParaMenu(id:number = null): void {
-    this.ds.setUrl(super.getUrl()+(id?"/"+id:"")).getData().subscribe(event => {
+    this.ds.setUrl(super.getUrl()+("/menu/"+id)).getData().subscribe(event => {
       if (event.type === HttpEventType.Response) {
         super.setData(event.body.items); 
       }

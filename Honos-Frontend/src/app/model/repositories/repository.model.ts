@@ -43,23 +43,22 @@ export abstract class Model<T> {
     });
   }
   
+  loadDataSetActivos(): void {
+    this.dataSource.setUrl(this.url+"/activos").getData().subscribe(event => {
+      if (event.type === HttpEventType.Response) {
+        //console.log("response received... getData()", event.body);             
+        this.dataSet = event.body.items;
+      }
+    });
+  }
+  
   getObjectById():T
   {
     return this.object;
   }
   
-  getById(id:number):Observable<T> {
-    let res:T;
-    
-    return this.dataSource.setUrl(this.url).getDataById(id);
-    
-//    this.dataSource.setUrl(this.url).getDataById(id).subscribe(event => {
-//      if (event.type === HttpEventType.Response) {
-//        console.log("response received... getBYID()", event.body);             
-//        return event.body;
-//      }
-//    });
-   // return res;
+  getById(id:number):Observable<T> {    
+    return this.dataSource.setUrl(this.url).getDataById(id);    
   }
 
   getDataSet(): T[] {
