@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="HonosBackend" transaction-type="RESOURCE_LOCAL">
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.Analisis</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.ConciliacionPrejudicial</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.EvaluacionDelRiesgo</class>
+		<class>com.calarcasi.honos.entities.generales.Apoderado</class>
+		<class>com.calarcasi.honos.entities.generales.Despacho</class>
+		<class>com.calarcasi.honos.entities.generales.Juridico</class>
+		<class>com.calarcasi.honos.entities.generales.MedioControlJudicial</class>
+		<class>com.calarcasi.honos.entities.generales.Natural</class>
+		<class>com.calarcasi.honos.entities.generales.Tema</class>
+		<class>com.calarcasi.honos.entities.generales.Tercero</class>
 		<class>com.calarcasi.honos.entities.seguridad.Menu</class>
 		<class>com.calarcasi.honos.entities.seguridad.Opcion</class>
 		<class>com.calarcasi.honos.entities.seguridad.Rol</class>
