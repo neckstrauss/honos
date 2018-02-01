@@ -15,6 +15,8 @@ public class Despacho implements Serializable {
 	@Id	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	private String nombre;
+	private String tipo;
 	private String estado;
 	private static final long serialVersionUID = 1L;
 
@@ -35,5 +37,19 @@ public class Despacho implements Serializable {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	
    
 }

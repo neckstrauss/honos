@@ -15,6 +15,7 @@ public class MedioControlJudicial implements Serializable {
 	@Id	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	private String nombre;
 	private String estado;
 	private static final long serialVersionUID = 1L;
 
@@ -35,5 +36,13 @@ public class MedioControlJudicial implements Serializable {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	
    
 }

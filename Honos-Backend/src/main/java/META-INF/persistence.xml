@@ -6,7 +6,7 @@
 		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.EvaluacionDelRiesgo</class>
 		<class>com.calarcasi.honos.entities.generales.Apoderado</class>
 		<class>com.calarcasi.honos.entities.generales.Despacho</class>
-		<class>com.calarcasi.honos.entities.generales.Juridico</class>
+		<class>com.calarcasi.honos.entities.generales.Juridica</class>
 		<class>com.calarcasi.honos.entities.generales.MedioControlJudicial</class>
 		<class>com.calarcasi.honos.entities.generales.Natural</class>
 		<class>com.calarcasi.honos.entities.generales.Tema</class>
