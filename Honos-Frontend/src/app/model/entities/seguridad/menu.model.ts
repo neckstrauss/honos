@@ -1,13 +1,14 @@
+import { EntityGeneral } from '../entity-general.model';
 import { Opcion } from './opcion.model';
-export class Menu {
+export class Menu extends EntityGeneral{
 
   constructor(
-    public id?: number,
     public label?: string,
     public idDivInterno?: string,
     public descripcion?: string,
-    public estado?: string,
     public opciones: Opcion[] =[]
-  ) {};
+  ) {
+    super();
+  };
 
 }

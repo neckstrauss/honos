@@ -1,12 +1,11 @@
+import { EntityGeneral } from '../entity-general.model';
 import { Menu } from './menu.model';
-export class Rol {
+export class Rol extends EntityGeneral{
 
   constructor(
-    public id?: number,
     public nombre?: string,
     public descripcion?: string,
-    public estado?: string,
     public menus?: Menu[]
-  ) {};
+  ) { super();};
 
 }
