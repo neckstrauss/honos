@@ -27,27 +27,27 @@ public class ConciliacionPrejudicialService {
 	 * INICIO ConciliacionPrejudicial
 	 */
 
-	@ApiMethod(name = "getConciliacionPrejudicial", path = "conciliaionesPrejudiciales", httpMethod = HttpMethod.GET)
+	@ApiMethod(name = "getConciliacionPrejudicial", path = "conciliacionesPrejudiciales", httpMethod = HttpMethod.GET)
 	public List<ConciliacionPrejudicial> getConciliacionPrejudicial() throws UnauthorizedException {
 		return new ConciliacionPrejudicialPojo().findWithQuery("select o from ConciliacionPrejudicial o");
 	}
 	
-	@ApiMethod(name = "getConciliacionPrejudicialById", path = "conciliaionesPrejudiciales/{id}", httpMethod = HttpMethod.GET)
+	@ApiMethod(name = "getConciliacionPrejudicialById", path = "conciliacionesPrejudiciales/{id}", httpMethod = HttpMethod.GET)
 	public ConciliacionPrejudicial getConciliacionPrejudicialById(@Named("id") final int id) throws UnauthorizedException {
 		return new ConciliacionPrejudicialPojo().find(id);
 	}
 
-	@ApiMethod(name = "saveConciliacionPrejudicial", path = "conciliaionesPrejudiciales", httpMethod = HttpMethod.POST)
+	@ApiMethod(name = "saveConciliacionPrejudicial", path = "conciliacionesPrejudiciales", httpMethod = HttpMethod.POST)
 	public ConciliacionPrejudicial saveConciliacionPrejudicial(ConciliacionPrejudicial o) throws UnauthorizedException {
 		return new ConciliacionPrejudicialPojo().create(o);
 	}
 
-	@ApiMethod(name = "deleteConciliacionPrejudicial", path = "conciliaionesPrejudiciales/{id}", httpMethod = HttpMethod.DELETE)
+	@ApiMethod(name = "deleteConciliacionPrejudicial", path = "conciliacionesPrejudiciales/{id}", httpMethod = HttpMethod.DELETE)
 	public void deleteConciliacionPrejudicial(@Named("id") final int id) throws UnauthorizedException {
 		new ConciliacionPrejudicialPojo().delete(id);
 	}
 
-	@ApiMethod(name = "updateConciliacionPrejudicial", path = "conciliaionesPrejudiciales/{id}", httpMethod = HttpMethod.PUT)
+	@ApiMethod(name = "updateConciliacionPrejudicial", path = "conciliacionesPrejudiciales/{id}", httpMethod = HttpMethod.PUT)
 	public ConciliacionPrejudicial updateConciliacionPrejudicial(ConciliacionPrejudicial o) throws UnauthorizedException {
 		return new ConciliacionPrejudicialPojo().update(o);
 	}

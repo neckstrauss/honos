@@ -35,13 +35,19 @@ import com.google.api.server.spi.response.UnauthorizedException;
 // [END echo_api_annotation]
 public class GeneralesService {
 
-/*
+	
+	/*
 	 * INICIO Apoderado
 	 */
 
 	@ApiMethod(name = "getApoderado", path = "apoderados", httpMethod = HttpMethod.GET)
 	public List<Apoderado> getApoderado() throws UnauthorizedException {
 		return new ApoderadoPojo().findWithQuery("select o from Apoderado o");
+	}
+	
+	@ApiMethod(name = "getApoderadoActivos", path = "apoderados/activos", httpMethod = HttpMethod.GET)
+	public List<Apoderado> getApoderadoActivos() throws UnauthorizedException {		
+		return new ApoderadoPojo().findWithQuery("select o from Apoderado o where o.estado LIKE 'ACT'");
 	}
 	
 	@ApiMethod(name = "getApoderadoById", path = "apoderados/{id}", httpMethod = HttpMethod.GET)
@@ -67,6 +73,9 @@ public class GeneralesService {
 	/*
 	 * FIN Apoderado
 	 */
+	
+	
+
 	
 	/*
 	 * INICIO Despacho

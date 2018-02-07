@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.calarcasi.honos.entities.MyDate;
 import com.calarcasi.honos.entities.generales.Apoderado;
 import com.calarcasi.honos.entities.generales.Despacho;
 import com.calarcasi.honos.entities.generales.MedioControlJudicial;
@@ -37,6 +38,7 @@ public class ConciliacionPrejudicial implements Serializable {
 	
 	@Column(name="NUMERO_RADICACION_INTERNO")
 	private int numeroRadicacionIterno;
+	
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_RADICACION_INTERNA")
@@ -107,13 +109,15 @@ public class ConciliacionPrejudicial implements Serializable {
 	public Date getFechaRadicacionInterna() {
 		return fechaRadicacionInterna;
 	}
-	public void setFechaRadicacionInterna(Date fechaRadicacionInterna) {
+	public void setFechaRadicacionInterna(MyDate fechaRadicacionInterna) {
 		this.fechaRadicacionInterna = fechaRadicacionInterna;
 	}
+	
+		
 	public Date getFechaNotificacion() {
 		return fechaNotificacion;
 	}
-	public void setFechaNotificacion(Date fechaNotificacion) {
+	public void setFechaNotificacion(MyDate fechaNotificacion) {
 		this.fechaNotificacion = fechaNotificacion;
 	}
 	public Tema getTema() {
