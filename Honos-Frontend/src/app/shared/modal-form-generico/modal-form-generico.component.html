@@ -1,6 +1,6 @@
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div [class]="messageClass()" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
 				<div class="card">
@@ -24,10 +24,10 @@
 						<!-- <ng-content select="[card-footer]"></ng-content> -->
 						<div *ngIf="editing" class="btn-group float-left">
 							<button class="btn btn-secondary"
-								(click)="cambiarObject(this.model.getPreviousId(this.object.id))">
+								(click)="getObjectById(this.model.getPreviousId(this.object.id))">
 								Previous</button>
 							<button class="btn btn-secondary"
-								(click)="cambiarObject(this.model.getNextId(this.object.id))">
+								(click)="getObjectById(this.model.getNextId(this.object.id))">
 								Next</button>
 						</div>
 						<button type="button" class="btn btn-secondary"

@@ -70,7 +70,6 @@
       false,
       "single"
     ],
-    "radix": true,
     "semicolon": [
       false,
       "always"

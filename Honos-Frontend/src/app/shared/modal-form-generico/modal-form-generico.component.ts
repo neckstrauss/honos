@@ -21,6 +21,7 @@ export class ModalFormGenericoComponent {
   @Input('model') model: Model<any>;
   @Input('titulo') titulo: string = 'titulo por defecto';
   @Input('form') form: NgForm;
+  @Input('tamanio') tamanio: string = '';
 
   @Output("stateUpdate")
   newEvent = new EventEmitter<number>();
@@ -31,12 +32,17 @@ export class ModalFormGenericoComponent {
 
     stateEvents.subscribe((update) => {
       this.object = this.model.newObject();
+      this.editing = update.mode == MODES.EDIT;
       if (update.id != undefined) {
         //Object.assign(this.object, this.model.get(update.id));
         this.getObjectById(update.id);
       }
-      this.editing = update.mode == MODES.EDIT;
-      this.newEvent.emit(update.id);
+      else
+      {
+        this.newEvent.emit(update.id);
+      } 
+      
+      
     });
   }
 
@@ -58,10 +64,15 @@ export class ModalFormGenericoComponent {
   private getObjectById(id: number) {
     this.model.getById(id).subscribe(event => {
       if (event.type === HttpEventType.Response) {
-        //            console.log("response received... getBYID()", event.body);
         Object.assign(this.object, event.body);
+        this.newEvent.emit(id);
       }
     });
+  }
+  
+   messageClass():string
+  {
+    return "modal-dialog " + this.tamanio;
   }
 
 }

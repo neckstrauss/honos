@@ -21,12 +21,14 @@
       "styles": [ "styles/styles.scss",
 			"../node_modules/material-design-icons/iconfont/material-icons.css",			
 		"../node_modules/animate.css/animate.min.css"
+		
       ],
       "scripts": [
 	  "../node_modules/jquery/dist/jquery.slim.min.js",
 	  "../node_modules/popper.js/dist/umd/popper.min.js",
 	  "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",	  
-	  "../node_modules/intl/dist/Intl.complete.js"
+	  "../node_modules/intl/dist/Intl.complete.js" 
+	  
 	  ],
       "environmentSource": "environments/environment.ts",
       "environments": {

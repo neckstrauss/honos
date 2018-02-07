@@ -9,16 +9,18 @@ export class ConciliacionPrejudicial extends EntityGeneral{
 
   constructor(
     public numeroRadicacionIterno?: number,
-    public fechaRadicacionInterna?: Date,
-    public fechaNotificacion?: Date,
+    public fechaRadicacionInterna?: string,
+    public fechaNotificacion?: string,
     public tema?: Tema,
     public medioControlJudicial?: MedioControlJudicial,
     public apoderado?: Apoderado,
     public convocados?: Tercero[],
     public convocantes?: Tercero[],
     public despacho?: Despacho,
-  ) {
+  ) 
+  {
     super();
+    
   };
 
 }

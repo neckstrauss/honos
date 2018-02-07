@@ -4,6 +4,13 @@ input.ng-dirty.ng-valid { border: 2px solid #6bc502 }
 textarea.ng-dirty.ng-invalid { border: 2px solid #ff0000 }
 textarea.ng-dirty.ng-valid { border: 2px solid #6bc502 }
 
+.form-group {
+    margin-bottom: 1rem;
+    padding-bottom: 1.5px;
+    padding-right: 1px;
+}
+
+
 
 // /// empiezo aqui
 // body {

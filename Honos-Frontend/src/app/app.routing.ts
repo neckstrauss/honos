@@ -9,6 +9,10 @@ const routes: Routes = [
     loadChildren: "./core/seguridad.modulo/seguridad.module#SeguridadModule",
   },
   {
+    path: "conciliacion",
+    loadChildren: "./core/conciliacionPrejudicial.modulo/conciliacion-prejudicial.module#ConciliacionPrejudicialModule",
+  },
+  {
     path: "dashboard",
     loadChildren: "./core/dashboard/dashboard.module#DashboardModule",
   },

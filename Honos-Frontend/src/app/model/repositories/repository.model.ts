@@ -107,7 +107,7 @@ export abstract class Model<T> {
   getNextId(id: number): number {
     let index = this.dataSet.findIndex(p => this.locator(p, id));
     if (index > -1) {      
-      let aux: any = this.dataSet[this.dataSet.length > index + 2 ? index + 1 : 0];
+      let aux: any = this.dataSet[this.dataSet.length > index + 1 ? index + 1 : 0];
       return aux.id;
     } else {
       return id || 0;
