@@ -17,6 +17,7 @@ export class ConciliacionPrejudicialModel extends Model<ConciliacionPrejudicial>
   newObject(): ConciliacionPrejudicial {
     let o: ConciliacionPrejudicial = new ConciliacionPrejudicial();
     o.apoderado = new Apoderado();
+    o.convocantes = [];
     return o;
   }
 

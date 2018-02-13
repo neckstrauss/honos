@@ -44,9 +44,10 @@ export abstract class Model<T> {
   }
   
   loadDataSetActivos(): void {
+    console.log("url: " + this.url+"/activos" );
     this.dataSource.setUrl(this.url+"/activos").getData().subscribe(event => {
       if (event.type === HttpEventType.Response) {
-        //console.log("response received... getData()", event.body);             
+        console.log("response received... getData()", event.body);             
         this.dataSet = event.body.items;
       }
     });

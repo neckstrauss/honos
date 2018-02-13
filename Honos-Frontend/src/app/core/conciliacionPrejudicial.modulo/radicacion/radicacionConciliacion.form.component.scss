@@ -6,3 +6,9 @@ button.btn
 i.material-icons{
 	padding-top: 3px;
 }
+
+.scrollable-menu {
+    height: auto;
+    max-height: 250px;
+    overflow-x: hidden;
+}

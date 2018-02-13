@@ -7,8 +7,11 @@ export class Tercero extends EntityGeneral{
     public numeroDocumento?: number,
     public direccion?: number,
     public numeroContacto?: number,
+    public nombreCompleto?: string
   ) {
     super();
   };
+  
+  
 
 }

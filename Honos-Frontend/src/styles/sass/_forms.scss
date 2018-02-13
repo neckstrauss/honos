@@ -3,14 +3,43 @@ input.ng-dirty.ng-valid { border: 2px solid #6bc502 }
 
 textarea.ng-dirty.ng-invalid { border: 2px solid #ff0000 }
 textarea.ng-dirty.ng-valid { border: 2px solid #6bc502 }
+// 
+// .form-group {
+//     margin-bottom: 1rem;
+//     padding-bottom: 1.5px;
+//     padding-right: 1px;
+// }
 
-.form-group {
-    margin-bottom: 1rem;
-    padding-bottom: 1.5px;
-    padding-right: 1px;
-}
+	li.list-group-item{
+		padding: 0.2rem 1.25rem;
+	}
 
+	ul.list-group{
+		padding-bottom: 6px;
+	}
 
+	li >{
+		padding: 0.2rem 1.25rem;
+		i.material-icons {
+			    font-size: 12px;
+		}
+		i {
+			
+            cursor: pointer;
+            border-radius: .5rem;
+            padding: .10rem;
+            font-size: 1.4rem;
+            color: #fff;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        i:hover {
+            color: #ededed;
+        }
+	}
+	
+	
+	
 
 // /// empiezo aqui
 // body {

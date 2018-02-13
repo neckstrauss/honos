@@ -10,6 +10,7 @@ export class Natural extends Tercero {
   ) {
     super();
   };
+ 
 
 
 }

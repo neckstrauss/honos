@@ -22,9 +22,12 @@ export class ModalFormGenericoComponent {
   @Input('titulo') titulo: string = 'titulo por defecto';
   @Input('form') form: NgForm;
   @Input('tamanio') tamanio: string = '';
+  @Input('validacion') valido: boolean = true;
 
   @Output("stateUpdate")
   newEvent = new EventEmitter<number>();
+  
+  locator = (p: any, id: number) => p.id == id;
 
   object: any = new Object();
 

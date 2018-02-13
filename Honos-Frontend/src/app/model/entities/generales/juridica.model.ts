@@ -8,6 +8,6 @@ export class Juridica extends Tercero {
   ) {
     super();
   };
-
-
+  
+  
 }

@@ -1,6 +1,9 @@
 import {ConciliacionPrejudicial} from '../../../model/entities/conciliacionPrejudicial/conciliacionPrejudicial.model';
+import { Natural } from '../../../model/entities/generales/natural.model';
+import { Tercero } from '../../../model/entities/generales/tercero.model';
 import {ConciliacionPrejudicialModel} from '../../../model/repositories/conciliacionPrejudicial/conciliacionPrejudicial.repository.model';
 import { ApoderadoModel } from '../../../model/repositories/generales/apoderado.repository.model';
+import { TerceroModel } from '../../../model/repositories/generales/tercero.repository.model';
 import {GenericoFormControl, GenericoFormGroup} from '../../../shared/modal-form-generico/form-generico.model';
 import {ModalFormGenericoComponent} from '../../../shared/modal-form-generico/modal-form-generico.component';
 import {Component, ViewChild} from "@angular/core";
@@ -17,8 +20,43 @@ import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
 export class RadicacionConciliacionPrejudicialFormComponent {
 
   @ViewChild('md') md: ModalFormGenericoComponent;
+  
+  convocanteSeleted: Tercero;
+  filtro: string = '';
+  
+  filtrar(): Tercero[]{
+    return this.terceroModel.getDataSet().filter(p => this.filtro.length >= 3 && p.nombreCompleto.toUpperCase().includes(this.filtro.toUpperCase())) ;
+  }
+  
+  addConvocante() {
 
-  constructor(private model: ConciliacionPrejudicialModel, private apoderadoModel: ApoderadoModel) {
+    if (this.md.object.convocantes == undefined) {
+      this.md.object.convocantes = new Array<Tercero>();
+    }
+
+    let index = this.md.object.convocantes.findIndex(p => this.md.locator(p, this.convocanteSeleted.id));
+
+    if (index == -1) {
+      let aux: Tercero = new Tercero();
+      Object.assign(aux, this.terceroModel.get(this.convocanteSeleted.id));
+
+      this.md.object.convocantes.push(aux);
+    }
+    
+    this.convocanteSeleted = null;
+    
+  }
+
+  deleteConvocante(id: number) {
+    let index = this.md.object.convocantes.findIndex(p => this.md.locator(p, id));
+    if (index > -1) {
+      //this.terceroModel.getDataSet().push(this.md.object.convocantes[index]);
+      this.md.object.convocantes.splice(index, 1);
+    }
+  }
+
+
+  constructor(private model: ConciliacionPrejudicialModel, private apoderadoModel: ApoderadoModel, private terceroModel: TerceroModel) {
     this.apoderadoModel.loadDataSetActivos();
   }
 
@@ -74,6 +112,7 @@ export class RadicacionConciliacionPrejudicialFormComponent {
             Validators.required]
         )
       ),
+      
       estado: new GenericoFormControl(
         "Estado", "estado", "",
         Validators.compose(
@@ -84,6 +123,10 @@ export class RadicacionConciliacionPrejudicialFormComponent {
     });
 
   actualizarOpciones(id: number) {
+    
+    this.terceroModel.loadDataSetActivos();
+    this.convocanteSeleted = null;
+    
     if (this.md.editing) {
       let d: string = this.md.object.fechaNotificacion;
       this.fechaNotificacion = {date: {year: parseInt(d.slice(0, 4)), month: parseInt(d.slice(5, 7)), day: parseInt(d.slice(8, 10))}};
