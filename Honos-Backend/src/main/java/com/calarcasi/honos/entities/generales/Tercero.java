@@ -24,6 +24,9 @@ public class Tercero implements Serializable {
 	
 	private String direccion;
 	
+	@Transient
+	private String nombreCompleto;
+	
 	@Column(name="NUMERO_CONTACTO")
 	private int numeroContacto;
 	
@@ -71,6 +74,11 @@ public class Tercero implements Serializable {
 	}
 	public void setNumeroContacto(int numeroContacto) {
 		this.numeroContacto = numeroContacto;
+	}
+	
+	public String getNombreCompleto()
+	{
+		return this.getNombreCompleto();
 	}
 	
 	

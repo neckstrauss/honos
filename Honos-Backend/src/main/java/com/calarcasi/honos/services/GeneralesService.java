@@ -246,27 +246,32 @@ public class GeneralesService {
 	 * INICIO Tercero
 	 */
 
-	@ApiMethod(name = "getTercero", path = "tercero", httpMethod = HttpMethod.GET)
+	@ApiMethod(name = "getTercero", path = "terceros", httpMethod = HttpMethod.GET)
 	public List<Tercero> getTercero() throws UnauthorizedException {
 		return new TerceroPojo().findWithQuery("select o from Tercero o");
 	}
 	
-	@ApiMethod(name = "getTerceroById", path = "tercero/{id}", httpMethod = HttpMethod.GET)
+	@ApiMethod(name = "getTerceroActivos", path = "terceros/activos", httpMethod = HttpMethod.GET)
+	public List<Tercero> getTerceroActivos() throws UnauthorizedException {		
+		return new TerceroPojo().findWithQuery("select o from Tercero o where o.estado LIKE 'ACT'");
+	}
+	
+	@ApiMethod(name = "getTerceroById", path = "terceros/{id}", httpMethod = HttpMethod.GET)
 	public Tercero getTerceroById(@Named("id") final int id) throws UnauthorizedException {
 		return new TerceroPojo().find(id);
 	}
 
-	@ApiMethod(name = "saveTercero", path = "tercero", httpMethod = HttpMethod.POST)
+	@ApiMethod(name = "saveTercero", path = "terceros", httpMethod = HttpMethod.POST)
 	public Tercero saveTercero(Tercero o) throws UnauthorizedException {
 		return new TerceroPojo().create(o);
 	}
 
-	@ApiMethod(name = "deleteTercero", path = "tercero/{id}", httpMethod = HttpMethod.DELETE)
+	@ApiMethod(name = "deleteTercero", path = "terceros/{id}", httpMethod = HttpMethod.DELETE)
 	public void deleteTercero(@Named("id") final int id) throws UnauthorizedException {
 		new TerceroPojo().delete(id);
 	}
 
-	@ApiMethod(name = "updateTercero", path = "tercero/{id}", httpMethod = HttpMethod.PUT)
+	@ApiMethod(name = "updateTercero", path = "terceros/{id}", httpMethod = HttpMethod.PUT)
 	public Tercero updateTercero(Tercero o) throws UnauthorizedException {
 		return new TerceroPojo().update(o);
 	}
@@ -274,4 +279,5 @@ public class GeneralesService {
 	/*
 	 * FIN Tercero
 	 */
-}
+	
+	}

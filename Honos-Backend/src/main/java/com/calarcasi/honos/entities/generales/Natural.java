@@ -63,6 +63,9 @@ public class Natural extends Tercero implements Serializable {
 		this.segundoApellido = segundoApellido;
 	}
 	
-	
+	public String getNombreCompleto()
+	{
+		return this.getPrimerNombre() + " " + ((this.getSegundoNombre()!= null)?this.getSegundoNombre() + " ":"") + this.getPrimerApellido() + " " + ((this.getSegundoApellido()!= null)?this.getSegundoApellido():"");
+	}
    
 }

@@ -41,7 +41,10 @@ public class Juridica extends Tercero implements Serializable {
 		this.nombreRepresentante = nombreRepresentante;
 	}
 	
-	
+	public String getNombreCompleto()
+	{
+		return this.razonSocial;
+	}
 	
    
 }
