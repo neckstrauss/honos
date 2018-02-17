@@ -17,6 +17,8 @@ export class ConciliacionPrejudicial extends EntityGeneral{
     public convocados?: Tercero[],
     public convocantes?: Tercero[],
     public despacho?: Despacho,
+    public pretension?: number,
+    public radicadoProcuraduria?: string
   ) 
   {
     super();

@@ -3,6 +3,9 @@ import { Natural } from '../../../model/entities/generales/natural.model';
 import { Tercero } from '../../../model/entities/generales/tercero.model';
 import {ConciliacionPrejudicialModel} from '../../../model/repositories/conciliacionPrejudicial/conciliacionPrejudicial.repository.model';
 import { ApoderadoModel } from '../../../model/repositories/generales/apoderado.repository.model';
+import { DespachoModel } from '../../../model/repositories/generales/despacho.repository.model';
+import { MedioControlJudicialModel } from '../../../model/repositories/generales/medioControlJudicial.repository.model';
+import { TemaModel } from '../../../model/repositories/generales/tema.repository.model';
 import { TerceroModel } from '../../../model/repositories/generales/tercero.repository.model';
 import {GenericoFormControl, GenericoFormGroup} from '../../../shared/modal-form-generico/form-generico.model';
 import {ModalFormGenericoComponent} from '../../../shared/modal-form-generico/modal-form-generico.component';
@@ -12,17 +15,26 @@ import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
 
 
 @Component({
-  selector: "radicacionConciliacion-modal-form",
+  selector: "conciliacionPrejudicial-modal-form",
   moduleId: module.id,
-  templateUrl: "radicacionConciliacion.form.component.html",
-  styleUrls: ["radicacionConciliacion.form.component.scss"]
+  templateUrl: "conciliacionPrejudicial.form.component.html",
+  styleUrls: ["conciliacionPrejudicial.form.component.scss"]
 })
-export class RadicacionConciliacionPrejudicialFormComponent {
+export class ConciliacionPrejudicialFormComponent {
 
   @ViewChild('md') md: ModalFormGenericoComponent;
+  readOnly: boolean = false;
   
-  constructor(private model: ConciliacionPrejudicialModel, private apoderadoModel: ApoderadoModel, private terceroModel: TerceroModel) {
-    this.apoderadoModel.loadDataSetActivos();
+  constructor(private model: ConciliacionPrejudicialModel,  
+              private terceroModel: TerceroModel, 
+              private temaModel: TemaModel,
+              private medioControlJudicialModel: MedioControlJudicialModel,
+              private despachoModel: DespachoModel              
+          ) {
+    this.temaModel.loadDataSetActivos();
+    this.terceroModel.loadDataSetActivos();
+    this.medioControlJudicialModel.loadDataSetActivos();
+    this.despachoModel.loadDataSetActivos();
   }
   
 convocanteSeleted: Tercero;
@@ -59,6 +71,37 @@ convocanteSeleted: Tercero;
     }
   }
   
+  convocadoSeleted: Tercero;
+  filtroConvocados: string = '';
+  
+  filtrarConvocados(): Tercero[]{
+    return this.terceroModel.getDataSet().filter(p => this.filtroConvocados.length >= 3 
+      && p.nombreCompleto.toUpperCase().includes(this.filtroConvocados.toUpperCase())) ;
+  }
+  
+  addconvocado() 
+  {
+    if (this.md.object.convocados == undefined) {
+      this.md.object.convocados = new Array<Tercero>();
+    }
+    let index = this.md.object.convocados.findIndex(p => this.md.locator(p, this.convocadoSeleted.id));
+    if (index == -1) {
+      let aux: Tercero = new Tercero();
+      Object.assign(aux, this.terceroModel.get(this.convocadoSeleted.id));
+      this.md.object.convocados.push(aux);
+    }    
+    this.convocadoSeleted = null;    
+  }
+
+  deleteconvocado(id: number) {
+    let index = this.md.object.convocados.findIndex(p => this.md.locator(p, id));
+    if (index > -1) {
+    //inlcuye en el listado seleccionable el objeto que se esta elimando  
+      //this.terceroModel.getDataSet().push(this.md.object.convocantes[index]);
+      this.md.object.convocados.splice(index, 1);
+    }
+  }
+  
   
   fechaNotificacionOptions: INgxMyDpOptions = {
     dateFormat: 'yyyy/mm/dd',
@@ -81,7 +124,7 @@ convocanteSeleted: Tercero;
   }
 
   form: GenericoFormGroup = new GenericoFormGroup(
-    {
+    {      
       numeroRadicacionIterno: new GenericoFormControl(
         "N�mero Radicado Interno", "numeroRadicacionIterno", "",
         [
@@ -89,21 +132,18 @@ convocanteSeleted: Tercero;
           Validators.minLength(1),
           Validators.maxLength(5),
           Validators.pattern("^[0-9]+$"),
-        ]
+        ], true
       ),
       fechaRadicacionInterna: new GenericoFormControl(
         "Fecha Radicación", "fechaRadicacionInterna", "",
         Validators.compose(
           [
             Validators.required]
-        )
+        ), true
       ),
       fechaNotificacion: new GenericoFormControl(
         "Fecha Fecha Notificacion", "fechaNotificacion", "",
-        Validators.compose(
-          [
-            Validators.required]
-        )
+          [Validators.required], true
       ),
       apoderado: new GenericoFormControl(
         "Apoderado", "apoderado", "",
@@ -113,19 +153,58 @@ convocanteSeleted: Tercero;
         )
       ),
       
+      convocados: new GenericoFormControl(
+        "Convocados", "convocados", "",
+          [], false
+      ),
+      
+      convocantes: new GenericoFormControl(
+        "Convocantes", "convocantes", "",
+          [], false
+      ),
+      
+      medioControlJudicial: new GenericoFormControl(
+        "Medio Control Judicial", "medioControlJudicial", "",
+          [Validators.required]
+        ),
+      
+      tema: new GenericoFormControl(
+        "Tema", "tema", "",
+          [Validators.required]
+        ),
+      
+      despacho: new GenericoFormControl(
+        "Despacho", "despacho", "",
+          [], false
+        ),
+      
+      pretension: new GenericoFormControl(
+        "Pretensión", "despacho", "",
+          [
+          Validators.required,          
+          ], false
+        ),
+      
+      radicadoProcuraduria: new GenericoFormControl(
+        "Radicado Procuraduria", "radicadoProcuraduria", "",
+          [            
+          Validators.pattern("^[0-9]+$"),
+          ], false
+        ),
+      
+      
       estado: new GenericoFormControl(
         "Estado", "estado", "",
-        Validators.compose(
-          [
-            Validators.required]
-        )
+          [Validators.required],true,true    
       )
     });
 
   actualizarOpciones(id: number) {
     
-    this.terceroModel.loadDataSetActivos();
+    
     this.convocanteSeleted = null;
+    
+    this.convocadoSeleted = null;
     
     if (this.md.editing) {
       let d: string = this.md.object.fechaNotificacion;

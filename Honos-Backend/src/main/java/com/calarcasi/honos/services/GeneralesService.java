@@ -74,9 +74,6 @@ public class GeneralesService {
 	 * FIN Apoderado
 	 */
 	
-	
-
-	
 	/*
 	 * INICIO Despacho
 	 */
@@ -84,6 +81,11 @@ public class GeneralesService {
 	@ApiMethod(name = "getDespacho", path = "despachos", httpMethod = HttpMethod.GET)
 	public List<Despacho> getDespacho() throws UnauthorizedException {
 		return new DespachoPojo().findWithQuery("select o from Despacho o");
+	}
+	
+	@ApiMethod(name = "getDespachoActivos", path = "despachos/activos", httpMethod = HttpMethod.GET)
+	public List<Despacho> getDespachoActivos() throws UnauthorizedException {		
+		return new DespachoPojo().findWithQuery("select o from Despacho o where o.estado LIKE 'ACT'");
 	}
 	
 	@ApiMethod(name = "getDespachoById", path = "despachos/{id}", httpMethod = HttpMethod.GET)
@@ -109,7 +111,9 @@ public class GeneralesService {
 	/*
 	 * FIN Despacho
 	 */
+
 	
+		
 	/*
 	 * INICIO Juridica
 	 */
@@ -150,6 +154,11 @@ public class GeneralesService {
 	@ApiMethod(name = "getMedioControlJudicial", path = "mediosControlJudicial", httpMethod = HttpMethod.GET)
 	public List<MedioControlJudicial> getMedioControlJudicial() throws UnauthorizedException {
 		return new MedioControlJudicialPojo().findWithQuery("select o from MedioControlJudicial o");
+	}
+	
+	@ApiMethod(name = "getMedioControlJudicialActivos", path = "mediosControlJudicial/activos", httpMethod = HttpMethod.GET)
+	public List<MedioControlJudicial> getMedioControlJudicialActivos() throws UnauthorizedException {		
+		return new MedioControlJudicialPojo().findWithQuery("select o from MedioControlJudicial o where o.estado LIKE 'ACT'");
 	}
 	
 	@ApiMethod(name = "getMedioControlJudicialById", path = "mediosControlJudicial/{id}", httpMethod = HttpMethod.GET)
@@ -216,6 +225,11 @@ public class GeneralesService {
 	@ApiMethod(name = "getTema", path = "temas", httpMethod = HttpMethod.GET)
 	public List<Tema> getTema() throws UnauthorizedException {
 		return new TemaPojo().findWithQuery("select o from Tema o");
+	}
+	
+	@ApiMethod(name = "getTemaActivos", path = "temas/activos", httpMethod = HttpMethod.GET)
+	public List<Tema> getTemaActivos() throws UnauthorizedException {		
+		return new TemaPojo().findWithQuery("select o from Tema o where o.estado LIKE 'ACT'");
 	}
 	
 	@ApiMethod(name = "getTemaById", path = "temas/{id}", httpMethod = HttpMethod.GET)

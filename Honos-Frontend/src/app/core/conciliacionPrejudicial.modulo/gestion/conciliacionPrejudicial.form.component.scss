@@ -1,0 +1,33 @@
+button.btn
+{
+	    padding: 0rem 0.75rem; 
+}
+
+i.material-icons{
+	padding-top: 3px;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 250px;
+    overflow-x: hidden;
+    
+//     transform: translate3d(228px, 96px, 0px);
+//     top: 0px;
+//     left: 0px;
+//     will-change: transform;
+    
+}
+
+.borde{
+	border-color: #343a40;
+    border-style: double;
+    border-width: medium;
+    margin-bottom: 10px;
+}
+
+.form-row
+{
+	margin-bottom: auto;
+}
+

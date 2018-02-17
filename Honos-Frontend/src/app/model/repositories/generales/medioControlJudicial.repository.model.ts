@@ -7,7 +7,7 @@ import { MedioControlJudicial } from '../../entities/generales/medioControlJudic
 import {HttpEventType} from '@angular/common/http';
 
 @Injectable()
-export class MedioControlJuridicialModel extends Model<MedioControlJudicial> {
+export class MedioControlJudicialModel extends Model<MedioControlJudicial> {
 
   constructor(private ds: RestDataSource, message: MessageService) {
     super(ds, message, environment.url + "honos/generales/mediosControlJudicial");

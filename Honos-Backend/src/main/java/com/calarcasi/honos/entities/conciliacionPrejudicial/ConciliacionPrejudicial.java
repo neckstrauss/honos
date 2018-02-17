@@ -76,6 +76,12 @@ public class ConciliacionPrejudicial implements Serializable {
 	@JoinColumn(name="DESPACHO_ID")
 	private Despacho despacho;
 	
+	@Column(precision=20)
+	private double pretension;
+	
+	@Column(name="RADICADO_PROCURADURIA")
+	private String radicadoProcuraduria;
+	
 	private String estado;
 	
 	@Embedded
@@ -155,6 +161,18 @@ public class ConciliacionPrejudicial implements Serializable {
 	}
 	public void setDespacho(Despacho despacho) {
 		this.despacho = despacho;
+	}
+	public double getPretension() {
+		return pretension;
+	}
+	public void setPretension(double pretension) {
+		this.pretension = pretension;
+	}
+	public String getRadicadoProcuraduria() {
+		return radicadoProcuraduria;
+	}
+	public void setRadicadoProcuraduria(String radicadoProcuraduria) {
+		this.radicadoProcuraduria = radicadoProcuraduria;
 	}
 	
 	

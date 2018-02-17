@@ -7,7 +7,7 @@ import { ConciliacionPrejudicialModel } from './repositories/conciliacionPrejudi
 import { ApoderadoModel } from './repositories/generales/apoderado.repository.model';
 import { DespachoModel } from './repositories/generales/despacho.repository.model';
 import { JuridicaModel } from './repositories/generales/juridica.repository.model';
-import { MedioControlJuridicialModel } from './repositories/generales/medioControlJuridico.repository.model';
+import { MedioControlJudicialModel } from './repositories/generales/medioControlJudicial.repository.model';
 import { NaturalModel } from './repositories/generales/natural.repository.model';
 import { TemaModel } from './repositories/generales/tema.repository.model';
 import { TerceroModel } from './repositories/generales/tercero.repository.model';
@@ -29,7 +29,7 @@ import { Subject } from 'rxjs/Subject';
                 ApoderadoModel,
                 DespachoModel,
                 JuridicaModel,
-                MedioControlJuridicialModel,
+                MedioControlJudicialModel,
                 NaturalModel,
                 TemaModel,
                 TerceroModel,

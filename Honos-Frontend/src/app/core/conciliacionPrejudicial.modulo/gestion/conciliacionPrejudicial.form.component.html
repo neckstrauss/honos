@@ -1,0 +1,292 @@
+<modal-form-generico #md [model]="this.model" titulo="Conciliación"
+	(stateUpdate)="actualizarOpciones($event)" [form]="form"
+	tamanio="modal-lg"
+	validacion="{{md.object.convocantes && md.object.convocados}}">
+<div card-body>
+	<form novalidate [formGroup]="form">
+
+		<div class="form-row">
+			<div class="col">
+				<div class="form-group ">
+					<label class="control-label" for="input">No Radicado<span
+						class="required">*</span>
+					</label> <input class="form-control form-control-sm"
+						name="numeroRadicacionIterno" type="number"
+						[(ngModel)]="md.object.numeroRadicacionIterno"
+						[readOnly]="(form.controls['numeroRadicacionIterno'].readOnly || readOnly)"
+						formControlName="numeroRadicacionIterno" />
+					<message-validation [form]="form" property="numeroRadicacionIterno"></message-validation>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label" for="input">Fecha Radicación<span
+						class="required">*</span>
+					</label>
+					<div class="input-group">
+						<input type="text" class="form-control form-control-sm"
+							placeholder="Select a date" aria-label="Select a date"
+							aria-describedby="basic-addon2" ngx-mydatepicker
+							name="fechaRadicacionInterna"
+							formControlName="fechaRadicacionInterna"
+							[readOnly]="(form.controls['fechaRadicacionInterna'].readOnly || readOnly)"
+							[(ngModel)]="fechaRadicacionInterna"
+							[options]="fechaRadicacionInternaOptions"
+							#dpfechaRadicacionInterna="ngx-mydatepicker"
+							(dateChanged)="onfechaRadicacionInternaChanged($event)">
+						<div class="input-group-append"
+							*ngIf="!(form.controls['fechaRadicacionInterna'].readOnly || readOnly)">
+							<button class="btn btn-danger" type="button"
+								(click)="dpfechaRadicacionInterna.clearDate()">
+								<i class="material-icons" aria-hidden="true"
+									data-toggle="tooltip" data-placement="top" title="Borrar Fecha">close</i>
+							</button>
+							<button class="btn btn-info" type="button"
+								(click)="dpfechaRadicacionInterna.toggleCalendar()">
+								<i class="material-icons" aria-hidden="true"
+									data-toggle="tooltip" data-placement="top"
+									title="Seleccionar Fecha">date_range</i>
+							</button>
+						</div>
+					</div>
+					<message-validation [form]="form" property="fechaRadicacionInterna"></message-validation>
+				</div>
+
+
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label class="control-label" for="input">Fecha Notificacion<span
+						class="required">*</span>
+					</label>
+					<div class="input-group">
+						<input type="text" class="form-control form-control-sm"
+							placeholder="Select a date" aria-label="Select a date"
+							aria-describedby="basic-addon2" ngx-mydatepicker
+							name="fechaNotificacion" formControlName="fechaNotificacion"
+							[(ngModel)]="fechaNotificacion"
+							[options]="fechaNotificacionOptions"
+							#dpfechaNotificacion="ngx-mydatepicker"
+							[readOnly]="(form.controls['fechaNotificacion'].readOnly || readOnly)"
+							(dateChanged)="onfechaNotificacionChanged($event)">
+						<div class="input-group-append"
+							*ngIf="!(form.controls['fechaNotificacion'].readOnly || readOnly)">
+							<button class="btn btn-danger" type="button"
+								(click)="dpfechaNotificacion.clearDate()">
+								<i class="material-icons" aria-hidden="true"
+									data-toggle="tooltip" data-placement="top" title="Borrar Fecha">close</i>
+							</button>
+							<button class="btn btn-info" type="button"
+								(click)="dpfechaNotificacion.toggleCalendar()">
+								<i class="material-icons" aria-hidden="true"
+									data-toggle="tooltip" data-placement="top"
+									title="Seleccionar Fecha">date_range</i>
+							</button>
+						</div>
+					</div>
+					<message-validation [form]="form" property="fechaNotificacion"></message-validation>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="col">
+				<div class="form-group ">
+					<label class="control-label" for="input">Pretensión<span
+						class="required">*</span>
+					</label>
+
+					<div class="input-group input-group-sm mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">$</span>
+						</div>
+						<input class="form-control form-control-sm" name="pretension"
+							type="text" [(ngModel)]="md.object.pretension"
+							formControlName="pretension" currencyMask
+							[options]="{ prefix: '', thousands: '.', precision:0 }"/>
+					</div>
+					<message-validation [form]="form" property="pretension"></message-validation>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group ">
+					<label class="control-label" for="input">Radicado
+						Procuraduria<span class="required">*</span>
+					</label> <input class="form-control form-control-sm"
+						name="radicadoProcuraduria" type="number" style="text-align:center;"
+						[(ngModel)]="md.object.radicadoProcuraduria"
+						formControlName="radicadoProcuraduria" />
+					<message-validation [form]="form" property="radicadoProcuraduria"></message-validation>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row ">
+			<div class="col borde">
+
+				<div class="form-group " *ngIf="md.object.convocantes">
+					<label>Convocantes<span class="required">*</span></label>
+					<p *ngIf="md.object.convocantes.length == 0">Seleccione un
+						convocante y oprima Add</p>
+					<ul class="list-group">
+						<li *ngFor="let o of md.object.convocantes; let i=index; "
+							class="list-group-item d-flex justify-content-between align-items-center">{{o.nombreCompleto}}<i
+							class="material-icons rojo" aria-hidden="true"
+							data-toggle="tooltip" data-placement="top"
+							*ngIf="!(form.controls['convocantes'].readOnly || readOnly)"
+							title="Eliminar Convocante" (click)="deleteConvocante(o.id)">close</i>
+						</li>
+					</ul>
+
+					<div class="btn-group dropright"
+						*ngIf="!(form.controls['convocantes'].readOnly || readOnly)">
+						<button type="button"
+							class="btn btn-light dropdown-toggle dropdown-toggle-split"
+							data-boundary="window" data-offset="30" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"
+							(click)="this.filtro = ''">
+							{{(this.convocanteSeleted)?this.convocanteSeleted.nombreCompleto:'seleccione
+							un convocante '}}<span class="sr-only">Toggle Dropright</span>
+						</button>
+						<button type="button" (click)="addConvocante()"
+							[disabled]="!this.convocanteSeleted" class="btn btn-success ">
+							Incluir</button>
+						<div class="dropdown-menu scrollable-menu">
+							<a class="dropdown-item" *ngFor="let o of filtrar()"
+								(click)="this.convocanteSeleted = o">{{o.nombreCompleto}}</a>
+							<div class="dropdown-divider"></div>
+							<form class="px-3">
+								<div class="form-group">
+									<input type="text" placeholder="Buscar..." class="form-control"
+										[(ngModel)]="filtro" [ngModelOptions]="{standalone: true}">
+								</div>
+							</form>
+
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="col borde">
+				<div class="form-group">
+					<label>Convocados<span class="required">*</span></label>
+					<p
+						*ngIf="!md.object.convocados || md.object.convocados.length == 0">Seleccione
+						un convocado y oprima Incluir</p>
+					<ul class="list-group">
+						<li *ngFor="let o of md.object.convocados; let i=index; "
+							class="list-group-item d-flex justify-content-between align-items-center">{{o.nombreCompleto}}<i
+							class="material-icons rojo" aria-hidden="true"
+							*ngIf="!(form.controls['convocados'].readOnly || readOnly)"
+							data-toggle="tooltip" data-placement="top"
+							title="Eliminar convocado" (click)="deleteconvocado(o.id)">close</i>
+						</li>
+					</ul>
+					<div class="btn-group dropup"
+						*ngIf="!(form.controls['convocados'].readOnly || readOnly)">
+						<button type="button"
+							class="btn btn-light dropdown-toggle 
+					dropdown-toggle-split"
+							data-offset="0" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false" (click)="this.filtroConvocados = ''">
+							{{(this.convocadoSeleted)?this.convocadoSeleted.nombreCompleto:'seleccione
+							un convocado '}}<span class="sr-only">Toggle Dropright</span>
+						</button>
+						<button type="button" (click)="addconvocado()"
+							[disabled]="!this.convocadoSeleted" class="btn btn-success ">
+							Incluir</button>
+						<div class="dropdown-menu scrollable-menu">
+							<a class="dropdown-item" *ngFor="let o of filtrarConvocados()"
+								(click)="this.convocadoSeleted = o">{{o.nombreCompleto}}</a>
+							<div class="dropdown-divider"></div>
+							<form class="px-3">
+								<div class="form-group">
+									<input type="text" placeholder="Buscar..." class="form-control"
+										[(ngModel)]="filtroConvocados"
+										[ngModelOptions]="{standalone: true}">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group form-row" *ngIf="md.object.apoderado">
+			<label class="col-sm-3 col-form-label">Abogado Responsable<span
+				class="required">*</span>
+			</label>
+			<div class="col">
+				<input class="form-control form-control-sm" name="apoderado"
+					type="text" [(ngModel)]="md.object.apoderado.nombreCompleto"
+					formControlName="apoderado" [readOnly]="true" />
+			</div>
+			<message-validation [form]="form" property="apoderado"></message-validation>
+		</div>
+
+		<div class="form-group form-row"
+			*ngIf="md.object.medioControlJudicial">
+			<label class="col-sm-3 col-form-label">Medio Control Judicial
+				<span class="required">*</span>
+			</label>
+			<div class="col">
+				<select class="form-control  custom-select form-control-sm"
+					[title]="md.object.medioControlJudicial.nombre"
+					name="medioControlJudicial"
+					[(ngModel)]="md.object.medioControlJudicial.id"
+					formControlName="medioControlJudicial">
+					<option
+						*ngFor="let o of this.medioControlJudicialModel.getDataSet()"
+						value="{{o.id}}">{{o.nombre}}</option>
+				</select>
+			</div>
+			<message-validation [form]="form" property="medioControlJudicial"></message-validation>
+		</div>
+
+
+		<div class="form-group form-row" *ngIf="md.object.tema">
+			<label class="col-sm-2 col-form-label">Tema<span
+				class="required">*</span></label>
+			<div class="col-sm-10">
+				<select class="form-control  custom-select form-control-sm"
+					[title]="md.object.tema.nombre" [(ngModel)]="md.object.tema.id"
+					formControlName="tema" name="tema">
+					<option *ngFor="let o of this.temaModel.getDataSet()"
+						value="{{o.id}}">{{o.nombre}}</option>
+				</select>
+			</div>
+			<message-validation [form]="form" property="tema"></message-validation>
+		</div>
+
+		<div class="form-group form-row" *ngIf="md.object.despacho">
+			<label class="col-sm-2 col-form-label">Despacho</label>
+			<div class="col">
+				<select class="form-control  custom-select form-control-sm"
+					name="despacho" [(ngModel)]="md.object.despacho.id"
+					formControlName="despacho">
+					<option *ngFor="let o of this.despachoModel.getDataSet()"
+						value="{{o.id}}">{{o.nombre}}</option>
+				</select>
+			</div>
+			<message-validation [form]="form" property="despacho"></message-validation>
+		</div>
+
+		<div class="form-group form-row">
+			<label class="col-sm-2 col-form-label">Estado<span
+				class="required">*</span></label>
+			<div class="col">
+				<select class="form-control  custom-select form-control-sm"
+					name="estado" [(ngModel)]="md.object.estado"
+					formControlName="estado">
+					<option value="ACT">Activo</option>
+					<option value="INA">Inactivo</option>
+				</select>
+			</div>
+			<message-validation [form]="form" property="estado"></message-validation>
+		</div>
+
+	</form>
+</div>
+</modal-form-generico>
