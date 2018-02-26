@@ -49,6 +49,7 @@ public class ConciliacionPrejudicialService {
 
 	@ApiMethod(name = "updateConciliacionPrejudicial", path = "conciliacionesPrejudiciales/{id}", httpMethod = HttpMethod.PUT)
 	public ConciliacionPrejudicial updateConciliacionPrejudicial(ConciliacionPrejudicial o) throws UnauthorizedException {
+		System.out.println("reisgo: " + o.getAnalisis().getEvaluacionRiesgo().getRiesgoCondena());
 		return new ConciliacionPrejudicialPojo().update(o);
 	}
 	

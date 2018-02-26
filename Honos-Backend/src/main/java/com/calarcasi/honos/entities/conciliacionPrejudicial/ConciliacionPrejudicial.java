@@ -174,6 +174,12 @@ public class ConciliacionPrejudicial implements Serializable {
 	public void setRadicadoProcuraduria(String radicadoProcuraduria) {
 		this.radicadoProcuraduria = radicadoProcuraduria;
 	}
+	public Analisis getAnalisis() {
+		return analisis;
+	}
+	public void setAnalisis(Analisis analisis) {
+		this.analisis = analisis;
+	}
 	
 	
 	

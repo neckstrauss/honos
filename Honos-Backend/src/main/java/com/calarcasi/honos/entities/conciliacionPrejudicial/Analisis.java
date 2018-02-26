@@ -2,6 +2,7 @@ package com.calarcasi.honos.entities.conciliacionPrejudicial;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 
 /**
  * Entity implementation class for Entity: ConciliacionPrejudicial
@@ -31,6 +32,10 @@ public class Analisis {
 	@Column(name = "POSICION_JURIDICA_ABOGADO", columnDefinition = "LONGTEXT")
 	private String posicionJuridicaAbogado;
 
+	@Embedded
+	private EvaluacionDelRiesgo evaluacionRiesgo;
+	
+	
 
 	public Analisis() {
 		super();
@@ -38,6 +43,14 @@ public class Analisis {
 
 	public String getHechos() {
 		return hechos;
+	}
+
+	public EvaluacionDelRiesgo getEvaluacionRiesgo() {
+		return evaluacionRiesgo;
+	}
+
+	public void setEvaluacionRiesgo(EvaluacionDelRiesgo evaluacionRiesgo) {
+		this.evaluacionRiesgo = evaluacionRiesgo;
 	}
 
 	public void setHechos(String hechos) {

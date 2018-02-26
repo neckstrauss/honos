@@ -31,3 +31,97 @@ i.material-icons{
 	margin-bottom: auto;
 }
 
+.nav-tabs
+{
+	padding-bottom: 1px;
+    margin-bottom: 9px;
+}
+
+.tab-content > .active { 
+    padding-right: 1px;
+   	padding-bottom: 5px;
+}
+
+
+
+
+    // se usa ng-reflect- para seleccionar el attribuito readonly;
+     :host /deep/ ckeditor[ng-reflect-readonly="true"] .cke_toolbar,
+     :host /deep/ ckeditor[ng-reflect-readonly="true"] .cke_bottom,
+     :host /deep/ ckeditor[readonly="true"] .cke_toolbar,
+     :host /deep/ ckeditor[readonly="true"] .cke_bottom {
+        display: none;
+    }
+    
+    // @for $i from 1 through 100 {
+    //      :host /deep/ ckeditor[readonly*="true"] #cke_#{$i + '54'} {
+    //         display: block;
+    //         float: right !important;
+    //     }
+    // }
+     :host /deep/ ckeditor[ng-reflect-readonly="true"] .cke_toolbox .cke_toolbar:nth-child(13),
+     :host /deep/ ckeditor[readonly="true"] .cke_toolbox .cke_toolbar:nth-child(13) {
+        display: block;
+        margin-left: auto !important;
+        .cke_toolgroup a::after {
+            content: none;
+        }
+    }
+    
+     :host /deep/ ckeditor .cke_toolbox {
+        display: flex;
+        max-width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .cke_toolbar {
+        	&:nth-child(1),  
+        	      	&:nth-child(2),
+        	&:nth-child(3),
+        	&:nth-child(4),
+        	//validar 5
+        	//&:nth-child(7),
+        	&:nth-child(8),
+        	&:nth-child(9),
+        	&:nth-child(11), //estilos, letras, etc
+        	&:nth-child(12),
+        	&:nth-child(14),
+        	{
+                display: none;
+            }
+           
+            &:nth-child(2) {
+                .cke_toolgroup {
+                    a:nth-child(1),
+                    a:nth-child(2),
+                    a:nth-child(3),
+                    a:nth-child(4),
+                    a:nth-child(6),
+                    a:nth-child(7),
+                    a:nth-child(8)
+                    
+                     {
+                        display: none;
+                    }
+                }
+            }
+           &:nth-child(7) {
+                .cke_toolgroup {
+                    a:nth-child(7),
+                    a:nth-child(8),
+                    a:nth-child(15),
+                    a:nth-child(16),
+                    a:nth-child(17) {
+                        display: none;
+                    }
+                }
+            }
+            &:nth-child(13) {
+                .cke_toolgroup {
+                    a:nth-child(2) {
+                        display: none;
+                    }
+                }
+            }
+
+        }
+    }

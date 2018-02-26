@@ -4,6 +4,7 @@ import { Despacho } from '../generales/despacho.model';
 import { MedioControlJudicial } from '../generales/medioControlJudicial.model';
 import { Tema } from '../generales/tema.model';
 import { Tercero } from '../generales/tercero.model';
+import { Analisis } from './analisis.model';
 
 export class ConciliacionPrejudicial extends EntityGeneral{
 
@@ -18,7 +19,8 @@ export class ConciliacionPrejudicial extends EntityGeneral{
     public convocantes?: Tercero[],
     public despacho?: Despacho,
     public pretension?: number,
-    public radicadoProcuraduria?: string
+    public radicadoProcuraduria?: string,
+    public analisis?: Analisis
   ) 
   {
     super();

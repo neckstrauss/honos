@@ -28,6 +28,7 @@
     "html5-history-api": "4.2.7",
     "intl": "1.2.4",
     "material-design-icons": "^3.0.1",
+    "ng2-ckeditor": "^1.1.14",
     "ng2-currency-mask": "^4.4.1",
     "ng2-search-filter": "^0.3.1",
     "ngx-mydatepicker": "^2.4.3",

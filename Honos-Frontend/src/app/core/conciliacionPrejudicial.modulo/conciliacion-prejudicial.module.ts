@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Routes, RouterModule} from "@angular/router";
 import {Subject} from "rxjs/Subject";
 import { RadicacionConciliacionPrejudicialTableComponent } from './radicacion/radicacionConciliacion.table.component';
+import { CKEditorModule } from 'ng2-ckeditor';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
@@ -28,7 +29,16 @@ let routing = RouterModule.forChild([
 ]);
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ModelModule, routing, SharedModule, NgxMyDatePickerModule.forRoot(), CurrencyMaskModule],
+  imports: [CommonModule, 
+            FormsModule, 
+            ReactiveFormsModule, 
+            ModelModule, 
+            routing, 
+            SharedModule, 
+            NgxMyDatePickerModule.forRoot(), 
+            CurrencyMaskModule,
+            CKEditorModule
+          ],
   declarations: [
       RadicacionConciliacionPrejudicialTableComponent, RadicacionConciliacionPrejudicialFormComponent,
       ConciliacionPrejudicialTableComponent, ConciliacionPrejudicialFormComponent
