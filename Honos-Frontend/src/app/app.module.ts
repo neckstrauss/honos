@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { routing } from "./app.routing";
 import { MessageModule } from './shared/messages/message.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { MessageModule } from './shared/messages/message.module';
     BrowserModule,
     CoreModule,
     routing, 
-    MessageModule
+    MessageModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

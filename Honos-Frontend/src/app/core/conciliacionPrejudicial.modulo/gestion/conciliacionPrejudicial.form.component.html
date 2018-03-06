@@ -1,0 +1,645 @@
+{{md.object|json}}
+<modal-form-generico #md [model]="this.model" titulo="Conciliaci√≥n"
+	(stateUpdate)="actualizarOpciones($event)" [form]="form"
+	tamanio="modal-lg"
+	validacion="{{md.object.convocantes && md.object.convocados}}">
+<div card-body>
+
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item"><a class="nav-link active" id="general-tab"
+			*ngIf="validacionGeneral();else else_general" data-toggle="tab"
+			href="#general" role="tab" aria-controls="home" style="color: red"
+			aria-selected="true">Informaci√≥n General</a> <ng-template
+				#else_general> <a class="nav-link active"
+				id="general-tab" data-toggle="tab" href="#general" role="tab"
+				aria-controls="home" aria-selected="true">Informaci√≥n General</a> </ng-template></li>
+		<li class="nav-item"><a class="nav-link" id="descripcion-tab"
+			style="color: red" data-toggle="tab" href="#descripcion" role="tab"
+			*ngIf="validacionDescripcion();else else_descripcion"
+			aria-controls="profile" aria-selected="false">Descripci√≥n de la
+				Conciliaci√≥n</a> <ng-template #else_descripcion> <a
+				class="nav-link" id="descripcion-tab" data-toggle="tab"
+				href="#descripcion" role="tab" aria-controls="profile"
+				aria-selected="false">Descripci√≥n de la Conciliaci√≥n</a> </ng-template></li>
+		<li class="nav-item"><a class="nav-link" id="analisis-tab"
+			*ngIf="validacionAnalisis(); else else_analisis" data-toggle="tab"
+			href="#analisis" role="tab" aria-controls="contact"
+			aria-selected="false" style="color: red">An√°lisis</a> <ng-template
+				#else_analisis> <a class="nav-link" id="analisis-tab"
+				data-toggle="tab" href="#analisis" role="tab"
+				aria-controls="contact" aria-selected="false">An√°lisis</a> </ng-template></li>
+	</ul>
+
+	<div class="tab-content" id="myTabContent" *ngIf="md.object.analisis">
+		<div class="tab-pane fade show active" id="general" role="tabpanel"
+			aria-labelledby="general-tab">
+			<form novalidate [formGroup]="form">
+
+				<div class="form-row">
+					<div class="col">
+						<div class="form-group ">
+							<label class="control-label" for="input">No Radicado<span
+								class="required">*</span>
+							</label> <input class="form-control form-control-sm"
+								name="numeroRadicacionIterno" type="number"
+								[(ngModel)]="md.object.numeroRadicacionIterno"
+								[readOnly]="(form.controls['numeroRadicacionIterno'].readOnly || readOnly)"
+								formControlName="numeroRadicacionIterno" />
+							<message-validation [form]="form"
+								property="numeroRadicacionIterno"></message-validation>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label class="control-label" for="input">Fecha
+								Radicaci√≥n<span class="required">*</span>
+							</label>
+							<div class="input-group">
+								<input type="text" class="form-control form-control-sm"
+									placeholder="Select a date" aria-label="Select a date"
+									aria-describedby="basic-addon2" ngx-mydatepicker
+									name="fechaRadicacionInterna"
+									formControlName="fechaRadicacionInterna"
+									[readOnly]="(form.controls['fechaRadicacionInterna'].readOnly || readOnly)"
+									[(ngModel)]="fechaRadicacionInterna"
+									[options]="fechaRadicacionInternaOptions"
+									#dpfechaRadicacionInterna="ngx-mydatepicker"
+									(dateChanged)="onfechaRadicacionInternaChanged($event)">
+								<div class="input-group-append"
+									*ngIf="!(form.controls['fechaRadicacionInterna'].readOnly || readOnly)">
+									<button class="btn btn-danger" type="button"
+										(click)="dpfechaRadicacionInterna.clearDate()">
+										<i class="material-icons" aria-hidden="true"
+											data-toggle="tooltip" data-placement="top"
+											title="Borrar Fecha">close</i>
+									</button>
+									<button class="btn btn-info" type="button"
+										(click)="dpfechaRadicacionInterna.toggleCalendar()">
+										<i class="material-icons" aria-hidden="true"
+											data-toggle="tooltip" data-placement="top"
+											title="Seleccionar Fecha">date_range</i>
+									</button>
+								</div>
+							</div>
+							<message-validation [form]="form"
+								property="fechaRadicacionInterna"></message-validation>
+						</div>
+
+
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label class="control-label" for="input">Fecha
+								Notificacion<span class="required">*</span>
+							</label>
+							<div class="input-group">
+								<input type="text" class="form-control form-control-sm"
+									placeholder="Select a date" aria-label="Select a date"
+									aria-describedby="basic-addon2" ngx-mydatepicker
+									name="fechaNotificacion" formControlName="fechaNotificacion"
+									[(ngModel)]="fechaNotificacion"
+									[options]="fechaNotificacionOptions"
+									#dpfechaNotificacion="ngx-mydatepicker"
+									[readOnly]="(form.controls['fechaNotificacion'].readOnly || readOnly)"
+									(dateChanged)="onfechaNotificacionChanged($event)">
+								<div class="input-group-append"
+									*ngIf="!(form.controls['fechaNotificacion'].readOnly || readOnly)">
+									<button class="btn btn-danger" type="button"
+										(click)="dpfechaNotificacion.clearDate()">
+										<i class="material-icons" aria-hidden="true"
+											data-toggle="tooltip" data-placement="top"
+											title="Borrar Fecha">close</i>
+									</button>
+									<button class="btn btn-info" type="button"
+										(click)="dpfechaNotificacion.toggleCalendar()">
+										<i class="material-icons" aria-hidden="true"
+											data-toggle="tooltip" data-placement="top"
+											title="Seleccionar Fecha">date_range</i>
+									</button>
+								</div>
+							</div>
+							<message-validation [form]="form" property="fechaNotificacion"></message-validation>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="form-group form-row" *ngIf="md.object.apoderado">
+					<label class="col-sm-3 col-form-label">Abogado Responsable<span
+						class="required">*</span>
+					</label>
+					<div class="col">
+						<input class="form-control form-control-sm" name="apoderado"
+							type="text" [(ngModel)]="md.object.apoderado.nombreCompleto"
+							formControlName="apoderado" [readOnly]="true" />
+					</div>
+					<message-validation [form]="form" property="apoderado"></message-validation>
+				</div>
+
+				<div class="form-group form-row"
+					*ngIf="md.object.medioControlJudicial">
+					<label class="col-sm-3 col-form-label"
+						[class.required]="!md.object.medioControlJudicial.id">Medio
+						Control Judicial<span class="required">*</span>
+					</label>
+					<div class="col">
+						<select class="form-control  custom-select form-control-sm"
+							[title]="md.object.medioControlJudicial.nombre"
+							name="medioControlJudicial"
+							[(ngModel)]="md.object.medioControlJudicial.id"
+							formControlName="medioControlJudicial">
+							<option
+								*ngFor="let o of this.medioControlJudicialModel.getDataSet()"
+								value="{{o.id}}">{{o.nombre}}</option>
+						</select>
+					</div>
+					<message-validation [form]="form" property="medioControlJudicial"></message-validation>
+				</div>
+
+
+				<div class="form-group form-row" *ngIf="md.object.tema">
+					<label class="col-sm-2 col-form-label"
+						[class.required]="!md.object.tema.id">Tema<span
+						class="required">*</span></label>
+					<div class="col">
+						<select class="form-control  custom-select form-control-sm"
+							[title]="md.object.tema.nombre" [(ngModel)]="md.object.tema.id"
+							formControlName="tema" name="tema">
+							<option *ngFor="let o of this.temaModel.getDataSet()"
+								value="{{o.id}}">{{o.nombre}}</option>
+						</select>
+					</div>
+					<message-validation [form]="form" property="tema"></message-validation>
+				</div>
+
+				<div class="form-group form-row ">
+					<label class="col-sm-2 col-form-label" for="input"
+						[class.required]="md.object.pretension == 0">Pretensi√≥n<span
+						class="required">*</span>
+					</label>
+					<div class="col-sm-3">
+
+						<input class="form-control form-control-sm" name="pretension"
+							type="text" [(ngModel)]="md.object.pretension"
+							formControlName="pretension" currencyMask
+							[options]="{ prefix: '$ ', thousands: '.', precision:0 }" />
+
+
+						<message-validation [form]="form" property="pretension"></message-validation>
+					</div>
+
+					<label class="col-sm col-form-label" for="input"
+						style="text-align: right">Radicado Procuraduria </label>
+					<div class="col-sm-3">
+						<input class="form-control form-control-sm"
+							name="radicadoProcuraduria" type="number"
+							style="text-align: center;"
+							[(ngModel)]="md.object.radicadoProcuraduria"
+							formControlName="radicadoProcuraduria" />
+						<message-validation [form]="form" property="radicadoProcuraduria"></message-validation>
+					</div>
+				</div>
+
+
+				<div class="form-group form-row" *ngIf="md.object.despacho">
+					<label class="col-sm-2 col-form-label">Despacho</label>
+					<div class="col">
+						<select class="form-control  custom-select form-control-sm"
+							name="despacho" [(ngModel)]="md.object.despacho.id"
+							formControlName="despacho">
+							<option *ngFor="let o of this.despachoModel.getDataSet()"
+								value="{{o.id}}">{{o.nombre}}</option>
+						</select>
+					</div>
+					<message-validation [form]="form" property="despacho"></message-validation>
+				</div>
+
+				<div class="form-row ">
+					<div class="col borde">
+
+						<div class="form-group " *ngIf="md.object.convocantes">
+							<label [class.required]="md.object.convocantes.length == 0">Convocantes<span
+								class="required">*</span></label>
+							<p *ngIf="md.object.convocantes.length == 0">Seleccione un
+								convocante y oprima Incluir</p>
+							<ul class="list-group">
+								<li *ngFor="let o of md.object.convocantes; let i=index; "
+									class="list-group-item d-flex justify-content-between align-items-center">{{o.nombreCompleto}}<i
+									class="material-icons rojo" aria-hidden="true"
+									data-toggle="tooltip" data-placement="top"
+									*ngIf="!(form.controls['convocantes'].readOnly || readOnly)"
+									title="Eliminar Convocante" (click)="deleteConvocante(o.id)">close</i>
+								</li>
+							</ul>
+
+							<div class="btn-group dropright"
+								*ngIf="!(form.controls['convocantes'].readOnly || readOnly)">
+								<button type="button"
+									class="btn btn-light dropdown-toggle dropdown-toggle-split"
+									data-boundary="window" data-offset="30" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false"
+									(click)="this.filtro = ''">
+									{{(this.convocanteSeleted)?this.convocanteSeleted.nombreCompleto:'seleccione
+									un convocante '}}<span class="sr-only">Toggle Dropright</span>
+								</button>
+								<button type="button" (click)="addConvocante()"
+									[disabled]="!this.convocanteSeleted" class="btn btn-success ">
+									Incluir</button>
+								<div class="dropdown-menu scrollable-menu">
+									<a class="dropdown-item" *ngFor="let o of filtrar()"
+										(click)="this.convocanteSeleted = o">{{o.nombreCompleto}}</a>
+									<div class="dropdown-divider"></div>
+									<form class="px-3">
+										<div class="form-group">
+											<input type="text" placeholder="Buscar..."
+												class="form-control" [(ngModel)]="filtro"
+												[ngModelOptions]="{standalone: true}">
+										</div>
+									</form>
+
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="col borde">
+						<div class="form-group">
+							<label
+								[class.required]="!md.object.convocados || md.object.convocados.length == 0">Convocados<span
+								class="required">*</span></label>
+							<p
+								*ngIf="!md.object.convocados || md.object.convocados.length == 0">Seleccione
+								un convocado y oprima Incluir</p>
+							<ul class="list-group">
+								<li *ngFor="let o of md.object.convocados; let i=index; "
+									class="list-group-item d-flex justify-content-between align-items-center">{{o.nombreCompleto}}<i
+									class="material-icons rojo" aria-hidden="true"
+									*ngIf="!(form.controls['convocados'].readOnly || readOnly)"
+									data-toggle="tooltip" data-placement="top"
+									title="Eliminar convocado" (click)="deleteconvocado(o.id)">close</i>
+								</li>
+							</ul>
+							<div class="btn-group dropup"
+								*ngIf="!(form.controls['convocados'].readOnly || readOnly)">
+								<button type="button"
+									class="btn btn-light dropdown-toggle 
+					dropdown-toggle-split"
+									data-offset="0" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false" (click)="this.filtroConvocados = ''">
+									{{(this.convocadoSeleted)?this.convocadoSeleted.nombreCompleto:'seleccione
+									un convocado '}}<span class="sr-only">Toggle Dropright</span>
+								</button>
+								<button type="button" (click)="addconvocado()"
+									[disabled]="!this.convocadoSeleted" class="btn btn-success ">
+									Incluir</button>
+								<div class="dropdown-menu scrollable-menu">
+									<a class="dropdown-item" *ngFor="let o of filtrarConvocados()"
+										(click)="this.convocadoSeleted = o">{{o.nombreCompleto}}</a>
+									<div class="dropdown-divider"></div>
+									<form class="px-3">
+										<div class="form-group">
+											<input type="text" placeholder="Buscar..."
+												class="form-control" [(ngModel)]="filtroConvocados"
+												[ngModelOptions]="{standalone: true}">
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group form-row">
+					<label class="col-sm-2 col-form-label">Estado<span
+						class="required">*</span></label>
+					<div class="col">
+						<select class="form-control  custom-select form-control-sm"
+							name="estado" [(ngModel)]="md.object.estado"
+							formControlName="estado">
+							<option value="ACT">Activo</option>
+							<option value="INA">Inactivo</option>
+						</select>
+					</div>
+					<message-validation [form]="form" property="estado"></message-validation>
+				</div>
+
+			</form>
+		</div>
+		<div class="tab-pane fade" id="descripcion" role="tabpanel"
+			aria-labelledby="descripcion-tab">
+
+			<ul class="nav nav-tabs" id="descripcionTab2" role="tablist">
+				<li class="nav-item"><a class="nav-link active" id="hechos-tab"
+					style="color: red"
+					*ngIf=" !md.object.analisis || !md.object.analisis.hechos; else else_analisis"
+					data-toggle="tab" href="#hechos" role="tab" aria-controls="home"
+					aria-selected="true">Hechos</a> <ng-template #else_analisis>
+					<a class="nav-link active" id="hechos-tab" data-toggle="tab"
+						href="#hechos" role="tab" aria-controls="home"
+						aria-selected="true">Hechos</a> </ng-template></li>
+				<li class="nav-item"><a class="nav-link" id="pretension-tab"
+					*ngIf="!md.object.analisis || !md.object.analisis.pretensiones; else else_pretensiones"
+					data-toggle="tab" href="#pretension" role="tab" style="color: red"
+					aria-controls="profile" aria-selected="false">Pretensiones</a> <ng-template
+						#else_pretensiones> <a class="nav-link"
+						id="pretension-tab" data-toggle="tab" href="#pretension"
+						role="tab" aria-controls="profile" aria-selected="false">Pretensiones</a>
+					</ng-template></li>
+			</ul>
+			<div class="tab-content" id="myTabDescripcion">
+				<div class="tab-pane fade show active" id="hechos" role="tabpanel"
+					aria-labelledby="hechos-tab">
+					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
+						[(ngModel)]="md.object.analisis.hechos" debounce="500"
+						name="hechos" [readonly]="false"> </ckeditor>
+
+				</div>
+				<div class="tab-pane fade" id="pretension" role="tabpanel"
+					aria-labelledby="pretension-tab">
+					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
+						[(ngModel)]="md.object.analisis.pretensiones" debounce="500"
+						name="pretensiones" [readonly]="false"> </ckeditor>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="analisis" role="tabpanel"
+			aria-labelledby="analisis-tab">
+			<ul class="nav nav-tabs" id="analisisTab2" role="tablist">
+				<li class="nav-item"><a class="nav-link active"
+					*ngIf="md.object.analisis.analisisCaducidad; else else_caducidad"
+					id="caducidad-tab" data-toggle="tab" href="#caducidad" role="tab"
+					aria-controls="caducidad" aria-selected="true"
+					title="An·lisis de la caducidad">Caducidad</a> <ng-template
+						#else_caducidad> <a class="nav-link active"
+						style="color: red" id="caducidad-tab" data-toggle="tab"
+						href="#caducidad" role="tab" aria-controls="caducidad"
+						aria-selected="true" title="An·lisis de la caducidad">Caducidad</a>
+					</ng-template></li>
+				<li class="nav-item"><a class="nav-link"
+					*ngIf="md.object.analisis.analisisJuridicoNormativo; else else_normativo"
+					id="juridicoNormativo-tab" data-toggle="tab"
+					href="#juridicoNormativo" role="tab"
+					aria-controls="juridicoNormativo" aria-selected="false"
+					title="An·lisis jurÌdico normativo">Normativo</a> <ng-template
+						#else_normativo> <a class="nav-link"
+						style="color: red" id="juridicoNormativo-tab" data-toggle="tab"
+						href="#juridicoNormativo" role="tab"
+						aria-controls="juridicoNormativo" aria-selected="false"
+						title="An·lisis jurÌdico normativo">Normativo</a> </ng-template></li>
+				<li class="nav-item"><a class="nav-link"
+					*ngIf="md.object.analisis.jurisprudencia; else else_jurisprudencia"
+					id="jurisprudencia-tab" data-toggle="tab" href="#jurisprudencia"
+					role="tab" aria-controls="jurisprudencia" aria-selected="false"
+					title="Jurisiprudencia o precedente judicial">Jurisprudencia</a> <ng-template
+						#else_jurisprudencia> <a class="nav-link"
+						style="color: red" id="jurisprudencia-tab" data-toggle="tab"
+						href="#jurisprudencia" role="tab" aria-controls="jurisprudencia"
+						aria-selected="false"
+						title="Jurisiprudencia o precedente judicial">Jurisprudencia</a> </ng-template>
+				</li>
+				<li class="nav-item"><a class="nav-link" id="probatorio-tab"
+					*ngIf="md.object.analisis.analisisProbatorio; else else_probatorio"
+					data-toggle="tab" href="#probatorio" role="tab"
+					aria-controls="probatorio" aria-selected="false"
+					title="An·lisis probatorio">Probatorio</a> <ng-template
+						#else_probatorio> <a class="nav-link"
+						id="probatorio-tab" style="color: red" data-toggle="tab"
+						href="#probatorio" role="tab" aria-controls="probatorio"
+						aria-selected="false" title="An·lisis probatorio">Probatorio</a> </ng-template>
+				</li>
+				<li class="nav-item"><a class="nav-link" id="riesgo-tab"
+					*ngIf="!validacionRiesgo(); else else_riesgo" data-toggle="tab"
+					href="#riesgo" role="tab" aria-controls="riesgo"
+					aria-selected="false" title="Evaluaci√≥n del riesgo">Riesgo</a> <ng-template
+						#else_riesgo> <a class="nav-link" id="riesgo-tab"
+						style="color: red" data-toggle="tab" href="#riesgo" role="tab"
+						aria-controls="riesgo" aria-selected="false"
+						title="Evaluaci√≥n del riesgo">Riesgo</a> </ng-template></li>
+
+				<li class="nav-item"><a class="nav-link" id="posicion-tab"
+					*ngIf="md.object.analisis.posicionJuridicaAbogado; else else_posicion"
+					data-toggle="tab" href="#posicion" role="tab"
+					aria-controls="posicion" aria-selected="false"
+					title="Posici√≥n jurÌdica del abogado ante el comitÈ de conciliaci√≥n">Posici√≥n</a>
+					<ng-template #else_posicion> <a class="nav-link"
+						id="posicion-tab" style="color: red" data-toggle="tab"
+						href="#posicion" role="tab" aria-controls="posicion"
+						aria-selected="false"
+						title="Posici√≥n jurÌdica del abogado ante el comitÈ de conciliaci√≥n">Posici√≥n</a>
+					</ng-template></li>
+			</ul>
+			<div class="tab-content" id="myTabAnalisis">
+				<div class="tab-pane fade show active" id="caducidad"
+					role="tabpanel" aria-labelledby="caducidad-tab">
+					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
+						[(ngModel)]="md.object.analisis.analisisCaducidad" debounce="500"
+						name="analisisCaducidad" [readonly]="false"> </ckeditor>
+				</div>
+				<div class="tab-pane fade" id="juridicoNormativo" role="tabpanel"
+					aria-labelledby="juridicoNormativo-tab">
+					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
+						[(ngModel)]="md.object.analisis.analisisJuridicoNormativo"
+						debounce="500" name="analisisJuridicoNormativo" [readonly]="false">
+					</ckeditor>
+				</div>
+				<div class="tab-pane fade" id="jurisprudencia" role="tabpanel"
+					aria-labelledby="jurisprudencia-tab">
+					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
+						[(ngModel)]="md.object.analisis.jurisprudencia" debounce="500"
+						name="jurisprudencia" [readonly]="false"> </ckeditor>
+				</div>
+				<div class="tab-pane fade" id="probatorio" role="tabpanel"
+					aria-labelledby="probatorio-tab">
+					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
+						[(ngModel)]="md.object.analisis.analisisProbatorio" debounce="500"
+						name="analisisProbatorio" [readonly]="false"> </ckeditor>
+				</div>
+				<div class="tab-pane fade" id="riesgo" role="tabpanel"
+					aria-labelledby="riesgo-tab">
+					<form novalidate>
+						<div class="form-group form-row">
+							<label class="col-sm-6 col-form-label"
+								[class.required]="!md.object.analisis.evaluacionRiesgo.fortalezaDefensa">Fortaleza
+								de la defensa<span class="required">*</span>
+							</label>
+							<div class="col-5">
+								<select class="form-control custom-select form-control-sm"
+									[ngModelOptions]="{standalone: true}"
+									(change)="evaluacionRiesgo()"
+									[(ngModel)]="md.object.analisis.evaluacionRiesgo.fortalezaDefensa">
+									<option value="ALT">ALTO</option>
+									<option value="MED">MEDIO</option>
+									<option value="BAJ">BAJO</option>
+								</select>
+							</div>
+							<a> <i class="material-icons">help</i>
+								<div class="popover-ca">
+									<br/>
+									<br/>
+									<div class="borde"></div>
+									<h3>Fortaleza Defensa</h3>
+									<div [innerHTML]="'<p>' + this.fortalezaDefensa + '</p>'"></div>
+									<!-- <p style="white-space: pre;">{{criterio.tooltip}}</p> -->
+								</div>
+							</a>
+
+						</div>
+
+						<div class="form-group form-row">
+							<label class="col-sm-6 col-form-label"
+								[class.required]="!md.object.analisis.evaluacionRiesgo.fortalezaProbatoriaDefensa">Fortaleza
+								probatoria de la defensa<span class="required">*</span>
+							</label>
+							<div class="col-5">
+								<select class="form-control  custom-select form-control-sm"
+									(change)="evaluacionRiesgo()"
+									[(ngModel)]="md.object.analisis.evaluacionRiesgo.fortalezaProbatoriaDefensa"
+									[ngModelOptions]="{standalone: true}">
+									<option value="ALT">ALTO</option>
+									<option value="MED">MEDIO</option>
+									<option value="BAJ">BAJO</option>
+								</select>
+							</div>
+							<a> <i class="material-icons">help</i>
+								<div class="popover-ca">
+									<div class="borde"></div>
+									<h3>Fortaleza probatoria de la defensa</h3>
+									<div [innerHTML]="'<p>' + this.fortalezaProbatoriaDefensa + '</p>'"></div>
+									<!-- <p style="white-space: pre;">{{criterio.tooltip}}</p> -->
+								</div>
+							</a>
+						</div>
+
+						<div class="form-group form-row">
+							<label class="col-sm-6 col-form-label"
+								[class.required]="!md.object.analisis.evaluacionRiesgo.fortalezaProbatoriaDemandante">Fortaleza
+								probatoria del demandante<span class="required">*</span>
+							</label>
+							<div class="col-5">
+								<select class="form-control  custom-select form-control-sm"
+									(change)="evaluacionRiesgo()"
+									[(ngModel)]="md.object.analisis.evaluacionRiesgo.fortalezaProbatoriaDemandante"
+									[ngModelOptions]="{standalone: true}">
+									<option value="ALT">ALTO</option>
+									<option value="MED">MEDIO</option>
+									<option value="BAJ">BAJO</option>
+								</select>
+							</div>
+							<a> <i class="material-icons">help</i>
+								<div class="popover-ca">
+									<div class="borde"></div>
+									<h3>Fortaleza probatoria del demandante</h3>
+									<div [innerHTML]="'<p>' + this.fortalezaProbatoriaDemandante + '</p>'"></div>
+									<!-- <p style="white-space: pre;">{{criterio.tooltip}}</p> -->
+								</div>
+							</a>
+						</div>
+
+						<div class="form-group form-row">
+							<label class="col-sm-6 col-form-label"
+								[class.required]="!md.object.analisis.evaluacionRiesgo.riesgosProcesales">Riesgos
+								procesales<span class="required">*</span>
+							</label>
+							<div class="col-5">
+								<select class="form-control  custom-select form-control-sm"
+									(change)="evaluacionRiesgo()"
+									[(ngModel)]="md.object.analisis.evaluacionRiesgo.riesgosProcesales"
+									[ngModelOptions]="{standalone: true}">
+									<option value="ALT">ALTO</option>
+									<option value="MED">MEDIO</option>
+									<option value="BAJ">BAJO</option>
+								</select>
+							</div>
+							<a> <i class="material-icons">help</i>
+								<div class="popover-ca">
+									<div class="borde"></div>
+									<h3>Riesgos Procesales</h3>
+									<div [innerHTML]="'<p>' + this.riesgosProcesales + '</p>'"></div>
+									<!-- <p style="white-space: pre;">{{criterio.tooltip}}</p> -->
+								</div>
+							</a>
+						</div>
+
+						<div class="form-group form-row">
+							<label class="col-sm-6 col-form-label"
+								[class.required]="!md.object.analisis.evaluacionRiesgo.nivelJurisprudencial">Nivel
+								de jurisprudencia<span class="required">*</span>
+							</label>
+							<div class="col-5">
+								<select class="form-control  custom-select form-control-sm"
+									(change)="evaluacionRiesgo()"
+									[(ngModel)]="md.object.analisis.evaluacionRiesgo.nivelJurisprudencial"
+									[ngModelOptions]="{standalone: true}">
+									<option value="ALT">ALTO</option>
+									<option value="MED">MEDIO</option>
+									<option value="BAJ">BAJO</option>
+								</select>
+							</div>
+
+
+							<a> <i class="material-icons">help</i>
+								<div class="popover-ca">
+									<div class="borde"></div>
+									<h3>Nivel de jurisprudencia</h3>
+									<div [innerHTML]="'<p>' + this.nivelJurisprudencial + '</p>'"></div>
+									<!-- <p style="white-space: pre;">{{criterio.tooltip}}</p> -->
+								</div>
+							</a>
+						</div>
+
+						<hr>
+
+						<div class="form-group form-row">
+							<label class="col-3 col-form-label">Riesgo de la Condena<span
+								class="required">*</span>
+							</label>
+							<div class="col-2">
+								<div class="input-group  mb-3">
+
+									<input class="form-control"
+										style="text-align: center; font-weight: bold; font-size: larger;"
+										type="text"
+										[(ngModel)]="md.object.analisis.evaluacionRiesgo.riesgoCondena"
+										[readOnly]="true" [ngModelOptions]="{standalone: true}"
+										currencyMask
+										[options]="{ prefix: '', thousands: '.', precision:0 }" />
+									<div class="input-group-append">
+										<span class="input-group-text" id="basic-addon1">%</span>
+									</div>
+								</div>
+							</div>
+
+							<label class="col col-form-label" style="text-align: end;">Probabilidad
+								de perder<span class="required">*</span>
+							</label>
+							<div class="col">
+								<input class="form-control "
+									style="text-align: center; font-weight: bold; font-size: larger;"
+									type="text"
+									[(ngModel)]="md.object.analisis.evaluacionRiesgo.probabilidadCondena"
+									[readOnly]="true" [ngModelOptions]="{standalone: true}" />
+							</div>
+
+						</div>
+
+						<div class="form-group form-row"></div>
+
+					</form>
+
+				</div>
+				<div class="tab-pane fade" id="posicion" role="tabpanel"
+					aria-labelledby="posicion-tab">
+					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
+						[(ngModel)]="md.object.analisis.posicionJuridicaAbogado"
+						debounce="500" name="posicionJuridicaAbogado" [readonly]="false">
+					</ckeditor>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+</div>
+</modal-form-generico>

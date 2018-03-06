@@ -10,14 +10,22 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { Routes, RouterModule } from "@angular/router";
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from "ngx-order-pipe";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Subject } from "rxjs/Subject";
 
-
 @NgModule({
-    imports: [CommonModule, FormsModule, ModelModule, Ng2SearchPipeModule, OrderModule, NgxPaginationModule],
+    imports: [
+      CommonModule, 
+      FormsModule, 
+      ModelModule, 
+      Ng2SearchPipeModule, 
+      OrderModule, 
+      NgxPaginationModule,
+      CurrencyMaskModule
+     ],
     declarations: 
     [
       TablaGenericaComponent, 
@@ -36,4 +44,3 @@ import { Subject } from "rxjs/Subject";
 
 })
 export class SharedModule { }
-

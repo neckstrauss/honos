@@ -44,9 +44,10 @@ export abstract class Model<T> {
   }
   
   loadDataSetActivos(): void {
+    console.log("url: " + this.url+"/activos" );
     this.dataSource.setUrl(this.url+"/activos").getData().subscribe(event => {
       if (event.type === HttpEventType.Response) {
-        //console.log("response received... getData()", event.body);             
+        console.log("response received... getData()", event.body);             
         this.dataSet = event.body.items;
       }
     });
@@ -107,7 +108,7 @@ export abstract class Model<T> {
   getNextId(id: number): number {
     let index = this.dataSet.findIndex(p => this.locator(p, id));
     if (index > -1) {      
-      let aux: any = this.dataSet[this.dataSet.length > index + 2 ? index + 1 : 0];
+      let aux: any = this.dataSet[this.dataSet.length > index + 1 ? index + 1 : 0];
       return aux.id;
     } else {
       return id || 0;

@@ -1,13 +1,12 @@
+import { EntityGeneral } from '../entity-general.model';
 import { Rol } from './rol.model';
 
-export class Usuario {
+export class Usuario extends EntityGeneral{
 
   constructor(
-    public id?: number,
     public usuario?: string,
     public password?: string,
-    public estado?: string,
     public rol: Rol = new Rol()
-  ) {};
+  ) { super();};
 
 }

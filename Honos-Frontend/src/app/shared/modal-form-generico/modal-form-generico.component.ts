@@ -21,9 +21,13 @@ export class ModalFormGenericoComponent {
   @Input('model') model: Model<any>;
   @Input('titulo') titulo: string = 'titulo por defecto';
   @Input('form') form: NgForm;
+  @Input('tamanio') tamanio: string = '';
+  @Input('validacion') valido: boolean = true;
 
   @Output("stateUpdate")
   newEvent = new EventEmitter<number>();
+
+  locator = (p: any, id: number) => p.id == id;
 
   object: any = new Object();
 
@@ -31,12 +35,16 @@ export class ModalFormGenericoComponent {
 
     stateEvents.subscribe((update) => {
       this.object = this.model.newObject();
+      this.editing = update.mode == MODES.EDIT;
       if (update.id != undefined) {
         //Object.assign(this.object, this.model.get(update.id));
         this.getObjectById(update.id);
       }
-      this.editing = update.mode == MODES.EDIT;
-      this.newEvent.emit(update.id);
+      else {
+        this.newEvent.emit(update.id);
+      }
+
+
     });
   }
 
@@ -58,10 +66,15 @@ export class ModalFormGenericoComponent {
   private getObjectById(id: number) {
     this.model.getById(id).subscribe(event => {
       if (event.type === HttpEventType.Response) {
-        //            console.log("response received... getBYID()", event.body);
+        this.object = this.model.newObject();
         Object.assign(this.object, event.body);
+        this.newEvent.emit(id);
       }
     });
+  }
+
+  messageClass(): string {
+    return "modal-dialog " + this.tamanio;
   }
 
 }

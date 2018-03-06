@@ -30,7 +30,6 @@ import com.google.api.server.spi.response.UnauthorizedException;
 )
 // [END echo_api_annotation]
 public class SeguridadService {
-
 	/*
 	 * INICIO gestion Opciones
 	 */

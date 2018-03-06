@@ -1,10 +1,11 @@
-export class Opcion {
+import { EntityGeneral } from '../entity-general.model';
+export class Opcion extends EntityGeneral{
 
   constructor(
-    public id?: number,
     public label?: string,
     public uri?: string,
-    public estado?: string
-  ) {};
+  ) {
+    super();
+  };
 
 }
