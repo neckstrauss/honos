@@ -1,6 +1,9 @@
 import {ConciliacionPrejudicial} from '../../../model/entities/conciliacionPrejudicial/conciliacionPrejudicial.model';
 import {EvaluacionDelRiesgo} from '../../../model/entities/conciliacionPrejudicial/evaluacionDelRiesgo.model';
+import {Despacho} from '../../../model/entities/generales/despacho.model';
+import {MedioControlJudicial} from '../../../model/entities/generales/medioControlJudicial.model';
 import {Natural} from '../../../model/entities/generales/natural.model';
+import {Tema} from '../../../model/entities/generales/tema.model';
 import {Tercero} from '../../../model/entities/generales/tercero.model';
 import {ConciliacionPrejudicialModel} from '../../../model/repositories/conciliacionPrejudicial/conciliacionPrejudicial.repository.model';
 import {ApoderadoModel} from '../../../model/repositories/generales/apoderado.repository.model';
@@ -14,7 +17,6 @@ import {Component, ViewChild} from "@angular/core";
 import {Validators} from '@angular/forms';
 import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
 
-
 @Component({
   selector: "conciliacionPrejudicial-modal-form",
   moduleId: module.id,
@@ -26,6 +28,14 @@ export class ConciliacionPrejudicialFormComponent {
   @ViewChild('md') md: ModalFormGenericoComponent;
   readOnly: boolean = false;
 
+  fortalezaDefensa: string = "Corresponde a la razonabilidad y/o expectativa de éxito del demandante frente a los hechos y normas en las que se fundamenta.<br/><ul><li><b>Riesgo Alto:</b> Existen hechos y normas que sustentan las pretensiones del demandante.</li><li><b>Riesgo Medio:</b> Existen solo normas o solo hechos que sustenten las pretensiones del demandante.</li><li><b>Riesgo Bajo:</b> No existen hechos ni normas que sustenten las pretensiones del demandante.</li></ul>";
+  fortalezaProbatoriaDefensa: string = "Muestra la consistencia y solidez de los hechos frente a las pruebas que se aportan y se practican para la defensa del proceso.<br/><ul><li><b>Riesgo Alto:</b> El material probatorio aportado para la defensa es deficiente al propósito de descalificar los hechos y pretensiones de la demanda.</li><li><b>Riesgo Medio:</b> Existe material probatorio aportado para la defensa que podria descalificar los hechos y pretensiones de la demanda.</li><li><b>Riesgo Bajo:</b> El material probatorio aportado para la defensa es contundente al propósito de descalificar los hechos y pretensiones de la demanda.</li></ul>";
+  fortalezaProbatoriaDemandante: string = "Se debe examinar las pruebas aportadas, allegadas, solicitadas en la demanda que soporten los hechos de la demanda.<br/><ul><li><b>Riesgo Alto:</b> El material probatorio aportado y solicitado es sufienciete para la prosperidad de las pretensiones.</li><li><b>Riesgo Medio:</b> El material probatorio aportado y solicitado podria llegar a generar algun tipo de riesgo para la entidad.</li><li><b>Riesgo Bajo:</b> El material probatorio aportado y solicitado es insufienciete para la prosperidad de las pretensiones.</li></ul>";
+  riesgosProcesales: string = "Este criterio se relaciona con los siguientes eventos en la defensa del Estado: <b>(i)</b> cambio del titular del despacho, <b>(ii)</b> posición del juez de conocimiento, <b>(iii)</b> arribo oportuno de las pruebas solicitadas, <b>(iv)</b> número de instancias asociadas al proceso, y <b>(v)</b> medidas de descongestión judicial.<br/><ul><li><b>Riesgo Alto:</b> Los riesgos procesales relacionados al proceso son contundentes, para representar un riesgo para la defensa.</li><li><b>Riesgo Medio:</b> Existen riesgos procesales que podrian representar algun riesgo para la defensa de los intereses de la entidad.</li><li><b>Riesgo Bajo:</b> No existen riesgos procesales para la defensa.</li></ul>";
+  nivelJurisprudencial: string = "Este indicador muestra la incidencia de los antecedentes procesales similares en un proceso de contestación de la demanda, donde se obtuvieron fallos favorables.<br/><ul><li><b>Riesgo Alto:</b> No existe ningún antecedente similar, o jurisprudencia que señale fallos favorables para la defensa del Departamento o existe suficiente jurisprudencia que soporte los argumentos del demandante.</li><li><b>Riesgo Medio:</b> Se han presentado varios casos similares que podrían definir líneas jurisprudenciales, que señalan fallos favorables para la defensa del Departamento.</li><li><b>Riesgo Bajo:</b> Existe suficiente material jurisprudencial, por medio del cual el fallo del proceso es favorable para la defensa del Departamento.</li></ul>";
+
+
+
   constructor(private model: ConciliacionPrejudicialModel,
     private terceroModel: TerceroModel,
     private temaModel: TemaModel,
@@ -36,6 +46,13 @@ export class ConciliacionPrejudicialFormComponent {
     this.terceroModel.loadDataSetActivos();
     this.medioControlJudicialModel.loadDataSetActivos();
     this.despachoModel.loadDataSetActivos();
+
+
+
+
+
+
+
   }
 
   convocanteSeleted: Tercero;
@@ -224,34 +241,77 @@ export class ConciliacionPrejudicialFormComponent {
     else {
       this.fechaRadicacionInterna = null;
     }
+
+    if (!this.md.object.despacho) {this.md.object.despacho = new Despacho()}
+
+    if (!this.md.object.tema) {this.md.object.tema = new Tema();}
+
+    if (!this.md.object.medioControlJudicial) {this.md.object.medioControlJudicial = new MedioControlJudicial();}
+
+
   }
 
   evaluacionRiesgo() {
     this.md.object.analisis.evaluacionRiesgo.riesgoCondena = this.calcularPorcentaje(this.md.object.analisis.evaluacionRiesgo);
     this.md.object.analisis.evaluacionRiesgo.probabilidadCondena = this.calcularProbabilidad(this.md.object.analisis.evaluacionRiesgo.riesgoCondena);
   }
-  
-  calcularProbabilidad(porcentaje: number)
-  {
+
+  calcularProbabilidad(porcentaje: number) {
     if (porcentaje > 50) {
-        return 'MUY PROBABLE';
-    }else if(porcentaje < 25){
+      return 'MUY PROBABLE';
+    } else if (porcentaje < 25) {
       return 'REMOTO';
-    }else
-    {
+    } else {
       return 'POSIBLE';
-    }  
-    
+    }
+
   }
 
+  validacionGeneral(): boolean {
+
+    return (!this.md.object.convocados || this.md.object.convocados.length == 0)
+      || this.md.object.convocantes.length == 0
+      || !this.md.object.tema
+      || !this.md.object.medioControlJudicial;
+
+  }
+
+  validacionDescripcion(): boolean {
+    return !this.md.object.analisis
+      || !this.md.object.analisis.hechos
+      || !this.md.object.analisis.pretensiones;
+  }
+
+  validacionAnalisis(): boolean {
+    return !this.md.object.analisis
+      || !this.md.object.analisis.analisisCaducidad
+      || !this.md.object.analisis.analisisJuridicoNormativo
+      || !this.md.object.analisis.posicionJuridicaAbogado
+      || !this.md.object.analisis.jurisprudencia
+      || !this.md.object.analisis.analisisProbatorio
+      || this.validacionRiesgo()
+      ;
+  }
+
+  validacionRiesgo(): boolean {
+    return !this.md.object.analisis
+      || !this.md.object.analisis.evaluacionRiesgo.fortalezaDefensa
+      || !this.md.object.analisis.evaluacionRiesgo.fortalezaProbatoriaDefensa
+      || !this.md.object.analisis.evaluacionRiesgo.fortalezaProbatoriaDemandante
+      || !this.md.object.analisis.evaluacionRiesgo.riesgosProcesales
+      || !this.md.object.analisis.evaluacionRiesgo.nivelJurisprudencial
+      ;
+  }
+
+
   calcularPorcentaje(evaluacion: EvaluacionDelRiesgo) {
-    let fortalezaDefensa              = 0.25 * this.getPeso(evaluacion.fortalezaDefensa);
-    let fortalezaProbatoriaDefensa    = 0.2  * this.getPeso(evaluacion.fortalezaProbatoriaDefensa);
-    let fortalezaProbatoriaDemandante = 0.2  * this.getPeso(evaluacion.fortalezaProbatoriaDemandante);
-    let nivelJurisprudencial          = 0.25 * this.getPeso(evaluacion.nivelJurisprudencial);
-    let riesgosProcesales             = 0.1  * this.getPeso(evaluacion.riesgosProcesales);
-    
-    return (fortalezaDefensa + fortalezaProbatoriaDefensa + fortalezaProbatoriaDemandante + nivelJurisprudencial + riesgosProcesales)*100;
+    let fortalezaDefensa = 0.25 * this.getPeso(evaluacion.fortalezaDefensa);
+    let fortalezaProbatoriaDefensa = 0.2 * this.getPeso(evaluacion.fortalezaProbatoriaDefensa);
+    let fortalezaProbatoriaDemandante = 0.2 * this.getPeso(evaluacion.fortalezaProbatoriaDemandante);
+    let nivelJurisprudencial = 0.25 * this.getPeso(evaluacion.nivelJurisprudencial);
+    let riesgosProcesales = 0.1 * this.getPeso(evaluacion.riesgosProcesales);
+
+    return (fortalezaDefensa + fortalezaProbatoriaDefensa + fortalezaProbatoriaDemandante + nivelJurisprudencial + riesgosProcesales) * 100;
   }
 
   getPeso(cal: string): number {
@@ -279,4 +339,10 @@ export class ConciliacionPrejudicialFormComponent {
 
   }
 
+
+
 }
+
+
+
+

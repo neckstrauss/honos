@@ -14,8 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Persistence;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.eclipse.persistence.jpa.config.Cascade;
 
 import com.calarcasi.honos.entities.MyDate;
 import com.calarcasi.honos.entities.generales.Apoderado;
@@ -23,6 +26,7 @@ import com.calarcasi.honos.entities.generales.Despacho;
 import com.calarcasi.honos.entities.generales.MedioControlJudicial;
 import com.calarcasi.honos.entities.generales.Tema;
 import com.calarcasi.honos.entities.generales.Tercero;
+import static javax.persistence.CascadeType.PERSIST;
 
 /**
  * Entity implementation class for Entity: ConciliacionPrejudicial
@@ -48,11 +52,11 @@ public class ConciliacionPrejudicial implements Serializable {
 	@Column(name="FECHA_NOTIFICACION")
 	private Date fechaNotificacion;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name="TEMA_ID")
 	private Tema tema;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name="MEDIO_CONTROL_JUDICIAL_ID")
 	private MedioControlJudicial medioControlJudicial;
 	
@@ -72,7 +76,7 @@ public class ConciliacionPrejudicial implements Serializable {
 	inverseJoinColumns=@JoinColumn(name="CONVOCANTE_ID"))
 	private List<Tercero> convocantes;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name="DESPACHO_ID")
 	private Despacho despacho;
 	

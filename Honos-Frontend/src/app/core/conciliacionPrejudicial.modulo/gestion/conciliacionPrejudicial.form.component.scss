@@ -19,11 +19,22 @@ i.material-icons{
     
 }
 
+.btn_ayuda{
+	    margin-top: 2px;
+    margin-bottom: 9px;
+    margin-left: 9px;
+    border-radius: 17px;
+}
+
 .borde{
 	border-color: #343a40;
     border-style: double;
     border-width: medium;
     margin-bottom: 10px;
+}
+
+.required{
+	color: red;
 }
 
 .form-row
@@ -38,7 +49,7 @@ i.material-icons{
 }
 
 .tab-content > .active { 
-    padding-right: 1px;
+    padding-right: 2px;
    	padding-bottom: 5px;
 }
 
@@ -125,3 +136,55 @@ i.material-icons{
 
         }
     }
+   
+.form-row {
+//     display: flex;
+//     align-items: center;
+    a {
+        color: #464c46;
+        margin-left: 1rem;
+        position: relative;
+        i {
+            font-size: 1.5rem;
+        }
+        .popover-ca {
+            display: none;
+            position: absolute;
+            background-color: #fffa8e;
+            width:40rem;
+            left: -41rem;
+            z-index: 10;
+            -webkit-transform: none;
+            transform: none;
+            top: -20vh;
+            padding: 1.2rem;
+            .borde {
+                width: 1rem;
+                height: 1rem;
+                position: absolute;
+                top: 20vh;
+                right: -.5rem;
+                background-color: #fffa8e;
+                transform: rotate(45deg);
+            }
+            h5 {
+                font-size: 1.1rem;
+                padding: 0;
+                margin: 0;
+                margin-bottom: .5rem;
+            }
+            p {
+                font-size: .8rem;
+                ul {
+                    list-style: none;
+                    li {
+                        font-size: .8rem;
+                    }
+                }
+            }
+        }
+        &:hover .popover-ca {
+            display: block;
+        }
+    }
+}

@@ -20,6 +20,7 @@ import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
 export class RadicacionConciliacionPrejudicialFormComponent {
 
   @ViewChild('md') md: ModalFormGenericoComponent;
+  readOnly: boolean = false;
   
   constructor(private model: ConciliacionPrejudicialModel, private apoderadoModel: ApoderadoModel, private terceroModel: TerceroModel) {
     this.apoderadoModel.loadDataSetActivos();
@@ -59,9 +60,12 @@ convocanteSeleted: Tercero;
     }
   }
   
+  fecha = new Date();
+  
   
   fechaNotificacionOptions: INgxMyDpOptions = {
     dateFormat: 'yyyy/mm/dd',
+    disableSince: {year: this.fecha.getFullYear(), month: this.fecha.getMonth() + 1, day: this.fecha.getDate() + 1 }
   };
 
   fechaNotificacion: any;
@@ -72,6 +76,7 @@ convocanteSeleted: Tercero;
   
   fechaRadicacionInternaOptions: INgxMyDpOptions = {
     dateFormat: 'yyyy/mm/dd',
+    disableSince: {year: this.fecha.getFullYear(), month: this.fecha.getMonth() + 1, day: this.fecha.getDate() + 1 }
   };
 
   fechaRadicacionInterna: any;

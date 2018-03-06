@@ -3,7 +3,21 @@
 	validacion="{{md.object.convocantes}}">
 <div card-body>
 	<form novalidate [formGroup]="form">
-		
+		<div class="form-row">
+					<div class="col">
+						<div class="form-group ">
+							<label class="control-label" for="input">No Radicado<span
+								class="required">*</span>
+							</label> <input class="form-control form-control-sm"
+								name="numeroRadicacionIterno" type="number"
+								[(ngModel)]="md.object.numeroRadicacionIterno"
+								[readOnly]="(form.controls['numeroRadicacionIterno'].readOnly || readOnly)"
+								formControlName="numeroRadicacionIterno" />
+							<message-validation [form]="form"
+								property="numeroRadicacionIterno"></message-validation>
+						</div>
+					</div>
+					</div>
 		<div class="form-row">
 			<div class="col">
 				<div class="form-group">
@@ -90,7 +104,8 @@
 			</ul>
 			
 			<div class="btn-group dropdown" >
-				<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-boundary="window"  data-offset="30"
+				<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" 
+				data-boundary="viewport"  data-offset="0"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="this.filtro = ''">
 					{{(this.convocanteSeleted)?this.convocanteSeleted.nombreCompleto:'seleccione
 					un convocante  '}}<span class="sr-only">Toggle Dropright</span></button>

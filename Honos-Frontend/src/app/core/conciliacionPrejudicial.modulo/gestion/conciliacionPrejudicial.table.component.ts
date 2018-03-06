@@ -24,7 +24,7 @@ export class ConciliacionPrejudicialTableComponent {
   
   /*configuracion de columnas*/
   columnas: any[] = [{ nombre: '#' },
-  { nombre: 'No Radicado', key: 'numeroRadicacionIterno' },
+  { nombre: 'Radicado PR', key: 'radicadoProcuraduria' },
   { nombre: 'Fecha Radicación', key: 'fechaRadicacionInterna' },
   { nombre: 'Convocantes', key: 'convocantes' },
   { nombre: 'Responsable', key: 'apoderado.nombreCompleto' },

@@ -2,8 +2,8 @@
   <ng-template let-item let-i="index">
     <tr>
       <th scope="row" style="vertical-align: middle">{{i + 1 + ((tb.selectedPage - 1) * tb.itemsPerPage)}}</th>
-      <td style="vertical-align: middle">{{item.numeroRadicacionIterno}}</td>
-      <td style="vertical-align: middle">{{item.fechaRadicacionInterna | date:'yyyy-MM-dd'}}</td>      
+      <td style="vertical-align: middle; text-align: right">{{(item.radicadoProcuraduria)?item.radicadoProcuraduria:'---'}}</td>
+      <td style="vertical-align: middle; text-align: center">{{item.fechaRadicacionInterna | date:'yyyy-MM-dd'}}</td>      
       <td style="vertical-align: middle">
       	<div class="convocantes" data-toggle="tooltip" title="{{mostrarConvocantes(item.convocantes)}}" [innerHtml]="item.convocantes[0].nombreCompleto + ' ' + ((item.convocantes.length > 1)? 'Y OTROS':'')"></div>
       </td>

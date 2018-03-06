@@ -23,9 +23,9 @@ export class ConciliacionPrejudicialModel extends Model<ConciliacionPrejudicial>
     let o: ConciliacionPrejudicial = new ConciliacionPrejudicial();
     o.apoderado = new Apoderado();
     o.convocantes = [];
-    o.despacho = new Despacho();
-    o.tema = new Tema();
-    o.medioControlJudicial = new MedioControlJudicial();
+//    o.despacho = new Despacho();
+//    o.tema = new Tema();
+//    o.medioControlJudicial = new MedioControlJudicial();
     o.analisis = new Analisis();
     o.analisis.evaluacionRiesgo = new EvaluacionDelRiesgo();
     return o;

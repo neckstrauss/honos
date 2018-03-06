@@ -26,7 +26,7 @@ export class ModalFormGenericoComponent {
 
   @Output("stateUpdate")
   newEvent = new EventEmitter<number>();
-  
+
   locator = (p: any, id: number) => p.id == id;
 
   object: any = new Object();
@@ -40,12 +40,11 @@ export class ModalFormGenericoComponent {
         //Object.assign(this.object, this.model.get(update.id));
         this.getObjectById(update.id);
       }
-      else
-      {
+      else {
         this.newEvent.emit(update.id);
-      } 
-      
-      
+      }
+
+
     });
   }
 
@@ -67,14 +66,14 @@ export class ModalFormGenericoComponent {
   private getObjectById(id: number) {
     this.model.getById(id).subscribe(event => {
       if (event.type === HttpEventType.Response) {
+        this.object = this.model.newObject();
         Object.assign(this.object, event.body);
         this.newEvent.emit(id);
       }
     });
   }
-  
-   messageClass():string
-  {
+
+  messageClass(): string {
     return "modal-dialog " + this.tamanio;
   }
 
