@@ -14,11 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Persistence;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.eclipse.persistence.jpa.config.Cascade;
 
 import com.calarcasi.honos.entities.MyDate;
 import com.calarcasi.honos.entities.generales.Apoderado;
@@ -26,14 +23,12 @@ import com.calarcasi.honos.entities.generales.Despacho;
 import com.calarcasi.honos.entities.generales.MedioControlJudicial;
 import com.calarcasi.honos.entities.generales.Tema;
 import com.calarcasi.honos.entities.generales.Tercero;
-import static javax.persistence.CascadeType.PERSIST;
 
 /**
  * Entity implementation class for Entity: ConciliacionPrejudicial
  *
  */
 @Entity
-
 public class ConciliacionPrejudicial implements Serializable {
 
 	@Id	
@@ -42,8 +37,7 @@ public class ConciliacionPrejudicial implements Serializable {
 	
 	@Column(name="NUMERO_RADICACION_INTERNO")
 	private int numeroRadicacionIterno;
-	
-	
+		
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_RADICACION_INTERNA")
 	private Date fechaRadicacionInterna;

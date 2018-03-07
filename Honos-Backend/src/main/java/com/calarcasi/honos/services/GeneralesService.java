@@ -6,6 +6,7 @@ import com.calarcasi.honos.entities.generales.Apoderado;
 import com.calarcasi.honos.entities.generales.Despacho;
 import com.calarcasi.honos.entities.generales.Juridica;
 import com.calarcasi.honos.entities.generales.MedioControlJudicial;
+import com.calarcasi.honos.entities.generales.MiembroComiteConciliacion;
 import com.calarcasi.honos.entities.generales.Natural;
 import com.calarcasi.honos.entities.generales.Tema;
 import com.calarcasi.honos.entities.generales.Tercero;
@@ -13,6 +14,7 @@ import com.calarcasi.honos.pojos.generales.ApoderadoPojo;
 import com.calarcasi.honos.pojos.generales.DespachoPojo;
 import com.calarcasi.honos.pojos.generales.JuridicaPojo;
 import com.calarcasi.honos.pojos.generales.MedioControlJudicialPojo;
+import com.calarcasi.honos.pojos.generales.MiembroComiteConciliacionPojo;
 import com.calarcasi.honos.pojos.generales.NaturalPojo;
 import com.calarcasi.honos.pojos.generales.TemaPojo;
 import com.calarcasi.honos.pojos.generales.TerceroPojo;
@@ -292,6 +294,44 @@ public class GeneralesService {
 	
 	/*
 	 * FIN Tercero
+	 */
+	
+	/*
+	 * INICIO MiembroComiteConciliacion
+	 */
+
+	@ApiMethod(name = "getMiembroComiteConciliacion", path = "miembrosComiteConciliacion", httpMethod = HttpMethod.GET)
+	public List<MiembroComiteConciliacion> getMiembroComiteConciliacion() throws UnauthorizedException {
+		return new MiembroComiteConciliacionPojo().findWithQuery("select o from MiembroComiteConciliacion o");
+	}
+	
+	@ApiMethod(name = "getMiembroComiteConciliacionActivos", path = "miembrosComiteConciliacion/activos", httpMethod = HttpMethod.GET)
+	public List<MiembroComiteConciliacion> getMiembroComiteConciliacionActivos() throws UnauthorizedException {		
+		return new MiembroComiteConciliacionPojo().findWithQuery("select o from MiembroComiteConciliacion o where o.estado LIKE 'ACT'");
+	}
+	
+	@ApiMethod(name = "getMiembroComiteConciliacionById", path = "miembrosComiteConciliacion/{id}", httpMethod = HttpMethod.GET)
+	public MiembroComiteConciliacion getMiembroComiteConciliacionById(@Named("id") final int id) throws UnauthorizedException {
+		return new MiembroComiteConciliacionPojo().find(id);
+	}
+
+	@ApiMethod(name = "saveMiembroComiteConciliacion", path = "miembrosComiteConciliacion", httpMethod = HttpMethod.POST)
+	public MiembroComiteConciliacion saveMiembroComiteConciliacion(MiembroComiteConciliacion o) throws UnauthorizedException {
+		return new MiembroComiteConciliacionPojo().create(o);
+	}
+
+	@ApiMethod(name = "deleteMiembroComiteConciliacion", path = "miembrosComiteConciliacion/{id}", httpMethod = HttpMethod.DELETE)
+	public void deleteMiembroComiteConciliacion(@Named("id") final int id) throws UnauthorizedException {
+		new MiembroComiteConciliacionPojo().delete(id);
+	}
+
+	@ApiMethod(name = "updateMiembroComiteConciliacion", path = "miembrosComiteConciliacion/{id}", httpMethod = HttpMethod.PUT)
+	public MiembroComiteConciliacion updateMiembroComiteConciliacion(MiembroComiteConciliacion o) throws UnauthorizedException {
+		return new MiembroComiteConciliacionPojo().update(o);
+	}
+	
+	/*
+	 * FIN MiembroComiteConciliacion
 	 */
 	
 	}
