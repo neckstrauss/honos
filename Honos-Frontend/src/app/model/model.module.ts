@@ -3,11 +3,13 @@ import {NgModule} from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import {Model} from "./repositories/repository.model";
 import { RestDataSource } from "./dataSources/rest.datasource";
+import { ComiteConciliacionModel } from './repositories/comiteConciliacion/comiteConciliacion.repository.model';
 import { ConciliacionPrejudicialModel } from './repositories/conciliacionPrejudicial/conciliacionPrejudicial.repository.model';
 import { ApoderadoModel } from './repositories/generales/apoderado.repository.model';
 import { DespachoModel } from './repositories/generales/despacho.repository.model';
 import { JuridicaModel } from './repositories/generales/juridica.repository.model';
 import { MedioControlJudicialModel } from './repositories/generales/medioControlJudicial.repository.model';
+import { MiembroComiteModel } from './repositories/generales/miembroComite.repository.model';
 import { NaturalModel } from './repositories/generales/natural.repository.model';
 import { TemaModel } from './repositories/generales/tema.repository.model';
 import { TerceroModel } from './repositories/generales/tercero.repository.model';
@@ -33,6 +35,8 @@ import { Subject } from 'rxjs/Subject';
                 NaturalModel,
                 TemaModel,
                 TerceroModel,
+                ComiteConciliacionModel,
+                MiembroComiteModel,
                 RestDataSource, 
                 { 
                   provide: SHARED_STATE, 

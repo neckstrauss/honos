@@ -5,9 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,16 +19,15 @@ import com.calarcasi.honos.entities.generales.MiembroComiteConciliacion;
  */
 @Entity
 @Table(name="ASISTENTES_COMITE")
+@IdClass(AsistenteComitePk.class)
+public class AsistenteComite implements Serializable {
 
-public class AsistentesComite implements Serializable {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-		
+	
+	@Id	
     @Column(name="COMITE_ID")	
-    private Long comite;
+    private int comite;
     
+	@Id
     @ManyToOne
     @JoinColumn(name="MIEMBRO_ID")
     private MiembroComiteConciliacion miembro;
@@ -40,15 +38,15 @@ public class AsistentesComite implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	public AsistentesComite() {
+	public AsistenteComite() {
 		super();
 	}
 
-	public Long getComite() {
+	public int getComite() {
 		return comite;
 	}
 
-	public void setComite(Long comite) {
+	public void setComite(int comite) {
 		this.comite = comite;
 	}
 
@@ -68,19 +66,7 @@ public class AsistentesComite implements Serializable {
 		this.razonInasistencia = razonInasistencia;
 	}
 
-	@Override
-	public String toString() {
-		return "AsistentesComite [id=" + id + ", comite=" + comite + ", miembro=" + miembro + ", razonInasistencia="
-				+ razonInasistencia + "]";
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 	
    

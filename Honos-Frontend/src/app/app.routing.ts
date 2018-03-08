@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: "./core/conciliacionPrejudicial.modulo/conciliacion-prejudicial.module#ConciliacionPrejudicialModule",
   },
   {
+    path: "comite",
+    loadChildren: "./core/comiteConciliacion.modulo/comite-conciliacion.module#ComiteConciliacionModule",
+  },
+  {
     path: "dashboard",
     loadChildren: "./core/dashboard/dashboard.module#DashboardModule",
   },

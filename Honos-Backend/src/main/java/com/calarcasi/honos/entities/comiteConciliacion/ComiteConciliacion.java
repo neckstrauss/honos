@@ -32,7 +32,7 @@ public class ComiteConciliacion  implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="FECHA_HORA")
@@ -47,7 +47,7 @@ public class ComiteConciliacion  implements Serializable {
 	
 	@OneToMany(cascade=CascadeType.PERSIST, orphanRemoval = true)
 	@JoinColumn(name="COMITE_ID") 	
-	private List<AsistentesComite> asistentes;
+	private List<AsistenteComite> asistentes;
 	
 //	@OneToMany
 //	@JoinColumn(name="NUMERO_COMITE")	
@@ -71,11 +71,11 @@ public class ComiteConciliacion  implements Serializable {
 		super();
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -112,11 +112,11 @@ public class ComiteConciliacion  implements Serializable {
 		this.estado = estado;
 	}
 
-	public List<AsistentesComite> getAsistentes() {
+	public List<AsistenteComite> getAsistentes() {
 		return asistentes;
 	}
 
-	public void setAsistentes(List<AsistentesComite> asistentes) {
+	public void setAsistentes(List<AsistenteComite> asistentes) {
 		this.asistentes = asistentes;
 	}
 

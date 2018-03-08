@@ -1,9 +1,5 @@
 import {ModelModule} from "../../model/model.module";
 import { ConciliacionPrejudicialModel } from '../../model/repositories/conciliacionPrejudicial/conciliacionPrejudicial.repository.model';
-import {MenuModel} from '../../model/repositories/seguridad/menu.repository.model';
-import {OpcionModel} from '../../model/repositories/seguridad/opcion.repository.model';
-import { RolModel } from '../../model/repositories/seguridad/rol.repository.model';
-import { UsuarioModel } from '../../model/repositories/seguridad/usuario.repository.model';
 import {SHARED_STATE, SharedState} from "../../model/sharedState.model";
 import {SharedModule} from '../../shared/shared.module';
 import { ConciliacionPrejudicialFormComponent } from './gestion/conciliacionPrejudicial.form.component';
