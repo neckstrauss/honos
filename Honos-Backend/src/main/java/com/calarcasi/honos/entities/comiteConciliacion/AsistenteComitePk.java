@@ -9,7 +9,7 @@ public class AsistenteComitePk implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int comite;
+	private Long comite;
 	
 	private int miembro;
 	
@@ -17,11 +17,11 @@ public class AsistenteComitePk implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getComite() {
+	public Long getComite() {
 		return comite;
 	}
 
-	public void setComite(int comite) {
+	public void setComite(Long comite) {
 		this.comite = comite;
 	}
 

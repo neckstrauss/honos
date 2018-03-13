@@ -5,7 +5,7 @@
     <servlet-class>com.google.api.server.spi.EndpointsServlet</servlet-class>
     <init-param>
       <param-name>services</param-name>
-      <param-value>com.calarcasi.honos.services.SeguridadService, com.calarcasi.honos.services.GeneralesService, com.calarcasi.honos.services.ConciliacionPrejudicialService</param-value>
+      <param-value>com.calarcasi.honos.services.SeguridadService, com.calarcasi.honos.services.GeneralesService, com.calarcasi.honos.services.ConciliacionPrejudicialService, com.calarcasi.honos.services.ComiteConciliacionService</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>

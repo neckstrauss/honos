@@ -18,7 +18,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.calarcasi.honos.entities.MyDate;
 import com.calarcasi.honos.entities.generales.Apoderado;
+import static javax.persistence.CascadeType.ALL;
 
 /**
  * Entity implementation class for Entity: ComiteConciliacion
@@ -32,21 +34,22 @@ public class ComiteConciliacion  implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="FECHA_HORA")
-	private Date fechaHora;	
+	@Column(name="FECHA_COMITE")
+	private Date fechaComite;	
 	
-	private String tipo;
+	@Column(name="TIPO_COMITE")
+	private String tipoComite;
 	
 	@Column(name="MOTIVO_CANCELACION")
 	private String motivoCancelacion;
 	
 	private String estado;
 	
-	@OneToMany(cascade=CascadeType.PERSIST, orphanRemoval = true)
-	@JoinColumn(name="COMITE_ID") 	
+	@OneToMany(cascade = ALL, orphanRemoval=true)
+	@JoinColumn(name="COMITE_ID")
 	private List<AsistenteComite> asistentes;
 	
 //	@OneToMany
@@ -71,31 +74,15 @@ public class ComiteConciliacion  implements Serializable {
 		super();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Date getFechaHora() {
-		return fechaHora;
-	}
-
-	public void setFechaHora(Date fechaHora) {
-		this.fechaHora = fechaHora;
-	}
-
-		
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
+	
 	public String getMotivoCancelacion() {
 		return motivoCancelacion;
 	}
@@ -153,13 +140,32 @@ public class ComiteConciliacion  implements Serializable {
 		this.horaFinal = horaFinal;
 	}
 
-	@Override
-	public String toString() {
-		return "ComiteConciliacion [id=" + id + ", fechaHora=" + fechaHora + ", horaFinal=" + horaFinal + ", proposiciones=" + proposiciones 
-				+ ", tipo=" + tipo + ", motivoCancelacion=" + motivoCancelacion + ", estado=" + estado + ", asistentes="
-				+ asistentes + "]";
+	
+	
+	public Date getFechaComite() {
+		return fechaComite;
+	}
+
+	public void setFechaComite(MyDate fechaComite) {
+		this.fechaComite = fechaComite;
+	}
+
+	public String getTipoComite() {
+		return tipoComite;
+	}
+
+	public void setTipoComite(String tipoComite) {
+		this.tipoComite = tipoComite;
 	}
 	
+	
+
+	@Override
+	public String toString() {
+		return "ComiteConciliacion [id=" + id + ", fechaComite=" + fechaComite + ", tipoComite=" + tipoComite
+				+ ", estado=" + estado + "]";
+	}
+
 	public void SetProposiciones(ComiteConciliacion des)
 	{
 		this.setHoraFinal(des.getHoraFinal());

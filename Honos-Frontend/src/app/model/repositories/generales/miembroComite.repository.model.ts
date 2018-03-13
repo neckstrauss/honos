@@ -10,7 +10,7 @@ import {HttpEventType} from '@angular/common/http';
 export class MiembroComiteModel extends Model<MiembroComite> {
 
   constructor(private ds: RestDataSource, message: MessageService) {
-    super(ds, message, environment.url + "honos/generales/miembrosComite");
+    super(ds, message, environment.url + "honos/generales/miembrosComiteConciliacion");
   }
   
   newObject(): MiembroComite {

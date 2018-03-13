@@ -2,6 +2,8 @@ package com.calarcasi.honos.services;
 
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import com.calarcasi.honos.entities.comiteConciliacion.ComiteConciliacion;
 import com.calarcasi.honos.pojos.comiteConciliacion.ComiteConciliacionPojo;
 import com.google.api.server.spi.config.Api;
@@ -27,33 +29,38 @@ public class ComiteConciliacionService {
 	 * INICIO ComiteConciliacion
 	 */
 
-	@ApiMethod(name = "getComiteConciliacion", path = "ComitesConciliacion", httpMethod = HttpMethod.GET)
+	@ApiMethod(name = "getComiteConciliacion", path = "comitesConciliacion", httpMethod = HttpMethod.GET)
 	public List<ComiteConciliacion> getComiteConciliacion() throws UnauthorizedException {
 		return new ComiteConciliacionPojo().findWithQuery("select o from ComiteConciliacion o");
 	}
 	
-	@ApiMethod(name = "getComiteConciliacionActivos", path = "ComitesConciliacion/activos", httpMethod = HttpMethod.GET)
+	@ApiMethod(name = "getComiteConciliacionActivos", path = "comitesConciliacion/activos", httpMethod = HttpMethod.GET)
 	public List<ComiteConciliacion> getComiteConciliacionActivos() throws UnauthorizedException {		
 		return new ComiteConciliacionPojo().findWithQuery("select o from ComiteConciliacion o where o.estado LIKE 'ACT'");
 	}
 	
-	@ApiMethod(name = "getComiteConciliacionById", path = "ComitesConciliacion/{id}", httpMethod = HttpMethod.GET)
+	@ApiMethod(name = "getComiteConciliacionById", path = "comitesConciliacion/{id}", httpMethod = HttpMethod.GET)
 	public ComiteConciliacion getComiteConciliacionById(@Named("id") final int id) throws UnauthorizedException {
 		return new ComiteConciliacionPojo().find(id);
 	}
 
-	@ApiMethod(name = "saveComiteConciliacion", path = "ComitesConciliacion", httpMethod = HttpMethod.POST)
-	public ComiteConciliacion saveComiteConciliacion(ComiteConciliacion o) throws UnauthorizedException {
+	@ApiMethod(name = "saveComiteConciliacion", path = "comitesConciliacion", httpMethod = HttpMethod.POST)
+	public ComiteConciliacion saveComiteConciliacion(ComiteConciliacion o) throws UnauthorizedException {			
+		
 		return new ComiteConciliacionPojo().create(o);
 	}
 
-	@ApiMethod(name = "deleteComiteConciliacion", path = "ComitesConciliacion/{id}", httpMethod = HttpMethod.DELETE)
+	@ApiMethod(name = "deleteComiteConciliacion", path = "comitesConciliacion/{id}", httpMethod = HttpMethod.DELETE)
 	public void deleteComiteConciliacion(@Named("id") final int id) throws UnauthorizedException {
 		new ComiteConciliacionPojo().delete(id);
 	}
 
-	@ApiMethod(name = "updateComiteConciliacion", path = "ComitesConciliacion/{id}", httpMethod = HttpMethod.PUT)
+	@ApiMethod(name = "updateComiteConciliacion", path = "comitesConciliacion/{id}", httpMethod = HttpMethod.PUT)
 	public ComiteConciliacion updateComiteConciliacion(ComiteConciliacion o) throws UnauthorizedException {
+System.out.println("comite: " + o);
+		
+		o.getAsistentes().forEach(p-> System.out.println("miembro: " + p.getMiembro().getId() + " comite " +  p.getComite()) );
+		
 		return new ComiteConciliacionPojo().update(o);
 	}
 	

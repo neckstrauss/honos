@@ -1,9 +1,10 @@
-<tabla-generica #tb [model]="this.model" [columnas]="this.columnas" titulo="Comités Conciliación">
+<tabla-generica #tb [model]="this.model" [columnas]="this.columnas" titulo="ComitÃ©s ConciliaciÃ³n">
   <ng-template let-item let-i="index">
     <tr>
       <th scope="row" style="vertical-align: middle">{{i + 1 + ((tb.selectedPage - 1) * tb.itemsPerPage)}}</th>
-      <td style="vertical-align: middle">{{item.fechaComite}}</td>
+      <td style="vertical-align: middle; text-align: center">{{item.fechaComite | date:'yyyy-MM-dd'}}</td>
       <td style="vertical-align: middle">{{item.tipoComite}}</td>
+      <td style="vertical-align: middle">{{item.estado}}</td>
       <td class="text-center">
         <i class="material-icons verde" aria-hidden="true " data-placement="top " title="Editar" data-toggle="modal" data-target="#modalForm"
           (click)="tb.editItem(item.id)">edit</i>
