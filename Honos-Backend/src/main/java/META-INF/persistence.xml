@@ -3,14 +3,25 @@
 	<persistence-unit name="HonosBackend" transaction-type="RESOURCE_LOCAL">
 		<class>com.calarcasi.honos.entities.comiteConciliacion.AsistenteComite</class>
 		<class>com.calarcasi.honos.entities.comiteConciliacion.ComiteConciliacion</class>
-		<class>com.calarcasi.honos.entities.generales.MiembroComiteConciliacion</class>
+		<class>com.calarcasi.honos.entities.comiteConciliacion.fichaTecnica.FichaConciliacion</class>
+		<class>com.calarcasi.honos.entities.comiteConciliacion.fichaTecnica.FichaTecnica</class>
 		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.Analisis</class>
 		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.ConciliacionPrejudicial</class>
 		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.EvaluacionDelRiesgo</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.AudienciaConciliacionAsistida</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionArchivada</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionCompleta</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionIncompleta</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionRadicada</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.FichaConciliacionAplicadaComite</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.FichaConciliacionRechazadaComite</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.FichaConciliacionSometidaComite</class>
 		<class>com.calarcasi.honos.entities.generales.Apoderado</class>
 		<class>com.calarcasi.honos.entities.generales.Despacho</class>
+		<class>com.calarcasi.honos.entities.generales.Estado</class>
 		<class>com.calarcasi.honos.entities.generales.Juridica</class>
 		<class>com.calarcasi.honos.entities.generales.MedioControlJudicial</class>
+		<class>com.calarcasi.honos.entities.generales.MiembroComiteConciliacion</class>
 		<class>com.calarcasi.honos.entities.generales.Natural</class>
 		<class>com.calarcasi.honos.entities.generales.Tema</class>
 		<class>com.calarcasi.honos.entities.generales.Tercero</class>

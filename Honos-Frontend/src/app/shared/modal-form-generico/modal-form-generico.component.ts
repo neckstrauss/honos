@@ -17,6 +17,7 @@ export class ModalFormGenericoComponent {
 
   lastId: number;
   editing: boolean = false;
+  @Input('idModal') idModal: string = 'modalForm';
 
   @Input('model') model: Model<any>;
   @Input('titulo') titulo: string = 'titulo por defecto';

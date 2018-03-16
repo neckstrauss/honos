@@ -1,0 +1,66 @@
+<div class="modal fade" id="modalFicha" tabindex="-1" role="dialog"
+	data-backdrop="false" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="card">
+					<div class="card-header">
+						<i class="material-icons icon-title">assignment</i>
+					</div>
+					<div class="card-title">
+						<h2>Aplicar Ficha a Comité Conciliación</h2>
+					</div>
+					<div class="card-content">
+						<form novalidate [formGroup]="form">
+							<div class="form-group ">
+								<label class="control-label" for="input">Seleccione un
+									comite<span class="required">*</span>
+								</label>
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">Fecha Comité</th>
+											<th scope="col">Tipo Comite</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr
+											*ngFor="let o of this.modelComite.getDataSet(); let i = index">
+											<th scope="row">
+												<div class="form-check form-check-inline">
+													<input class="form-check-input" type="radio"
+														name="comite" formControlName="comite"
+														id="comite{{i+1}}" value="{{o.id}}"
+														[(ngModel)]="object.comite" checked> 
+												</div>
+
+
+											</th>
+											<td>{{o.fechaComite | date:'yyyy-MM-dd'}}</td>
+											<td>{{o.tipoComite}}</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<message-validation [form]="form" property="comite"></message-validation>
+
+							</div>
+
+
+
+
+						</form>
+					</div>
+					<div class="card-footer">
+						<button type="button" class="btn btn-success"
+							(click)="submitForm(form)" [disabled]="form.invalid">Aplicar</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

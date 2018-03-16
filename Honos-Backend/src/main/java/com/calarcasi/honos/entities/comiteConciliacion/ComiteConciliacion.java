@@ -1,10 +1,11 @@
 package com.calarcasi.honos.entities.comiteConciliacion;
 
+import static javax.persistence.CascadeType.ALL;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,8 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.calarcasi.honos.entities.MyDate;
+import com.calarcasi.honos.entities.comiteConciliacion.fichaTecnica.FichaTecnica;
 import com.calarcasi.honos.entities.generales.Apoderado;
-import static javax.persistence.CascadeType.ALL;
 
 /**
  * Entity implementation class for Entity: ComiteConciliacion
@@ -52,9 +53,9 @@ public class ComiteConciliacion  implements Serializable {
 	@JoinColumn(name="COMITE_ID")
 	private List<AsistenteComite> asistentes;
 	
-//	@OneToMany
-//	@JoinColumn(name="NUMERO_COMITE")	
-//	private List<FichaTecnica> fichasTecnicas;
+	@OneToMany
+	@JoinColumn(name="COMITE_ID")	
+	private List<FichaTecnica> fichasTecnicas;
 	
 	@ManyToMany
 	@JoinTable(name="APODERADOS_COMITE_EXTRAORDINARIO",
@@ -158,7 +159,14 @@ public class ComiteConciliacion  implements Serializable {
 		this.tipoComite = tipoComite;
 	}
 	
-	
+
+	public List<FichaTecnica> getFichasTecnicas() {
+		return fichasTecnicas;
+	}
+
+	public void setFichasTecnicas(List<FichaTecnica> fichasTecnicas) {
+		this.fichasTecnicas = fichasTecnicas;
+	}
 
 	@Override
 	public String toString() {

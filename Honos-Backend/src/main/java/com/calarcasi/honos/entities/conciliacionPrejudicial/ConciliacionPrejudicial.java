@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 import com.calarcasi.honos.entities.MyDate;
 import com.calarcasi.honos.entities.generales.Apoderado;
 import com.calarcasi.honos.entities.generales.Despacho;
+import com.calarcasi.honos.entities.generales.Estado;
 import com.calarcasi.honos.entities.generales.MedioControlJudicial;
 import com.calarcasi.honos.entities.generales.Tema;
 import com.calarcasi.honos.entities.generales.Tercero;
@@ -33,7 +34,7 @@ public class ConciliacionPrejudicial implements Serializable {
 
 	@Id	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name="NUMERO_RADICACION_INTERNO")
 	private int numeroRadicacionIterno;
@@ -80,7 +81,9 @@ public class ConciliacionPrejudicial implements Serializable {
 	@Column(name="RADICADO_PROCURADURIA")
 	private String radicadoProcuraduria;
 	
-	private String estado;
+	@ManyToOne
+	@JoinColumn(name="ESTADO")
+	private Estado<ConciliacionPrejudicial> estado;
 	
 	@Embedded
 	private Analisis analisis;
@@ -90,18 +93,18 @@ public class ConciliacionPrejudicial implements Serializable {
 	public ConciliacionPrejudicial() {
 		super();
 	}   
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}   
-	public String getEstado() {
+	public Estado getEstado() {
 		return this.estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 	public int getNumeroRadicacionIterno() {

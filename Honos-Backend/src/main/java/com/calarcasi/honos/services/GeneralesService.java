@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.calarcasi.honos.entities.generales.Apoderado;
 import com.calarcasi.honos.entities.generales.Despacho;
+import com.calarcasi.honos.entities.generales.Estado;
 import com.calarcasi.honos.entities.generales.Juridica;
 import com.calarcasi.honos.entities.generales.MedioControlJudicial;
 import com.calarcasi.honos.entities.generales.MiembroComiteConciliacion;
@@ -12,6 +13,7 @@ import com.calarcasi.honos.entities.generales.Tema;
 import com.calarcasi.honos.entities.generales.Tercero;
 import com.calarcasi.honos.pojos.generales.ApoderadoPojo;
 import com.calarcasi.honos.pojos.generales.DespachoPojo;
+import com.calarcasi.honos.pojos.generales.EstadoPojo;
 import com.calarcasi.honos.pojos.generales.JuridicaPojo;
 import com.calarcasi.honos.pojos.generales.MedioControlJudicialPojo;
 import com.calarcasi.honos.pojos.generales.MiembroComiteConciliacionPojo;
@@ -332,6 +334,44 @@ public class GeneralesService {
 	
 	/*
 	 * FIN MiembroComiteConciliacion
+	 */
+	
+	/*
+	 * INICIO Estado
+	 */
+
+	@ApiMethod(name = "getEstado", path = "estados", httpMethod = HttpMethod.GET)
+	public List<Estado> getEstado() throws UnauthorizedException {
+		return new EstadoPojo().findWithQuery("select o from Estado o");
+	}
+	
+	@ApiMethod(name = "getEstadoActivos", path = "estados/activos", httpMethod = HttpMethod.GET)
+	public List<Estado> getEstadoActivos() throws UnauthorizedException {		
+		return new EstadoPojo().findWithQuery("select o from Estado o where o.estado LIKE 'ACT'");
+	}
+	
+	@ApiMethod(name = "getEstadoById", path = "estados/{id}", httpMethod = HttpMethod.GET)
+	public Estado getEstadoById(@Named("id") final int id) throws UnauthorizedException {
+		return new EstadoPojo().find(id);
+	}
+
+	@ApiMethod(name = "saveEstado", path = "estados", httpMethod = HttpMethod.POST)
+	public Estado saveEstado(Estado o) throws UnauthorizedException {
+		return new EstadoPojo().create(o);
+	}
+
+	@ApiMethod(name = "deleteEstado", path = "estados/{id}", httpMethod = HttpMethod.DELETE)
+	public void deleteEstado(@Named("id") final int id) throws UnauthorizedException {
+		new EstadoPojo().delete(id);
+	}
+
+	@ApiMethod(name = "updateEstado", path = "estados/{id}", httpMethod = HttpMethod.PUT)
+	public Estado updateEstado(Estado o) throws UnauthorizedException {
+		return new EstadoPojo().update(o);
+	}
+	
+	/*
+	 * FIN Estado
 	 */
 	
 	}

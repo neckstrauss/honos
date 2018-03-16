@@ -3,6 +3,7 @@ package com.calarcasi.honos.services;
 import java.util.List;
 
 import com.calarcasi.honos.entities.conciliacionPrejudicial.ConciliacionPrejudicial;
+import com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionRadicada;
 import com.calarcasi.honos.pojos.conciliacionPrejudicial.ConciliacionPrejudicialPojo;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiIssuer;
@@ -39,6 +40,9 @@ public class ConciliacionPrejudicialService {
 
 	@ApiMethod(name = "saveConciliacionPrejudicial", path = "conciliacionesPrejudiciales", httpMethod = HttpMethod.POST)
 	public ConciliacionPrejudicial saveConciliacionPrejudicial(ConciliacionPrejudicial o) throws UnauthorizedException {
+		
+		o.setEstado(new ConciliacionRadicada());
+		
 		return new ConciliacionPrejudicialPojo().create(o);
 	}
 

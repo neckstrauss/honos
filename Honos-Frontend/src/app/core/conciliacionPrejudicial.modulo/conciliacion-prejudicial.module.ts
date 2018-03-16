@@ -2,6 +2,7 @@ import {ModelModule} from "../../model/model.module";
 import { ConciliacionPrejudicialModel } from '../../model/repositories/conciliacionPrejudicial/conciliacionPrejudicial.repository.model';
 import {SHARED_STATE, SharedState} from "../../model/sharedState.model";
 import {SharedModule} from '../../shared/shared.module';
+import { AplicarFichaConciliacionFormComponent } from './gestion/aplicarFichaConciliacion.form.component';
 import { ConciliacionPrejudicialFormComponent } from './gestion/conciliacionPrejudicial.form.component';
 import { ConciliacionPrejudicialTableComponent } from './gestion/conciliacionPrejudicial.table.component';
 import { RadicacionConciliacionPrejudicialFormComponent } from './radicacion/radicacionConciliacion.form.component';
@@ -39,7 +40,8 @@ let routing = RouterModule.forChild([
           ],
   declarations: [
       RadicacionConciliacionPrejudicialTableComponent, RadicacionConciliacionPrejudicialFormComponent,
-      ConciliacionPrejudicialTableComponent, ConciliacionPrejudicialFormComponent
+      ConciliacionPrejudicialTableComponent, ConciliacionPrejudicialFormComponent, AplicarFichaConciliacionFormComponent
+      
   ],
   exports: [
       RadicacionConciliacionPrejudicialTableComponent,
