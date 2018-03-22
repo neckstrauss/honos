@@ -23,7 +23,7 @@ export class RadicacionConciliacionPrejudicialFormComponent {
   readOnly: boolean = false;
   
   constructor(private model: ConciliacionPrejudicialModel, private apoderadoModel: ApoderadoModel, private terceroModel: TerceroModel) {
-    this.apoderadoModel.loadDataSetActivos();
+    this.apoderadoModel.loadDataSetActivos();   
   }
   
 convocanteSeleted: Tercero;
@@ -115,22 +115,35 @@ convocanteSeleted: Tercero;
         Validators.compose(
           [
             Validators.required]
-        )
+        ),
+      ),
+      
+      convocantes: new GenericoFormControl(
+        "Convocantes", "convocantes", "",
+        [], false
       ),
       
       estado: new GenericoFormControl(
         "Estado", "estado", "",
         Validators.compose(
-          [
-            Validators.required]
-        )
+          []
+        ),true
       )
     });
-
+   
   actualizarOpciones(id: number) {
     
     this.terceroModel.loadDataSetActivos();
     this.convocanteSeleted = null;
+    
+    if(this.md.object.estado && this.md.object.estado.id != 'CRD')
+    {
+      this.readOnly = true;
+    }  
+    else
+    {
+      this.readOnly = false;
+    }  
     
     if (this.md.editing) {
       let d: string = this.md.object.fechaNotificacion;
@@ -147,6 +160,7 @@ convocanteSeleted: Tercero;
     else {
       this.fechaRadicacionInterna = null;
     }
+  
   }
 
 }

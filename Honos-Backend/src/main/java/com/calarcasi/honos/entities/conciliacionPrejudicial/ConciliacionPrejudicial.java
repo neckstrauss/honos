@@ -89,6 +89,15 @@ public class ConciliacionPrejudicial implements Serializable {
 	private Analisis analisis;
 	
 	private static final long serialVersionUID = 1L;
+	
+	public boolean isIformacionCompleta()
+	{
+		if( this.analisis.isInformacionCompleta())
+		{return true;}
+		else 
+		return false;	
+	}
+	
 
 	public ConciliacionPrejudicial() {
 		super();

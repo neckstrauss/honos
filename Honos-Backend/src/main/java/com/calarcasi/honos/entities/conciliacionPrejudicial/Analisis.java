@@ -40,6 +40,27 @@ public class Analisis {
 	public Analisis() {
 		super();
 	}
+	
+	public boolean isInformacionCompleta()
+	{
+		
+		if((this.analisisCaducidad != null && !this.analisisCaducidad.isEmpty()) 
+				&& (this.analisisJuridicoNormativo != null && !this.analisisJuridicoNormativo.isEmpty())
+				&& (this.analisisProbatorio != null && !this.getAnalisisProbatorio().isEmpty())
+				&& (this.hechos != null && !this.hechos.isEmpty())
+				&& (this.jurisprudencia != null && !this.jurisprudencia.isEmpty())
+				&& (this.posicionJuridicaAbogado != null && !this.posicionJuridicaAbogado.isEmpty()) 
+				&& (this.pretensiones != null && !this.pretensiones.isEmpty()) 
+				&& this.evaluacionRiesgo.isInfomacionCompleta())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+		
+	}
 
 	public String getHechos() {
 		return hechos;

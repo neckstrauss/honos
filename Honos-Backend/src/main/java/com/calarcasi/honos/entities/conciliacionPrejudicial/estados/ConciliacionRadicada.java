@@ -13,7 +13,6 @@ import javax.persistence.*;
 
 public class ConciliacionRadicada extends Estado<ConciliacionPrejudicial> implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	public ConciliacionRadicada() {
@@ -22,8 +21,22 @@ public class ConciliacionRadicada extends Estado<ConciliacionPrejudicial> implem
 
 	@Override
 	public Estado evaluarEstado(ConciliacionPrejudicial c) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Estado<ConciliacionPrejudicial> newEstado = c.getEstado();
+
+		if (c.getConvocados() != null) {
+			if (c.isIformacionCompleta()) 
+			{
+				newEstado = new ConciliacionCompleta();
+			}
+			else 
+			{
+				newEstado = new ConciliacionIncompleta();
+			}
+				
+		} 
+
+		return newEstado;
 	}
-   
+
 }

@@ -22,8 +22,14 @@ public class ConciliacionIncompleta extends Estado<ConciliacionPrejudicial> impl
 
 	@Override
 	public Estado evaluarEstado(ConciliacionPrejudicial c) {
-		// TODO Auto-generated method stub
-		return null;
+		Estado<ConciliacionPrejudicial> newEstado = c.getEstado();
+
+			if (c.isIformacionCompleta()) 
+			{
+				newEstado = new ConciliacionCompleta();
+			}						
+
+		return newEstado;
 	}
    
 }

@@ -1,6 +1,7 @@
+{{md.object | json}}
 <modal-form-generico #md [model]="this.model" titulo="Conciliación"
-	(stateUpdate)="actualizarOpciones($event)" [form]="form"
-	tamanio="modal-lg"
+	(stateUpdate)="actualizarOpciones($event)" [form]="form" (formSumit)="this.model.loadDataSet()"
+	tamanio="modal-lg" [readOnly]="readonly"
 	validacion="{{md.object.convocantes && md.object.convocados}}">
 <div card-body>
 
@@ -42,7 +43,7 @@
 							</label> <input class="form-control form-control-sm"
 								name="numeroRadicacionIterno" type="number"
 								[(ngModel)]="md.object.numeroRadicacionIterno"
-								[readOnly]="(form.controls['numeroRadicacionIterno'].readOnly || readOnly)"
+								[readOnly]="readonly"
 								formControlName="numeroRadicacionIterno" />
 							<message-validation [form]="form"
 								property="numeroRadicacionIterno"></message-validation>
@@ -59,13 +60,13 @@
 									aria-describedby="basic-addon2" ngx-mydatepicker
 									name="fechaRadicacionInterna"
 									formControlName="fechaRadicacionInterna"
-									[readOnly]="(form.controls['fechaRadicacionInterna'].readOnly || readOnly)"
+									[readOnly]="readonly"
 									[(ngModel)]="fechaRadicacionInterna"
 									[options]="fechaRadicacionInternaOptions"
 									#dpfechaRadicacionInterna="ngx-mydatepicker"
 									(dateChanged)="onfechaRadicacionInternaChanged($event)">
 								<div class="input-group-append"
-									*ngIf="!(form.controls['fechaRadicacionInterna'].readOnly || readOnly)">
+									*ngIf="!readonly">
 									<button class="btn btn-danger" type="button"
 										(click)="dpfechaRadicacionInterna.clearDate()">
 										<i class="material-icons" aria-hidden="true"
@@ -99,10 +100,10 @@
 									[(ngModel)]="fechaNotificacion"
 									[options]="fechaNotificacionOptions"
 									#dpfechaNotificacion="ngx-mydatepicker"
-									[readOnly]="(form.controls['fechaNotificacion'].readOnly || readOnly)"
+									[readOnly]="readonly"
 									(dateChanged)="onfechaNotificacionChanged($event)">
 								<div class="input-group-append"
-									*ngIf="!(form.controls['fechaNotificacion'].readOnly || readOnly)">
+									*ngIf="!readonly">
 									<button class="btn btn-danger" type="button"
 										(click)="dpfechaNotificacion.clearDate()">
 										<i class="material-icons" aria-hidden="true"
@@ -147,7 +148,7 @@
 							name="medioControlJudicial"
 							[(ngModel)]="md.object.medioControlJudicial.id"
 							formControlName="medioControlJudicial">
-							<option
+							<option [disabled]="readonly"
 								*ngFor="let o of this.medioControlJudicialModel.getDataSet()"
 								value="{{o.id}}">{{o.nombre}}</option>
 						</select>
@@ -164,7 +165,8 @@
 						<select class="form-control  custom-select form-control-sm"
 							[title]="md.object.tema.nombre" [(ngModel)]="md.object.tema.id"
 							formControlName="tema" name="tema">
-							<option *ngFor="let o of this.temaModel.getDataSet()"
+							<option [disabled]="readonly" 
+							*ngFor="let o of this.temaModel.getDataSet()"
 								value="{{o.id}}">{{o.nombre}}</option>
 						</select>
 					</div>
@@ -180,7 +182,7 @@
 
 						<input class="form-control form-control-sm" name="pretension"
 							type="text" [(ngModel)]="md.object.pretension"
-							formControlName="pretension" currencyMask
+							formControlName="pretension" currencyMask [readOnly]="readonly"
 							[options]="{ prefix: '$ ', thousands: '.', precision:0 }" />
 
 
@@ -192,7 +194,7 @@
 					<div class="col-sm-3">
 						<input class="form-control form-control-sm"
 							name="radicadoProcuraduria" type="number"
-							style="text-align: center;"
+							style="text-align: center;" [readOnly]="readonly"
 							[(ngModel)]="md.object.radicadoProcuraduria"
 							formControlName="radicadoProcuraduria" />
 						<message-validation [form]="form" property="radicadoProcuraduria"></message-validation>
@@ -206,7 +208,8 @@
 						<select class="form-control  custom-select form-control-sm"
 							name="despacho" [(ngModel)]="md.object.despacho.id"
 							formControlName="despacho">
-							<option *ngFor="let o of this.despachoModel.getDataSet()"
+							<option [disabled]="readonly" 
+							*ngFor="let o of this.despachoModel.getDataSet()"
 								value="{{o.id}}">{{o.nombre}}</option>
 						</select>
 					</div>
@@ -226,13 +229,13 @@
 									class="list-group-item d-flex justify-content-between align-items-center">{{o.nombreCompleto}}<i
 									class="material-icons rojo" aria-hidden="true"
 									data-toggle="tooltip" data-placement="top"
-									*ngIf="!(form.controls['convocantes'].readOnly || readOnly)"
+									*ngIf="!(form.controls['convocantes'].readonly || readonly)"
 									title="Eliminar Convocante" (click)="deleteConvocante(o.id)">close</i>
 								</li>
 							</ul>
 
 							<div class="btn-group dropright"
-								*ngIf="!(form.controls['convocantes'].readOnly || readOnly)">
+								*ngIf="!(form.controls['convocantes'].readOnly || readonly)">
 								<button type="button"
 									class="btn btn-light dropdown-toggle dropdown-toggle-split"
 									data-boundary="window" data-offset="30" data-toggle="dropdown"
@@ -274,13 +277,13 @@
 								<li *ngFor="let o of md.object.convocados; let i=index; "
 									class="list-group-item d-flex justify-content-between align-items-center">{{o.nombreCompleto}}<i
 									class="material-icons rojo" aria-hidden="true"
-									*ngIf="!(form.controls['convocados'].readOnly || readOnly)"
+									*ngIf="!(form.controls['convocados'].readOnly || readonly)"
 									data-toggle="tooltip" data-placement="top"
 									title="Eliminar convocado" (click)="deleteconvocado(o.id)">close</i>
 								</li>
 							</ul>
 							<div class="btn-group dropup"
-								*ngIf="!(form.controls['convocados'].readOnly || readOnly)">
+								*ngIf="!(form.controls['convocados'].readOnly || readonly)">
 								<button type="button"
 									class="btn btn-light dropdown-toggle 
 					dropdown-toggle-split"
@@ -310,17 +313,18 @@
 				</div>
 
 				<div class="form-group form-row">
-					<label class="col-sm-2 col-form-label">Estado<span
-						class="required">*</span></label>
+					<label class="col-sm-2 col-form-label" for="input"
+						[class.required]="!md.object.estado">Estado<span
+						class="required">*</span>
+					</label>
 					<div class="col">
-						<select class="form-control  custom-select form-control-sm"
-							name="estado" [(ngModel)]="md.object.estado"
-							formControlName="estado">
-							<option value="ACT">Activo</option>
-							<option value="INA">Inactivo</option>
-						</select>
+						<input class="form-control form-control-sm" name="estado"
+							type="text" [(ngModel)]="(md.object.estado)?md.object.estado.nombre:md.object.estado"
+							formControlName="estado"
+							[readOnly]="readonly" />
+
+						<message-validation [form]="form" property="estado"></message-validation>
 					</div>
-					<message-validation [form]="form" property="estado"></message-validation>
 				</div>
 
 			</form>
@@ -350,15 +354,15 @@
 				<div class="tab-pane fade show active" id="hechos" role="tabpanel"
 					aria-labelledby="hechos-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
-						[(ngModel)]="md.object.analisis.hechos" debounce="500"
-						name="hechos" [readonly]="false"> </ckeditor>
+						[(ngModel)]="md.object.analisis.hechos" debounce="500" [readonly]="readonly" 
+						name="hechos" > </ckeditor>
 
 				</div>
 				<div class="tab-pane fade" id="pretension" role="tabpanel"
 					aria-labelledby="pretension-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.pretensiones" debounce="500"
-						name="pretensiones" [readonly]="false"> </ckeditor>
+						name="pretensiones"  [readonly]="readonly"> </ckeditor>
 				</div>
 			</div>
 		</div>
@@ -433,26 +437,26 @@
 					role="tabpanel" aria-labelledby="caducidad-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.analisisCaducidad" debounce="500"
-						name="analisisCaducidad" [readonly]="false"> </ckeditor>
+						name="analisisCaducidad" [readonly]="readonly"> </ckeditor>
 				</div>
 				<div class="tab-pane fade" id="juridicoNormativo" role="tabpanel"
 					aria-labelledby="juridicoNormativo-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.analisisJuridicoNormativo"
-						debounce="500" name="analisisJuridicoNormativo" [readonly]="false">
+						debounce="500" name="analisisJuridicoNormativo" [readonly]="readonly">
 					</ckeditor>
 				</div>
 				<div class="tab-pane fade" id="jurisprudencia" role="tabpanel"
 					aria-labelledby="jurisprudencia-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.jurisprudencia" debounce="500"
-						name="jurisprudencia" [readonly]="false"> </ckeditor>
+						name="jurisprudencia" [readonly]="readonly"> </ckeditor>
 				</div>
 				<div class="tab-pane fade" id="probatorio" role="tabpanel"
 					aria-labelledby="probatorio-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.analisisProbatorio" debounce="500"
-						name="analisisProbatorio" [readonly]="false"> </ckeditor>
+						name="analisisProbatorio" [readonly]="readonly"> </ckeditor>
 				</div>
 				<div class="tab-pane fade" id="riesgo" role="tabpanel"
 					aria-labelledby="riesgo-tab">
@@ -474,8 +478,7 @@
 							</div>
 							<a> <i class="material-icons">help</i>
 								<div class="popover-ca">
-									<br/>
-									<br/>
+									<br /> <br />
 									<div class="borde"></div>
 									<h3>Fortaleza Defensa</h3>
 									<div [innerHTML]="'<p>' + this.fortalezaDefensa + '</p>'"></div>
@@ -504,7 +507,8 @@
 								<div class="popover-ca">
 									<div class="borde"></div>
 									<h3>Fortaleza probatoria de la defensa</h3>
-									<div [innerHTML]="'<p>' + this.fortalezaProbatoriaDefensa + '</p>'"></div>
+									<div
+										[innerHTML]="'<p>' + this.fortalezaProbatoriaDefensa + '</p>'"></div>
 									<!-- <p style="white-space: pre;">{{criterio.tooltip}}</p> -->
 								</div>
 							</a>
@@ -529,7 +533,8 @@
 								<div class="popover-ca">
 									<div class="borde"></div>
 									<h3>Fortaleza probatoria del demandante</h3>
-									<div [innerHTML]="'<p>' + this.fortalezaProbatoriaDemandante + '</p>'"></div>
+									<div
+										[innerHTML]="'<p>' + this.fortalezaProbatoriaDemandante + '</p>'"></div>
 									<!-- <p style="white-space: pre;">{{criterio.tooltip}}</p> -->
 								</div>
 							</a>
@@ -631,7 +636,7 @@
 					aria-labelledby="posicion-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.posicionJuridicaAbogado"
-						debounce="500" name="posicionJuridicaAbogado" [readonly]="false">
+						debounce="500" name="posicionJuridicaAbogado" [readonly]="readonly">
 					</ckeditor>
 				</div>
 			</div>

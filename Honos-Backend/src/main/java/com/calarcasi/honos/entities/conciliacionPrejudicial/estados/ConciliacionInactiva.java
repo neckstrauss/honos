@@ -11,30 +11,19 @@ import javax.persistence.*;
  */
 @Entity
 
-public class ConciliacionCompleta extends Estado<ConciliacionPrejudicial> implements Serializable {
+public class ConciliacionInactiva extends Estado<ConciliacionPrejudicial> implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
 
-	public ConciliacionCompleta() {
-		super("CCO");
+	public ConciliacionInactiva() {
+		super("CIN");
 	}
 
 	@Override
 	public Estado evaluarEstado(ConciliacionPrejudicial c) {
-		Estado<ConciliacionPrejudicial> newEstado = c.getEstado();
-		
-			if (c.isIformacionCompleta()) 
-			{
-				newEstado = new ConciliacionCompleta();
-				//validar si pasa a sometida a comite
-			}
-			else 
-			{
-				newEstado = new ConciliacionIncompleta();
-			}		 
-
-		return newEstado;
+		// TODO Auto-generated method stub
+		return null;
 	}
    
 }

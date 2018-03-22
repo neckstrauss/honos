@@ -2,10 +2,10 @@ package com.calarcasi.honos.services;
 
 import java.util.List;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import com.calarcasi.honos.entities.comiteConciliacion.ComiteConciliacion;
 import com.calarcasi.honos.entities.comiteConciliacion.fichaTecnica.FichaConciliacion;
+import com.calarcasi.honos.entities.conciliacionPrejudicial.ConciliacionPrejudicial;
+import com.calarcasi.honos.entities.conciliacionPrejudicial.estados.FichaConciliacionAplicadaComite;
 import com.calarcasi.honos.pojos.comiteConciliacion.ComiteConciliacionPojo;
 import com.calarcasi.honos.pojos.comiteConciliacion.fichaTecnica.FichaConciliacionPojo;
 import com.calarcasi.honos.pojos.conciliacionPrejudicial.ConciliacionPrejudicialPojo;
@@ -93,11 +93,19 @@ public class ComiteConciliacionService {
 		
 		ConciliacionPrejudicialPojo conciliacionPojo = new ConciliacionPrejudicialPojo();
 		ComiteConciliacionPojo comitePojo = new ComiteConciliacionPojo();
+				
+		ConciliacionPrejudicial conciliacion = conciliacionPojo.find(o.getConciliacion()); 
+		
+		FichaConciliacion ficha = new FichaConciliacion(conciliacion, comitePojo.find(o.getComite()));
+				
+		FichaConciliacion newFicha = new FichaConciliacionPojo().create(ficha);
+		
+		conciliacion.setEstado(new FichaConciliacionAplicadaComite());
+		
+		conciliacionPojo.update(conciliacion);
 		
 		
-		FichaConciliacion ficha = new FichaConciliacion(conciliacionPojo.find(o.getConciliacion()), comitePojo.find(o.getComite()));
-		
-		return new FichaConciliacionPojo().create(ficha);
+		return newFicha;
 	}
 
 	@ApiMethod(name = "deleteFichaConciliacion", path = "fichasConciliacion/{id}", httpMethod = HttpMethod.DELETE)

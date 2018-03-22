@@ -1,23 +1,23 @@
+{{md.object.convocantes && !readOnly}}
 <modal-form-generico #md [model]="this.model" titulo="Conciliación"
-	(stateUpdate)="actualizarOpciones($event)" [form]="form" tamanio =""
-	validacion="{{md.object.convocantes}}">
+	(stateUpdate)="actualizarOpciones($event)" [form]="form" tamanio="" [readOnly]="readOnly"
+	validacion="{{md.object.convocantes}}" (formSumit)="this.model.loadDataSet()">
 <div card-body>
 	<form novalidate [formGroup]="form">
 		<div class="form-row">
-					<div class="col">
-						<div class="form-group ">
-							<label class="control-label" for="input">No Radicado<span
-								class="required">*</span>
-							</label> <input class="form-control form-control-sm"
-								name="numeroRadicacionIterno" type="number"
-								[(ngModel)]="md.object.numeroRadicacionIterno"
-								[readOnly]="(form.controls['numeroRadicacionIterno'].readOnly || readOnly)"
-								formControlName="numeroRadicacionIterno" />
-							<message-validation [form]="form"
-								property="numeroRadicacionIterno"></message-validation>
-						</div>
-					</div>
-					</div>
+			<div class="col">
+				<div class="form-group ">
+					<label class="control-label" for="input">No Radicado<span
+						class="required">*</span>
+					</label> <input class="form-control form-control-sm"
+						name="numeroRadicacionIterno" type="number"
+						[(ngModel)]="md.object.numeroRadicacionIterno"
+						[readOnly]="(form.controls['numeroRadicacionIterno'].readOnly || readOnly)"
+						formControlName="numeroRadicacionIterno" />
+					<message-validation [form]="form" property="numeroRadicacionIterno"></message-validation>
+				</div>
+			</div>
+		</div>
 		<div class="form-row">
 			<div class="col">
 				<div class="form-group">
@@ -33,8 +33,9 @@
 							[(ngModel)]="fechaRadicacionInterna"
 							[options]="fechaRadicacionInternaOptions"
 							#dpfechaRadicacionInterna="ngx-mydatepicker"
-							(dateChanged)="onfechaRadicacionInternaChanged($event)">
-						<div class="input-group-append">
+							(dateChanged)="onfechaRadicacionInternaChanged($event)"
+							[readOnly]="(form.controls['fechaRadicacionInterna'].readOnly || readOnly)">
+						<div class="input-group-append" *ngIf="!(form.controls['fechaRadicacionInterna'].readOnly || readOnly)">
 							<button class="btn btn-danger" type="button"
 								(click)="dpfechaRadicacionInterna.clearDate()">
 								<i class="material-icons" aria-hidden="true"
@@ -53,8 +54,8 @@
 			</div>
 			<div class="col">
 				<div class="form-group">
-					<label class="control-label" for="input">Fecha Notificación<span
-						class="required">*</span>
+					<label class="control-label" for="input">Fecha
+						Notificación<span class="required">*</span>
 					</label>
 					<div class="input-group">
 						<input type="text" class="form-control form-control-sm"
@@ -63,13 +64,16 @@
 							name="fechaNotificacion" formControlName="fechaNotificacion"
 							[(ngModel)]="fechaNotificacion"
 							[options]="fechaNotificacionOptions" #dp="ngx-mydatepicker"
-							(dateChanged)="onfechaNotificacionChanged($event)">
-						<div class="input-group-append">
-							<button class="btn btn-danger" type="button" (click)="dp.clearDate()">
+							(dateChanged)="onfechaNotificacionChanged($event)"
+							[readOnly]="(form.controls['fechaNotificacion'].readOnly || readOnly)">
+						<div class="input-group-append" *ngIf="!(form.controls['fechaNotificacion'].readOnly || readOnly)">
+							<button class="btn btn-danger" type="button"
+								(click)="dp.clearDate()">
 								<i class="material-icons" aria-hidden="true"
 									data-toggle="tooltip" data-placement="top" title="Borrar Fecha">close</i>
 							</button>
-							<button class="btn btn-info" type="button" (click)="dp.toggleCalendar()">
+							<button class="btn btn-info" type="button"
+								(click)="dp.toggleCalendar()">
 								<i class="material-icons" aria-hidden="true"
 									data-toggle="tooltip" data-placement="top"
 									title="Seleccionar Fecha">date_range</i>
@@ -84,7 +88,8 @@
 			<label>Responsable<span class="required">*</span></label> <select
 				class="form-control  custom-select form-control-sm" name="apoderado"
 				[(ngModel)]="md.object.apoderado.id" formControlName="apoderado">
-				<option *ngFor="let o of this.apoderadoModel.getDataSet()"
+				<option [disabled]="(form.controls['apoderado'].readOnly || readOnly)" 
+					*ngFor="let o of this.apoderadoModel.getDataSet()"
 					value="{{o.id}}">{{o.nombreCompleto}}</option>
 			</select>
 			<message-validation [form]="form" property="apoderado"></message-validation>
@@ -99,49 +104,53 @@
 					class="list-group-item d-flex justify-content-between align-items-center">{{o.nombreCompleto}}<i
 					class="material-icons rojo" aria-hidden="true"
 					data-toggle="tooltip" data-placement="top"
+					*ngIf="!(form.controls['convocantes'].readOnly || readOnly)"
 					title="Eliminar Convocante" (click)="deleteConvocante(o.id)">close</i>
 				</li>
 			</ul>
-			
-			<div class="btn-group dropdown" >
-				<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" 
-				data-boundary="viewport"  data-offset="0"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="this.filtro = ''">
+
+			<div class="btn-group" *ngIf="!(form.controls['convocantes'].readOnly || readOnly)">
+				<button type="button"
+					class="btn btn-light dropdown-toggle dropdown-toggle-split"
+					data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"
+					(click)="this.filtro = ''">
 					{{(this.convocanteSeleted)?this.convocanteSeleted.nombreCompleto:'seleccione
-					un convocante  '}}<span class="sr-only">Toggle Dropright</span></button>
-				<button type="button" (click)="addConvocante()" [disabled]="!this.convocanteSeleted"
-					class="btn btn-success ">
-					Incluir
+					un convocante '}}<span class="sr-only">Toggle Dropright</span>
 				</button>
+				<button type="button" (click)="addConvocante()"
+					[disabled]="!this.convocanteSeleted" class="btn btn-success ">
+					Incluir</button>
 				<div class="dropdown-menu scrollable-menu">
-					
-					<a class="dropdown-item"
-						*ngFor="let o of filtrar()"
+
+					<a class="dropdown-item" *ngFor="let o of filtrar()"
 						(click)="this.convocanteSeleted = o">{{o.nombreCompleto}}</a>
-					
+
 					<div class="dropdown-divider"></div>
-					
+
 					<form class="px-3">
 						<div class="form-group">
-							<input type="text" placeholder="Buscar..." class="form-control" [(ngModel)]="filtro" [ngModelOptions]="{standalone: true}" >							
+							<input type="text" placeholder="Buscar..." class="form-control"
+								[(ngModel)]="filtro" [ngModelOptions]="{standalone: true}">
 						</div>
 					</form>
-							
+
 
 				</div>
 			</div>
 		</div>
 
-		<div class="form-group">
-			<label>Estado<span class="required">*</span></label>
-			<select class="form-control  custom-select form-control-sm"
-				name="estado" [(ngModel)]="md.object.estado"
-				formControlName="estado">
-				<option value="ACT">Activo</option>
-				<option value="INA">Inactivo</option>
-			</select>
+		<div class="form-group " *ngIf="md.object.estado">
+			<label class="control-label" for="input">Estado<span
+				class="required">*</span>
+			</label> <input class="form-control form-control-sm" name="estado"
+				type="text" [(ngModel)]="md.object.estado.nombre"
+				formControlName="estado"
+				[readOnly]="(form.controls['estado'].readOnly || readOnly)" />
 			<message-validation [form]="form" property="estado"></message-validation>
 		</div>
+
+
 
 
 

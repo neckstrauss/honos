@@ -5,6 +5,7 @@ import java.util.List;
 import com.calarcasi.honos.entities.conciliacionPrejudicial.ConciliacionPrejudicial;
 import com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionRadicada;
 import com.calarcasi.honos.pojos.conciliacionPrejudicial.ConciliacionPrejudicialPojo;
+import com.calarcasi.honos.pojos.generales.EstadoPojo;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiIssuer;
 import com.google.api.server.spi.config.ApiMethod;
@@ -53,7 +54,11 @@ public class ConciliacionPrejudicialService {
 
 	@ApiMethod(name = "updateConciliacionPrejudicial", path = "conciliacionesPrejudiciales/{id}", httpMethod = HttpMethod.PUT)
 	public ConciliacionPrejudicial updateConciliacionPrejudicial(ConciliacionPrejudicial o) throws UnauthorizedException {
-		System.out.println("reisgo: " + o.getAnalisis().getEvaluacionRiesgo().getRiesgoCondena());
+
+		EstadoPojo estadoPojo = new EstadoPojo();
+		
+		o.setEstado(estadoPojo.find(o.getEstado().getId()).evaluarEstado(o));
+		
 		return new ConciliacionPrejudicialPojo().update(o);
 	}
 	

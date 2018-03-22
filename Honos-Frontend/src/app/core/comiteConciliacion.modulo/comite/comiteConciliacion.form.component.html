@@ -1,7 +1,7 @@
 {{md.object | json}}
 <modal-form-generico #md [model]="this.model"
 	titulo="Comité" (stateUpdate)="actualizarOpciones($event)"
-	[form]="form" tamanio="">
+	[form]="form" tamanio="" (formSumit)="this.model.loadDataSet()">
 <div card-body>
 	<form novalidate [formGroup]="form">
 		<div class="form-check form-check-inline" >

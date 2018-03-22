@@ -3,9 +3,12 @@ import { FichaConciliacion } from '../../../model/entities/comiteConciliacion/fi
 import { ConciliacionPrejudicial } from '../../../model/entities/conciliacionPrejudicial/conciliacionPrejudicial.model';
 import { ComiteConciliacionModel } from '../../../model/repositories/comiteConciliacion/comiteConciliacion.repository.model';
 import { FichaConciliacionModel } from '../../../model/repositories/comiteConciliacion/fichaTecnica/fichaConciliacion.repository.model';
+import { ConciliacionPrejudicialModel } from '../../../model/repositories/conciliacionPrejudicial/conciliacionPrejudicial.repository.model';
 import { SharedState, SHARED_STATE } from '../../../model/sharedState.model';
+import { Message } from '../../../shared/messages/message.model';
 import {GenericoFormControl, GenericoFormGroup} from '../../../shared/modal-form-generico/form-generico.model';
 import {ModalFormGenericoComponent} from '../../../shared/modal-form-generico/modal-form-generico.component';
+import { HttpEventType } from '@angular/common/http';
 import {Component, ViewChild, Inject} from "@angular/core";
 import {Validators, NgForm} from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -26,7 +29,8 @@ export class AplicarFichaConciliacionFormComponent {
   
   constructor(@Inject(SHARED_STATE) private stateEvents: Observable<SharedState>, 
               private model: FichaConciliacionModel,
-              private modelComite: ComiteConciliacionModel
+              private modelComite: ComiteConciliacionModel,
+              private modelConciliacion: ConciliacionPrejudicialModel,
               ) {
      stateEvents.subscribe((update) => {
       this.object = this.model.newObject();
@@ -53,9 +57,15 @@ export class AplicarFichaConciliacionFormComponent {
   
   submitForm(form: NgForm) {
     if (form.valid) {
-      this.model.save(this.object);
-      form.reset();
-      $("#modalFicha").modal("hide");
+      this.model.save(this.object).subscribe(event => {
+        if (event.type === HttpEventType.Response) {
+          this.model.getMessages().reportMessage(new Message("Transacción Exitosa...", "alert-success"));
+          form.reset();
+          $("#modalFicha").modal("hide");    
+          this.modelConciliacion.loadDataSet();
+        }
+      });
+      
       // this.model.loadDataSet();
     }
   }

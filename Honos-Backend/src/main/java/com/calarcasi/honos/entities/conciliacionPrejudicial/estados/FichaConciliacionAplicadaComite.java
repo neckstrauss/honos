@@ -22,8 +22,7 @@ public class FichaConciliacionAplicadaComite extends Estado<ConciliacionPrejudic
 
 	@Override
 	public Estado evaluarEstado(ConciliacionPrejudicial c) {
-		// TODO Auto-generated method stub
-		return null;
+		return c.getEstado();
 	}
    
 }

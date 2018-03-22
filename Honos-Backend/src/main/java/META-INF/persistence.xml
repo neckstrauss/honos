@@ -11,6 +11,7 @@
 		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.AudienciaConciliacionAsistida</class>
 		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionArchivada</class>
 		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionCompleta</class>
+		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionInactiva</class>
 		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionIncompleta</class>
 		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.ConciliacionRadicada</class>
 		<class>com.calarcasi.honos.entities.conciliacionPrejudicial.estados.FichaConciliacionAplicadaComite</class>
