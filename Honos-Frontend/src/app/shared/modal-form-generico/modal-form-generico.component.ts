@@ -2,6 +2,7 @@ import {Component, Inject, ViewChild, Input, Output, EventEmitter} from "@angula
 import {NgForm} from "@angular/forms";
 import {Model} from "../../model/repositories/repository.model";
 import {MODES, SharedState, SHARED_STATE} from "../../model/sharedState.model";
+import { Message } from '../messages/message.model';
 import {HttpEventType} from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -24,16 +25,20 @@ export class ModalFormGenericoComponent {
   @Input('form') form: NgForm;
   @Input('tamanio') tamanio: string = '';
   @Input('validacion') valido: boolean = true;
+  @Input('readOnly') readOnly: boolean = false;
 
   @Output("stateUpdate")
   newEvent = new EventEmitter<number>();
+  
+  @Output("formSumit")
+  summitEvent = new EventEmitter();
 
   locator = (p: any, id: number) => p.id == id;
 
   object: any = new Object();
 
   constructor( @Inject(SHARED_STATE) private stateEvents: Observable<SharedState>) {
-
+    
     stateEvents.subscribe((update) => {
       this.object = this.model.newObject();
       this.editing = update.mode == MODES.EDIT;
@@ -57,9 +62,15 @@ export class ModalFormGenericoComponent {
 
   submitForm(form: NgForm) {
     if (form.valid) {
-      this.model.save(this.object);
-      form.reset();
-      $("#modalForm").modal("hide");
+      this.model.save(this.object).subscribe(event => {
+        if (event.type === HttpEventType.Response) {
+          this.model.getMessages().reportMessage(new Message("Transacción Exitosa...", "alert-success"));
+          form.reset();
+          $("#modalForm").modal("hide");    
+          this.summitEvent.emit();
+        }
+      });
+      
       // this.model.loadDataSet();
     }
   }

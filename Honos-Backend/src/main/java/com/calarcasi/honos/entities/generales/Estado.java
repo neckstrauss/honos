@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 
-public abstract class Estado<T> implements Serializable {
+public class Estado<T> implements Serializable {
 	
 	@Id
 	@Column(length=3)
@@ -27,7 +27,7 @@ public abstract class Estado<T> implements Serializable {
 		this.id = id;
 	}
 	
-	public abstract Estado evaluarEstado(T t);
+	public  Estado evaluarEstado(T t) {return null;};
 	
 	public String getId() {
 		return this.id;

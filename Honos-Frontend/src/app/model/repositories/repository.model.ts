@@ -34,6 +34,11 @@ export abstract class Model<T> {
     this.dataSet = dataSet;
   }
   
+  getMessages():MessageService
+  {
+    return this.messages;
+  }
+  
   loadDataSet(): void {
     this.dataSource.setUrl(this.url).getData().subscribe(event => {
       if (event.type === HttpEventType.Response) {
@@ -74,24 +79,25 @@ export abstract class Model<T> {
     return this.dataSet.find(p => this.locator(p, id));
   }
 
-  save(data: any) {
+  save(data: any):Observable<T> {
     if (data.id == 0 || data.id == null) {
-      this.dataSource.setUrl(this.url).saveData(data).subscribe(event => {
+      return this.dataSource.setUrl(this.url).saveData(data);/*.subscribe(event => {
         if (event.type === HttpEventType.Response) {
 //          console.log("response received... save()", event.body);
           this.messages.reportMessage(new Message("Transacción Exitosa...", "alert-success"));
           this.dataSet.push(event.body);
+          
         }
-      });
+      });*/
     } else {
-      this.dataSource.setUrl(this.url).updateData(data).subscribe(event => {
+      return this.dataSource.setUrl(this.url).updateData(data);/*.subscribe(event => {
         if (event.type === HttpEventType.Response) {
 //          console.log("response received... update()", event.body);
           this.messages.reportMessage(new Message("Transacción Exitosa...", "alert-success"));
           let index = this.dataSet.findIndex(item => this.locator(item, event.body.id));
           this.dataSet.splice(index, 1, event.body);
         }
-      });
+      });*/
     }
   }
 

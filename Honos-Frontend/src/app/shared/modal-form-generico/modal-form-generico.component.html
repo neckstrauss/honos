@@ -1,3 +1,4 @@
+{{valido}}
 <div class="modal fade" id="{{idModal}}" tabindex="-1" role="dialog" data-backdrop="false"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div [class]="messageClass()" role="document">
@@ -17,8 +18,8 @@
 					</div>
 					<div class="card-footer">
 						<button type="button" class="btn btn-success"
-							(click)="submitForm(form)" 
-							[disabled]="form.invalid || !valido">{{editing ? "Save" :
+							(click)="submitForm(form)"  *ngIf="!readOnly"
+							[disabled]="form.invalid || !valido ">{{editing ? "Save" :
 							"Create"}}</button>
 
 						<!-- <ng-content select="[card-footer]"></ng-content> -->

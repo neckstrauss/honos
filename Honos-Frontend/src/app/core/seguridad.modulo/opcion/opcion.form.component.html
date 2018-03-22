@@ -1,5 +1,5 @@
 <modal-form-generico #md [model]="this.model" titulo="Opción"
-	[form]="form">
+	[form]="form" (formSumit)="this.model.loadDataSet()">
 <div card-body>
 	<form novalidate  [formGroup]="form">
 		<div class="form-group ">

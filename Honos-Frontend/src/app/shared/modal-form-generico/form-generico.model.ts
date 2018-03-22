@@ -7,8 +7,9 @@ export class GenericoFormControl extends FormControl {
   readOnly: boolean;
   
 
-  constructor(label: string, property: string, value: any, validator: any, readOnly: boolean = false, disabled: boolean = false) {
-    super({value: value, disabled: disabled}, validator);
+  constructor(label: string, property: string, value: any, validator: any, readOnly: boolean = false) {
+    super({value: value}, validator);
+    
     this.label = label;
     this.modelProperty = property;
     this.readOnly = readOnly;

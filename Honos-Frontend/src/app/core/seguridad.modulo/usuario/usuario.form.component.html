@@ -1,6 +1,6 @@
 <modal-form-generico #md [model]="this.model" titulo="Rol" [form]="form" (stateUpdate)="cargarListados()">
 <div card-body>
-<form novalidate  [formGroup]="form">
+<form novalidate  [formGroup]="form" (formSumit)="this.model.loadDataSet()">
 	<div class="form-group ">
 		<label class="control-label" for="input">Usuario<span
 			class="required">*</span>
