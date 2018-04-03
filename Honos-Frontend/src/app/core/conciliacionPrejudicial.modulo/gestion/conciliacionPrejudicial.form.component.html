@@ -354,7 +354,7 @@
 				<div class="tab-pane fade show active" id="hechos" role="tabpanel"
 					aria-labelledby="hechos-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
-						[(ngModel)]="md.object.analisis.hechos" debounce="500" [readonly]="readonly" 
+						[(ngModel)]="md.object.analisis.hechos"  [readonly]="this.readonly" 
 						name="hechos" > </ckeditor>
 
 				</div>
@@ -362,7 +362,7 @@
 					aria-labelledby="pretension-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.pretensiones" debounce="500"
-						name="pretensiones"  [readonly]="readonly"> </ckeditor>
+						name="pretensiones"  [readonly]="false"> </ckeditor>
 				</div>
 			</div>
 		</div>
@@ -437,26 +437,26 @@
 					role="tabpanel" aria-labelledby="caducidad-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.analisisCaducidad" debounce="500"
-						name="analisisCaducidad" [readonly]="readonly"> </ckeditor>
+						name="analisisCaducidad" [readonly]="false"> </ckeditor>
 				</div>
 				<div class="tab-pane fade" id="juridicoNormativo" role="tabpanel"
 					aria-labelledby="juridicoNormativo-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.analisisJuridicoNormativo"
-						debounce="500" name="analisisJuridicoNormativo" [readonly]="readonly">
+						debounce="500" name="analisisJuridicoNormativo" [readonly]="false">
 					</ckeditor>
 				</div>
 				<div class="tab-pane fade" id="jurisprudencia" role="tabpanel"
 					aria-labelledby="jurisprudencia-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.jurisprudencia" debounce="500"
-						name="jurisprudencia" [readonly]="readonly"> </ckeditor>
+						name="jurisprudencia" [readonly]="false"> </ckeditor>
 				</div>
 				<div class="tab-pane fade" id="probatorio" role="tabpanel"
 					aria-labelledby="probatorio-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.analisisProbatorio" debounce="500"
-						name="analisisProbatorio" [readonly]="readonly"> </ckeditor>
+						name="analisisProbatorio" [readonly]="false"> </ckeditor>
 				</div>
 				<div class="tab-pane fade" id="riesgo" role="tabpanel"
 					aria-labelledby="riesgo-tab">
@@ -636,7 +636,7 @@
 					aria-labelledby="posicion-tab">
 					<ckeditor [config]="{extraPlugins: 'divarea', height: 350}"
 						[(ngModel)]="md.object.analisis.posicionJuridicaAbogado"
-						debounce="500" name="posicionJuridicaAbogado" [readonly]="readonly">
+						debounce="500" name="posicionJuridicaAbogado" [readonly]="false">
 					</ckeditor>
 				</div>
 			</div>

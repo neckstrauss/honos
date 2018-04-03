@@ -16,6 +16,7 @@ export class ComiteConciliacionTableComponent {
   /*configuracion de columnas*/
   columnas: any[] = [{ nombre: '#' },
   { nombre: 'Fecha Comité', key: 'fechaComite' },
+  { nombre: 'Fecha Limite Recepción', key: 'fechaLimiteRecepcion' },
   { nombre: 'Tipo Comité', key: 'tipoComite' },
   { nombre: 'Estado', key: 'estado' },
   { nombre: '' }

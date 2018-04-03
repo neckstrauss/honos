@@ -29,10 +29,17 @@ export abstract class Model<T> {
     return this.url;
   }
   
+  public getDataSource(): RestDataSource
+  {
+    return this.dataSource;
+  }
+  
   setData(dataSet: T[])
   {
     this.dataSet = dataSet;
   }
+  
+  
   
   getMessages():MessageService
   {

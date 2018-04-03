@@ -45,6 +45,14 @@ export class ComiteConciliacionFormComponent {
           Validators.required,
         ]
       ),
+      
+      fechaLimiteRecepcion: new GenericoFormControl(
+        "Fecha Limite Recepción", "fechaLimiteRecepcion", "",
+        [
+          Validators.required,
+        ]
+      ),
+      
       asistentes: new GenericoFormControl(
         "Miembros", "asistentes", "",
         [
@@ -63,20 +71,36 @@ export class ComiteConciliacionFormComponent {
         )
       )
     });
-
+  
   fecha = new Date();
 
+  fechaLimiteRecepcionOptions: INgxMyDpOptions = {
+    dateFormat: 'yyyy/mm/dd',
+    disableWeekends: true,
+    disableUntil: {year: this.fecha.getFullYear(), month: this.fecha.getMonth() + 1, day: this.fecha.getDate() - 1}
+  };
+
+  fechaLimiteRecepcion: any;
+
+  onfechaLimiteRecepcionChanged(event: IMyDateModel): void {
+    this.md.object.fechaLimiteRecepcion = event.formatted;
+  }
+    
   fechaComiteOptions: INgxMyDpOptions = {
     dateFormat: 'yyyy/mm/dd',
+    disableWeekends: true,
     disableUntil: {year: this.fecha.getFullYear(), month: this.fecha.getMonth() + 1, day: this.fecha.getDate() - 1}
   };
 
   fechaComite: any;
 
   onfechaComiteChanged(event: IMyDateModel): void {
-    this.md.object.fechaComite = event.formatted;
+    this.md.object.fechaComite = event.formatted;    
+     
+    let copy: INgxMyDpOptions = JSON.parse(JSON.stringify(this.fechaLimiteRecepcionOptions)); 
+    copy.disableSince = {year: event.jsdate.getFullYear(), month: event.jsdate.getMonth() + 1, day: event.jsdate.getDate()};
+    this.fechaLimiteRecepcionOptions = copy;
   }
-
 
   miembroSeleted: MiembroComite;
   filtroAsistentes: string = '';
@@ -142,6 +166,9 @@ export class ComiteConciliacionFormComponent {
 
 
   actualizarOpciones(id: number) {
+    
+    
+    
     if (this.md.editing) {
       let fechaComiteAux: string = this.md.object.fechaComite;
       this.fechaComite = {
@@ -155,6 +182,15 @@ export class ComiteConciliacionFormComponent {
       this.fechaComite = null;
     }
 
+    
+    if (this.md.editing) {
+      let fechaLimiteRecepcionAux: string = this.md.object.fechaLimiteRecepcion;
+      this.fechaLimiteRecepcion = {date: {year: parseInt(fechaLimiteRecepcionAux.slice(0, 4)), 
+        month: parseInt(fechaLimiteRecepcionAux.slice(5, 7)), day: parseInt(fechaLimiteRecepcionAux.slice(8, 10))}};
+    } 
+    else {
+      this.fechaLimiteRecepcion = null;
+    }
     
     this.miembroSeleted = null;
 

@@ -3,8 +3,8 @@ import { FichaConciliacion } from '../../../model/entities/comiteConciliacion/fi
 import { ConciliacionPrejudicial } from '../../../model/entities/conciliacionPrejudicial/conciliacionPrejudicial.model';
 import { ComiteConciliacionModel } from '../../../model/repositories/comiteConciliacion/comiteConciliacion.repository.model';
 import { FichaConciliacionModel } from '../../../model/repositories/comiteConciliacion/fichaTecnica/fichaConciliacion.repository.model';
-import { ConciliacionPrejudicialModel } from '../../../model/repositories/conciliacionPrejudicial/conciliacionPrejudicial.repository.model';
-import { SharedState, SHARED_STATE } from '../../../model/sharedState.model';
+import {ConciliacionPrejudicialModel} from '../../../model/repositories/conciliacionPrejudicial/conciliacionPrejudicial.repository.model';
+import {SharedState, SHARED_STATE, MODES} from '../../../model/sharedState.model';
 import { Message } from '../../../shared/messages/message.model';
 import {GenericoFormControl, GenericoFormGroup} from '../../../shared/modal-form-generico/form-generico.model';
 import {ModalFormGenericoComponent} from '../../../shared/modal-form-generico/modal-form-generico.component';
@@ -23,7 +23,7 @@ declare var $: any;
 export class AplicarFichaConciliacionFormComponent {
   
   @ViewChild('md') md: ModalFormGenericoComponent;
-  readOnly: boolean = false;
+  readonly: boolean = false;
   
   object: FichaConciliacion = new FichaConciliacion();
   
@@ -33,14 +33,17 @@ export class AplicarFichaConciliacionFormComponent {
               private modelConciliacion: ConciliacionPrejudicialModel,
               ) {
      stateEvents.subscribe((update) => {
+      
+      if(update.mode == MODES.ASIGNAR)
+      {
       this.object = this.model.newObject();
        
       if (update.id != undefined) {
         //Object.assign(this.object, this.model.get(update.id));
         this.object.conciliacion = update.id;
-        modelComite.loadDataSetActivos();
+        modelComite.loadDataSetAplicables();
       }
-
+       }
     });
     
   }

@@ -9,6 +9,7 @@ export class ComiteConciliacion extends EntityGeneral{
 
   constructor(
     public fechaComite?: string,
+    public fechaLimiteRecepcion?: string,
     public tipoComite?: string,
     public motivoCancelacion?: string,
     public asistentes?: AsistenteComite[],

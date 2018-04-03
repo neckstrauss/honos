@@ -11,7 +11,7 @@
       <td style="vertical-align: middle">{{item.estado.nombre}}</td>
       <td class="text-center">
       	<i class="material-icons naranja" aria-hidden="true " data-placement="top " title="Aplicar Ficha" data-toggle="modal" data-target="#modalFicha"
-          *ngIf="item.estado.id=='CCO'" (click)="tb.editItem(item.id)">gavel</i>
+          *ngIf="item.estado.id=='CCO'" (click)="this.asignarComite(item.id)">gavel</i>
         <i class="material-icons verde" aria-hidden="true " data-placement="top " title="Editar" data-toggle="modal" data-target="#modalForm"
           (click)="tb.editItem(item.id)">edit</i>
         <i class="material-icons rojo" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Inactivar" 

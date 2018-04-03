@@ -2,7 +2,8 @@
   <ng-template let-item let-i="index">
     <tr>
       <th scope="row" style="vertical-align: middle">{{i + 1 + ((tb.selectedPage - 1) * tb.itemsPerPage)}}</th>
-      <td style="vertical-align: middle; text-align: center">{{item.fechaComite | date:'yyyy-MM-dd'}}</td>
+      <td style="vertical-align: middle; text-align: left">{{item.fechaComite | date:'yyyy-MM-dd'}}</td>
+      <td style="vertical-align: middle; text-align: left">{{item.fechaLimiteRecepcion | date:'yyyy-MM-dd'}}</td>
       <td style="vertical-align: middle">{{item.tipoComite}}</td>
       <td style="vertical-align: middle">{{item.estado}}</td>
       <td class="text-center">

@@ -26,7 +26,7 @@ import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
 export class ConciliacionPrejudicialFormComponent {
 
   @ViewChild('md') md: ModalFormGenericoComponent;
-  readonly = true;
+  readonly;// = false;
 
   fortalezaDefensa: string = "Corresponde a la razonabilidad y/o expectativa de éxito del demandante frente a los hechos y normas en las que se fundamenta.<br/><ul><li><b>Riesgo Alto:</b> Existen hechos y normas que sustentan las pretensiones del demandante.</li><li><b>Riesgo Medio:</b> Existen solo normas o solo hechos que sustenten las pretensiones del demandante.</li><li><b>Riesgo Bajo:</b> No existen hechos ni normas que sustenten las pretensiones del demandante.</li></ul>";
   fortalezaProbatoriaDefensa: string = "Muestra la consistencia y solidez de los hechos frente a las pruebas que se aportan y se practican para la defensa del proceso.<br/><ul><li><b>Riesgo Alto:</b> El material probatorio aportado para la defensa es deficiente al propósito de descalificar los hechos y pretensiones de la demanda.</li><li><b>Riesgo Medio:</b> Existe material probatorio aportado para la defensa que podria descalificar los hechos y pretensiones de la demanda.</li><li><b>Riesgo Bajo:</b> El material probatorio aportado para la defensa es contundente al propósito de descalificar los hechos y pretensiones de la demanda.</li></ul>";
@@ -46,6 +46,8 @@ export class ConciliacionPrejudicialFormComponent {
     this.terceroModel.loadDataSetActivos();
     this.medioControlJudicialModel.loadDataSetActivos();
     this.despachoModel.loadDataSetActivos();
+    console.log("paso por constructor");
+    //    this.readonly = false;
   }
 
   convocanteSeleted: Tercero;
@@ -209,16 +211,10 @@ export class ConciliacionPrejudicialFormComponent {
     });
 
   actualizarOpciones(id: number) {
-    
-    
-     if(this.md.object.estado && this.md.object.estado.id == 'CFA')
-    {
-      this.readonly = true; 
-    }  
-    else
-    {
-       this.readonly = false;
-    }  
+
+    //    this.readonly = false;
+
+    console.log("paso por el form");
 
     if (!this.md.object.analisis.evaluacionRiesgo) {
       this.md.object.analisis.evaluacionRiesgo = new EvaluacionDelRiesgo();
@@ -251,7 +247,30 @@ export class ConciliacionPrejudicialFormComponent {
     if (!this.md.object.medioControlJudicial) {this.md.object.medioControlJudicial = new MedioControlJudicial();}
 
 
+    if (this.readonly == undefined) {
+      //se inluye un delay para que el checkeditor se renderice y no genere error
+      setTimeout(() => {this.configuraEditable();}, 580)
+    }
+    else {
+      this.configuraEditable();
+    }
+
+
+
+
+
   }
+
+  configuraEditable() {
+    if (this.md.object.estado && this.md.object.estado.id == 'CFA') {
+      console.log("paso por estado");
+      this.readonly = true;
+    }
+    else {
+      this.readonly = false;
+    }
+  }
+
 
   evaluacionRiesgo() {
     this.md.object.analisis.evaluacionRiesgo.riesgoCondena = this.calcularPorcentaje(this.md.object.analisis.evaluacionRiesgo);

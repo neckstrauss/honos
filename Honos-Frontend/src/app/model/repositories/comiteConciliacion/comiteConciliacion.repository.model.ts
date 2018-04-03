@@ -17,5 +17,17 @@ export class ComiteConciliacionModel extends Model<ComiteConciliacion> {
     let o: ComiteConciliacion = new ComiteConciliacion();
     return o;
   }
+  
+  
+  loadDataSetAplicables(): void {
+    console.log("url plicables: " + super.getUrl()+"/aplicables" );
+    super.getDataSource().setUrl(super.getUrl()+"/aplicables/1").getData().subscribe(event => {
+      if (event.type === HttpEventType.Response) {
+        console.log("response received... getData()", event.body);             
+        super.setData( event.body.items);
+      }
+    });
+  }
+  
 
 }

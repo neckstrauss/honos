@@ -2,7 +2,7 @@ import {Component, Inject, ViewChild, Input, Output, EventEmitter} from "@angula
 import {NgForm} from "@angular/forms";
 import {Model} from "../../model/repositories/repository.model";
 import {MODES, SharedState, SHARED_STATE} from "../../model/sharedState.model";
-import { Message } from '../messages/message.model';
+import {Message} from '../messages/message.model';
 import {HttpEventType} from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -29,7 +29,7 @@ export class ModalFormGenericoComponent {
 
   @Output("stateUpdate")
   newEvent = new EventEmitter<number>();
-  
+
   @Output("formSumit")
   summitEvent = new EventEmitter();
 
@@ -38,18 +38,20 @@ export class ModalFormGenericoComponent {
   object: any = new Object();
 
   constructor( @Inject(SHARED_STATE) private stateEvents: Observable<SharedState>) {
-    
-    stateEvents.subscribe((update) => {
-      this.object = this.model.newObject();
-      this.editing = update.mode == MODES.EDIT;
-      if (update.id != undefined) {
-        //Object.assign(this.object, this.model.get(update.id));
-        this.getObjectById(update.id);
-      }
-      else {
-        this.newEvent.emit(update.id);
-      }
 
+    stateEvents.subscribe((update) => {
+
+      if (update.mode == MODES.EDIT || update.mode == MODES.CREATE){
+        this.object = this.model.newObject();
+        this.editing = update.mode == MODES.EDIT;
+        if (update.id != undefined) {
+          //Object.assign(this.object, this.model.get(update.id));
+          this.getObjectById(update.id);
+        }
+        else {
+          this.newEvent.emit(update.id);
+        }
+      }
 
     });
   }
@@ -66,11 +68,11 @@ export class ModalFormGenericoComponent {
         if (event.type === HttpEventType.Response) {
           this.model.getMessages().reportMessage(new Message("Transacción Exitosa...", "alert-success"));
           form.reset();
-          $("#modalForm").modal("hide");    
+          $("#modalForm").modal("hide");
           this.summitEvent.emit();
         }
       });
-      
+
       // this.model.loadDataSet();
     }
   }

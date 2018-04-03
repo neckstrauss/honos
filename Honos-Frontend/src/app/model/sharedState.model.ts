@@ -1,7 +1,7 @@
 import { InjectionToken } from "@angular/core";
 
 export enum MODES {
-  CREATE, EDIT
+  CREATE, EDIT, ASIGNAR
 }
 
 export class SharedState {  

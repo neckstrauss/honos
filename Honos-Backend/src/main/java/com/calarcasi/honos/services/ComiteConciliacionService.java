@@ -1,14 +1,21 @@
 package com.calarcasi.honos.services;
 
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.calarcasi.honos.entities.comiteConciliacion.ComiteConciliacion;
 import com.calarcasi.honos.entities.comiteConciliacion.fichaTecnica.FichaConciliacion;
 import com.calarcasi.honos.entities.conciliacionPrejudicial.ConciliacionPrejudicial;
 import com.calarcasi.honos.entities.conciliacionPrejudicial.estados.FichaConciliacionAplicadaComite;
+import com.calarcasi.honos.entities.generales.Apoderado;
 import com.calarcasi.honos.pojos.comiteConciliacion.ComiteConciliacionPojo;
 import com.calarcasi.honos.pojos.comiteConciliacion.fichaTecnica.FichaConciliacionPojo;
 import com.calarcasi.honos.pojos.conciliacionPrejudicial.ConciliacionPrejudicialPojo;
+import com.calarcasi.honos.pojos.generales.ApoderadoPojo;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiIssuer;
 import com.google.api.server.spi.config.ApiMethod;
@@ -41,6 +48,36 @@ public class ComiteConciliacionService {
 	public List<ComiteConciliacion> getComiteConciliacionActivos() throws UnauthorizedException {
 		return new ComiteConciliacionPojo()
 				.findWithQuery("select o from ComiteConciliacion o where o.estado LIKE 'ACT'");
+	}
+	
+	@ApiMethod(name = "getComiteConciliacionAplicables", path = "comitesConciliacion/aplicables/{idApoderado}", httpMethod = HttpMethod.GET)
+	public List<ComiteConciliacion> getComiteConciliacionAplicables(@Named("idApoderado") final int idApoderado) throws UnauthorizedException {
+		
+		Map<String, Object> parametros  = new HashMap<String, Object>();		
+		Calendar now = Calendar.getInstance();
+		now.set(Calendar.MINUTE, 0);
+        now.set(Calendar.SECOND, 0);
+        now.set(Calendar.MILLISECOND, 0);
+		now.set(Calendar.HOUR_OF_DAY, 0);		
+		parametros.put("fecha", now.getTime());
+		
+		ComiteConciliacionPojo pojo = new ComiteConciliacionPojo();
+		
+		List<ComiteConciliacion> comites = pojo
+				.findWithQuery("select o from ComiteConciliacion o where o.estado LIKE 'ACT' and o.fechaLimiteRecepcion >= :fecha and o.tipoComite LIKE 'ORDINARIO'", parametros);
+		
+		
+		Apoderado apoderado = new ApoderadoPojo().find(idApoderado);
+		parametros.put("apoderado", apoderado);		
+		
+		List<ComiteConciliacion> comitesExtraordinarios = pojo
+				.findWithQuery("select o from ComiteConciliacion o where o.estado LIKE 'ACT' and o.fechaLimiteRecepcion >= :fecha and o.tipoComite LIKE 'EXTRAORDINARIO' and :apoderado MEMBER OF o.apoderadosExtraordinario", parametros);
+				
+		System.out.println("numero comites: " + comitesExtraordinarios.size());
+	
+		comites.addAll(comitesExtraordinarios);
+		
+		return comites;
 	}
 
 	@ApiMethod(name = "getComiteConciliacionById", path = "comitesConciliacion/{id}", httpMethod = HttpMethod.GET)

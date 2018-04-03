@@ -41,6 +41,10 @@ public class ComiteConciliacion  implements Serializable {
 	@Column(name="FECHA_COMITE")
 	private Date fechaComite;	
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="FECHA_LIMITE_RECEPCION")
+	private Date fechaLimiteRecepcion;
+	
 	@Column(name="TIPO_COMITE")
 	private String tipoComite;
 	
@@ -174,10 +178,14 @@ public class ComiteConciliacion  implements Serializable {
 				+ ", estado=" + estado + "]";
 	}
 
-	public void SetProposiciones(ComiteConciliacion des)
-	{
-		this.setHoraFinal(des.getHoraFinal());
-		this.setProposiciones(des.getProposiciones());
+	public Date getFechaLimiteRecepcion() {
+		return fechaLimiteRecepcion;
 	}
+
+	public void setFechaLimiteRecepcion(MyDate fechaLimiteRecepcion) {
+		this.fechaLimiteRecepcion = fechaLimiteRecepcion;
+	}
+
+	
 	
 }
